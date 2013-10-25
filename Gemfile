@@ -12,7 +12,7 @@ gem 'asset_sync'
 gem 'fog'
 gem 'rmagick'
 gem 'friendly_id', '~> 4.0.10'
-
+gem 'squeel'
 
 
 # Gems used only for assets and not required
