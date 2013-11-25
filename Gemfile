@@ -48,6 +48,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'rspec-rails', '~> 2.0'
   gem 'syntax'
+  gem 'rake'
 end
 
 group :development do
