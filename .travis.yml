@@ -6,4 +6,4 @@ rvm:
 services: postgresql
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
- - export RAILS_ENV=travis-ci bundle exec rake db:migrate
+ - RAILS_ENV=travis-ci bundle exec rake db:migrate
