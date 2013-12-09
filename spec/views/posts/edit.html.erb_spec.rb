@@ -1,15 +1,17 @@
 require 'spec_helper'
 
 describe "posts/edit" do
+  include_context 'test_preparation'
+  include_context 'posts'
+
   before(:each) do
-    @post = assign(:post, stub_model(Post,
-      :title => "MyString",
-      :body => "MyString",
-      :author => 1,
-      :parent => 1,
-      :category => 1
-    ))
+    setup
+    @post = create_post
   end
+
+  after(:each) do
+    teardown
+  end 
 
   it "renders the edit post form" do
     render

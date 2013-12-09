@@ -1,23 +1,25 @@
 require 'spec_helper'
 
 describe "posts/show" do
+  include_context 'test_preparation'
+  include_context 'posts'
+
   before(:each) do
-    @post = assign(:post, stub_model(Post,
-      :title => "Title",
-      :body => "Body",
-      :author => 1,
-      :parent => 2,
-      :category => 3
-    ))
+    setup
+    @post = create_post
   end
 
+  after(:each) do
+    teardown
+  end 
+  
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Title/)
     rendered.should match(/Body/)
-    rendered.should match(/1/)
-    rendered.should match(/2/)
-    rendered.should match(/3/)
+    rendered.should match(/Farts McGee Strikes Again/)
+    rendered.should match(/Toot power/)
+    rendered.should match(@post.category.name)
   end
 end

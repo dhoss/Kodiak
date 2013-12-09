@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe "posts/new" do
   before(:each) do
-    assign(:post, stub_model(Post,
-      :title => "MyString",
-      :body => "MyString",
-      :author => 1,
-      :parent => 1,
-      :category => 1
-    ).as_new_record)
+    assign(:post, Post.new)
   end
 
   it "renders new post form" do
