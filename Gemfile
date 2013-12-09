@@ -14,6 +14,7 @@ gem 'rmagick'
 gem 'friendly_id', '~> 4.0.10'
 gem 'squeel'
 gem 'coveralls', require: false
+gem 'faker'
 
 
 # Gems used only for assets and not required
