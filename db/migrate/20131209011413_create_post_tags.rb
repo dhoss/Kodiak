@@ -1,6 +1,6 @@
 class CreatePostTags < ActiveRecord::Migration
   def change
-    create_table :post_tags do |t|
+    create_table :posts_tag do |t|
       t.integer :post_id
       t.integer :tag_id
       t.timestamps

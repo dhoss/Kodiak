@@ -1,5 +1,5 @@
 class AddUniqueIndexToPostTags < ActiveRecord::Migration
   def change
-    add_index :post_tags, [:post_id, :tag_id], :unique => true
+    add_index :posts_tag, [:post_id, :tag_id], :unique => true
   end
 end

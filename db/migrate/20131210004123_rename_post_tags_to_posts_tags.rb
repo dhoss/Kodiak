@@ -1,6 +1,6 @@
 class RenamePostTagsToPostsTags < ActiveRecord::Migration
   def up
-    rename_table :post_tags, :posts_tags
+    rename_table :posts_tag, :posts_tag
   end
 
   def down

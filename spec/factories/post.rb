@@ -8,7 +8,7 @@ FactoryGirl.define do
 
     factory :post_with_tags do 
       after_create do |post|
-        create(:tag, posttags: tag)
+        FactoryGirl.create_list(:tag, tags: [post])
       end
     end
 
