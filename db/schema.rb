@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20131213230141) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "body"
+    t.integer  "author"
     t.integer  "parent"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
