@@ -24,16 +24,6 @@
         null,
         null
       ],
-      "/home/devin/projects/web/kodiak/spec/support/controller_macros.rb": [
-        1,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null
-      ],
       "/home/devin/projects/web/kodiak/spec/support/test_preparation.rb": [
         1,
         1,
@@ -52,7 +42,6 @@
         null
       ],
       "/home/devin/projects/web/kodiak/spec/support/devise.rb": [
-        1,
         1,
         1,
         null
@@ -597,14 +586,14 @@
         null,
         1,
         1,
-        14,
+        2,
         1,
         1,
-        14,
+        2,
         null,
         null
       ]
     },
-    "timestamp": 1386999089
+    "timestamp": 1386999721
   }
 }
