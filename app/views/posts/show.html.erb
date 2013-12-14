@@ -12,7 +12,7 @@
 
 <p>
   <b>Author:</b>
-  <%= @post.author %>
+  <%= @post.user %>
 </p>
 
 <p>
@@ -22,7 +22,9 @@
 
 <p>
   <b>Category:</b>
-  <%= @post.category.name %>
+  <% if @post.category%>
+    <%= @post.category.name %>
+  <% end %>
 </p>
 
 

@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
+
+
   # GET /posts
   # GET /posts.json
   def index
@@ -13,7 +16,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    @post = Post.where(id: params[:id]).first
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +27,9 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
+    @user = current_user
     @post = Post.new
+    @post.user(@user)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +45,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    
+    @user = current_user
+    @post = Post.new(params[:post], :author => @user)
 
     respond_to do |format|
       if @post.save
@@ -56,8 +63,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    @post = Post.find(params[:id])
-
+    @post = Post.find_with_associations(params[:id])
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

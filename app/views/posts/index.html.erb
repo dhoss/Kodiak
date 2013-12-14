@@ -7,6 +7,8 @@
     <th>Author</th>
     <th>Parent</th>
     <th>Category</th>
+    <th>Tags</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,9 +18,10 @@
   <tr>
     <td><%= post.title %></td>
     <td><%= post.body %></td>
-    <td><%= post.author %></td>
+    <td><%= post.user %></td>
     <td><%= post.parent %></td>
     <td><%= post.category %></td>
+    <td><% if !post.tags.empty? %> <%= post.tags.collect {|t| t.name }.join(", ").html_safe %><% end %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
