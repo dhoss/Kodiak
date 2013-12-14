@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
 
+  accepts_nested_attributes_for :tags
+
   # maybe put me in a helper/module?
   scope :with_associations, includes(:category, :tags, :user)
 

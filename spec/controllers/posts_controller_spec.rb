@@ -14,7 +14,10 @@ describe PostsController do
   end
   
   let!(:user) { User.create! user_attributes }
-  let!(:user_post) { user.posts.create! post_attributes }
+  let!(:user_post) { user.posts.create! post_attributes, 
+                     :tag_attributes => [ 
+                       { :name => "fartaculous" } 
+  ] }
 
 
 
