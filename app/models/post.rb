@@ -11,7 +11,9 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :tags, :category
 
   # maybe put me in a helper/module?
-  scope :with_associations, includes(:category, :tags, :user)
+  def self.with_associations
+    includes(:category, :tags, :user)
+  end
 
   def self.has_tag?(tag)
     self.tags.include?(tag)
