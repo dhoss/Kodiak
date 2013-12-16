@@ -1,5 +1,6 @@
 Kodiak::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.eager_load = false
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
@@ -12,7 +13,7 @@ Kodiak::Application.configure do
   config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil
-  config.whiny_nils = true
+  config.whiny_nils = false
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
