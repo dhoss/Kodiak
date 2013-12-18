@@ -23,6 +23,7 @@ gem 'faker'
 gem 'gemnasium'
 gem 'unf'
 gem 'protected_attributes'
+gem 'hashifiable'
 
 
 # Gems used only for assets and not required
