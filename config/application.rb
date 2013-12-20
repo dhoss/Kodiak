@@ -55,7 +55,7 @@ module Kodiak
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.secret_key_base = %Q(
+    config.secret_key_base = %Q:
  _____                 _                                                
 /  ___|               | |                                               
 \ `--. _ __ ___   ___ | | _____ _   _                                   
@@ -88,7 +88,7 @@ module Kodiak
  \__,_|   \_/\_/ \___/|_|  |_|\__,_|  \___/|_|   | .__/ \__,_|_|_| |_(_)
                                                  | |                    
                                                  |_|                    
-    )
+    :
     I18n.enforce_available_locales = true
   end
 end
