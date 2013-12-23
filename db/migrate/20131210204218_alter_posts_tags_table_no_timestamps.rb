@@ -1,6 +1,6 @@
 class AlterPostsTagsTableNoTimestamps < ActiveRecord::Migration
   def up
-    drop_table :posts_tags
+    drop_table :posts_tags if ActiveRecord::Base.connection.table_exists? :posts_tags
     create_table :posts_tags, :id => false do |t|
       t.integer :post_id, :null => false
       t.integer :tag_id,  :null => false
