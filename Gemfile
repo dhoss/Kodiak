@@ -25,6 +25,7 @@ gem 'unf'
 gem 'protected_attributes'
 gem 'hashifiable'
 gem 'acts_as_sane_tree'
+gem 'awesome_print'
 
 
 # Gems used only for assets and not required
