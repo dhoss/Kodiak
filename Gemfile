@@ -24,6 +24,7 @@ gem 'gemnasium'
 gem 'unf'
 gem 'protected_attributes'
 gem 'hashifiable'
+gem 'acts_as_sane_tree'
 
 
 # Gems used only for assets and not required
