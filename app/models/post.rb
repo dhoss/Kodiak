@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
   acts_as_sane_tree
   attr_accessible :body, :category, :parent_id, :title, :tags, :category, :user
+  validates :title, presence: true
+  validates :body, presence: true
  
   extend Hashifiable
   # has many

@@ -1,18 +1,18 @@
 require 'spec_helper'
-require 'database_cleaner'
-require 'factory_girl'
 
 describe UsersController do
-  
-  before :all do
-    FactoryGirl.factories.clear
-    FactoryGirl.find_definitions
+  include_context 'test_preparation'
+  include_context 'posts'
+  include_context 'users'
+
+  before(:each) do
+    setup
   end
 
-  after :all do
-    DatabaseCleaner.clean
+  after(:each) do
+    teardown
   end
-  
+
   let(:valid_attributes) { FactoryGirl.attributes_for(:user) }
 
   let(:valid_session) { {} }
