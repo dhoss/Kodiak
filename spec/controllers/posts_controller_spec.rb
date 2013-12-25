@@ -16,9 +16,7 @@ describe PostsController do
   let!(:user) { User.create! user_attributes }
   let!(:user_post) { user.posts.create! post_attributes, 
                      :category => { :name => "toots"},
-                     :tag_attributes => [ 
-                       { :name => "fartaculous" } 
-                     ] 
+                     :tag_attributes => [{ :name => "fartaculous" }] 
   }
 
 
