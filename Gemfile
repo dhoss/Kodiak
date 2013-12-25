@@ -10,11 +10,11 @@ gem 'rails', '4.0.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'pg', '0.17.1'
 gem 'devise', '~> 3.2.2'
 gem 'carrierwave', '~> 0.9.0'
 gem 'asset_sync', '~> 0.5.4'
-gem 'fog', '~>1.18.0'
+gem 'fog', '~>1.19.0'
 gem 'rmagick'
 gem 'friendly_id', '~> 5.0.2'
 gem 'squeel', '1.1.1'
@@ -36,7 +36,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 2.4.0'
 end
 
 gem 'jquery-rails', '~> 3.0.4'
