@@ -32,7 +32,6 @@ GEM
       activemodel
       fog
     atomic (1.1.14)
-    awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     capistrano (3.0.1)
@@ -216,7 +215,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_sane_tree
   asset_sync (~> 0.5.4)
-  awesome_print
   bcrypt-ruby (~> 3.1.2)
   capistrano
   carrierwave (~> 0.9.0)

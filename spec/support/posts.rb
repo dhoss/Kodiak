@@ -18,4 +18,8 @@ shared_context 'posts' do
     post[:user] = FactoryGirl.attributes_for(:user)
     return post
   end
+
+  def expect_valid_post(post, expected)
+    post.should == expected
+  end
 end
