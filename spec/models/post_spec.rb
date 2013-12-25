@@ -32,10 +32,6 @@ describe Post do
   context "with 1 comment" do
     it "has one comment with no children" do
       comment = post.comments.create(:title => "I'm a comment", :body => "toot", :user => user)
-      p "WITH COMMENTS"
-      pp post.descendants
-      p "COMMENT"
-      pp comment
       expect(post.comments.count).to eq(1)
       post.descendants.keys.each do |child|
         expect_valid_post(
@@ -54,5 +50,51 @@ describe Post do
     end
   end
 
-
+  context "with sub-comments" do 
+    it "has one comment with several children" do
+      # turn me into a method to be re-usable
+      comment = post.comments.create(:title => "I'm a comment", :body => "toot", :user => user)
+      sub_comment = comment.comments.create(:title => "I'm a comment of '" << comment.title << "'", :body => "toot 2", :user => user)
+      sub_sub_comment = sub_comment.comments.create(:title => "I'm a comment of '" << sub_comment.title << "'", :body => "toot 3", :user => user)
+      expect(post.comments.count).to eq(1)
+      expect(comment.comments.count).to eq(1)
+      # I don't really like this.  
+      # Find a way to create a sane data structure and compare the two.
+      post.descendants.keys.each do |child|
+        expect_valid_post(
+          { 
+            :title => child.title,
+            :body  => child.body,
+            :user  => child.user,
+            child => {
+              :title => sub_comment.title,
+              :body  => sub_comment.body,
+              :user  => sub_comment.user,
+              "sub_child" => {
+                :title => sub_sub_comment.title, 
+                :body  => sub_sub_comment.body,
+                :user  => sub_sub_comment.user
+              }
+            }
+          }, 
+          { 
+            :title => "I'm a comment", 
+            :body => "toot", 
+            :user => user,
+            child => {
+              :title => "I'm a comment of '" << comment.title << "'", 
+              :body  => "toot 2",
+              :user  => user,
+                "sub_child" => {
+                  :title => "I'm a comment of '" << sub_comment.title << "'",
+                  :body  => "toot 3",
+                  :user  => user
+                }
+            },
+            
+          }
+        )
+      end
+    end
+  end
 end
