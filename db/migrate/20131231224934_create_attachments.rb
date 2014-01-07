@@ -4,7 +4,7 @@ class CreateAttachments < ActiveRecord::Migration
       t.string :name
       t.string :path
       t.string :mime
-      t.references :post_id, index: true
+      t.references :post, index: true
 
       t.timestamps
     end

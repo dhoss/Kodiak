@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20131231224934) do
     t.string   "name"
     t.string   "path"
     t.string   "mime"
-    t.integer  "post_id_id"
+    t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "attachments", ["post_id_id"], name: "index_attachments_on_post_id_id", using: :btree
+  add_index "attachments", ["post_id"], name: "index_attachments_on_post_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
