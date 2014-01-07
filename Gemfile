@@ -15,7 +15,7 @@ gem 'devise', '~> 3.2.2'
 gem 'carrierwave', '~> 0.9.0'
 gem 'asset_sync', '~> 0.5.4'
 gem 'fog', '~>1.19.0'
-gem 'rmagick'
+gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.2'
 gem 'squeel', '1.1.1'
 gem 'coveralls', require: false
