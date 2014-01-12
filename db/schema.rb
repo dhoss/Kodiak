@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20140112205025) do
 
   add_index "attachments", ["post_id"], name: "index_attachments_on_post_id", using: :btree
 
+  create_table "attachments_posts", id: false, force: true do |t|
+    t.integer "post_id",       null: false
+    t.integer "attachment_id", null: false
+  end
+
+  add_index "attachments_posts", ["post_id", "attachment_id"], name: "index_attachments_posts_on_post_id_and_attachment_id", unique: true, using: :btree
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -43,13 +50,6 @@ ActiveRecord::Schema.define(version: 20140112205025) do
     t.integer  "user_id"
     t.integer  "category_id"
   end
-
-  create_table "posts_attachments", id: false, force: true do |t|
-    t.integer "post_id",       null: false
-    t.integer "attachment_id", null: false
-  end
-
-  add_index "posts_attachments", ["post_id", "attachment_id"], name: "index_posts_attachments_on_post_id_and_attachment_id", unique: true, using: :btree
 
   create_table "posts_tags", id: false, force: true do |t|
     t.integer "post_id", null: false
