@@ -5,12 +5,23 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-
+include ActionDispatch::TestProcess
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 RSpec.configure do |config|
+  config.after(:all) do
+    # Get rid of the linked images
+    if Rails.env.test? || Rails.env.cucumber?
+      tmp = Factory(:attachment)
+      store_path = File.dirname(File.dirname(tmp.url))
+      temp_path = tmp.cache_dir
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
+      FileUtils.rm_rf(Dir["#{temp_path}/[^.]*"])
+    end
+  end
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

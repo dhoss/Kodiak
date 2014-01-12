@@ -12,7 +12,7 @@ describe AttachmentUploader do
     @uploader.store!(
       File.open(
         File.join(
-          @base_path, 'jimmies-stable.png'
+          @base_path, 'jimmies.png'
         )
       )
     )  

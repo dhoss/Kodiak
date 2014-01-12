@@ -1,10 +1,12 @@
 class CreateAttachments < ActiveRecord::Migration
   def change
     create_table :attachments do |t|
+      t.references :attachable, polymorphic: true
       t.string :name
       t.string :path
       t.string :mime
-      t.references :post, index: true
+      t.string :attachment
+      t.references :posts, index: true
 
       t.timestamps
     end

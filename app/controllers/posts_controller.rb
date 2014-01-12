@@ -45,7 +45,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    
     @user = current_user
     @post = Post.new(params[:post], :author => @user)
 

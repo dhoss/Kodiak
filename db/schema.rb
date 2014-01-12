@@ -11,28 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112205025) do
+ActiveRecord::Schema.define(version: 20131231224934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attachments", force: true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
     t.string   "name"
     t.string   "path"
     t.string   "mime"
-    t.integer  "post_id"
+    t.string   "attachment"
+    t.integer  "posts_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "attachments", ["post_id"], name: "index_attachments_on_post_id", using: :btree
-
-  create_table "attachments_posts", id: false, force: true do |t|
-    t.integer "post_id",       null: false
-    t.integer "attachment_id", null: false
-  end
-
-  add_index "attachments_posts", ["post_id", "attachment_id"], name: "index_attachments_posts_on_post_id_and_attachment_id", unique: true, using: :btree
+  add_index "attachments", ["posts_id"], name: "index_attachments_on_posts_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"

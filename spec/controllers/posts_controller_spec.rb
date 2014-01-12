@@ -19,8 +19,6 @@ describe PostsController do
                      :tag_attributes => [{ :name => "fartaculous" }] 
   }
 
-
-
   describe "GET index" do
     it "assigns all posts as @posts" do
       get :index
@@ -71,6 +69,19 @@ describe PostsController do
         sign_in user
         post :create, {:post => post_attributes}
         response.should redirect_to(Post.last)
+      end
+    end
+
+    describe "POST attachment" do
+      describe "with valid attachment" do
+        it "creates a post with an attachment" do
+          sign_in user
+          expect {
+            post :create, {
+              :post => post_attributes.merge(attachments_attributes: [ FactoryGirl.attributes_for(:attachment) ])
+            }
+          }.to change(Attachment, :count).by(1)
+        end
       end
     end
 
