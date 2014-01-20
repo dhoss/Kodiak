@@ -82,6 +82,26 @@ describe PostsController do
             }
           }.to change(Attachment, :count).by(1)
         end
+
+        it "is a valid attachment object" do
+          sign_in user
+          post :create, {
+              :post => post_attributes.merge(attachments_attributes: [ FactoryGirl.attributes_for(:attachment) ])
+          }
+          assigns(:post).attachments.first.should be_a(Attachment)
+        end
+
+        it "allows you to upload multiple images" do
+          sign_in user
+          expect {
+            post :create, {
+              :post => post_attributes.merge(attachments_attributes: [ 
+                FactoryGirl.attributes_for(:attachment), FactoryGirl.attributes_for(:attachment), FactoryGirl.attributes_for(:attachment)
+              ])
+            }
+          }.to change(Attachment, :count).by(3)
+          assigns(:post).attachments.each { |a| a.should be_a(Attachment) }
+        end
       end
     end
 

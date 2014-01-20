@@ -7,7 +7,8 @@ class Post < ActiveRecord::Base
                   :tags, 
                   :category, 
                   :user,
-                  :attachments_attributes
+                  :attachments_attributes,
+                  :attachments
 
   validates :title, presence: true
   validates :body, presence: true
