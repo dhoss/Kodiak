@@ -2,11 +2,11 @@ Kodiak::Application.routes.draw do
 
   resources :posts
 
-
   devise_for :users
 
   resources :users
 
+  resources :categories
 
   root :to => "home#index"
   # The priority is based upon order of creation:
