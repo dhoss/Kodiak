@@ -32,6 +32,8 @@ gem 'acts_as_sane_tree'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'jquery-ui-rails'
+  gem 'jquery-modal-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
