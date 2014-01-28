@@ -1,4 +1,5 @@
-<%= form_for(@category, remote: true) do |f| %>
+<div id="category-notice"></div>
+<%= form_for(@category, remote: true, url: '/categories.json') do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -16,6 +17,6 @@
   </div>
   <div class="actions">
     <%= f.submit %>
-    <%= link_to 'Cancel', users_path, :rel => "modal:close", :class => "button" %>
+    <%= link_to 'Cancel', categories_path, :rel => "modal:close", :class => "button" %>
   </div>
 <% end %>

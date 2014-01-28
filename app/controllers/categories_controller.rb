@@ -27,8 +27,9 @@ class CategoriesController < ApplicationController
       success_msg = 'Category was successfully created'
       if @category.save
         format.html { redirect_to @category, notice: success_msg }
-        format.json { render json: @category, status: :created, location: @category,  notice: success_msg }
-        format.js
+        # the @category.to_h.merge(...) stuff should be moved to a module
+        format.json { render json: @category.to_h.merge(notice: success_msg), status: :created, location: @category }
+        format.js { render json: @category.to_h.merge(notice: success_msg), content_type: 'text/json' }
       else
         format.html { render action: "new" }
         format.json { render json: @post.errors, status: unprocessable_entity }
