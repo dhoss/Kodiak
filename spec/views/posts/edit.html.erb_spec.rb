@@ -20,9 +20,6 @@ describe "posts/edit" do
     assert_select "form[action=?][method=?]", post_path(@post), "post" do
       assert_select "input#post_title[name=?]", "post[title]"
       assert_select "input#post_body[name=?]", "post[body]"
-      assert_select "input#post_user[name=?]", "post[user]"
-      assert_select "input#post_parent[name=?]", "post[parent]"
-      assert_select "input#post_category[name=?]", "post[category]"
     end
   end
 end
