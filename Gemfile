@@ -26,20 +26,12 @@ gem 'protected_attributes'
 gem 'hashifiable'
 gem 'acts_as_sane_tree'
 
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'jquery-ui-rails'
-  gem 'jquery-modal-rails'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 2.4.0'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-modal-rails'
+gem 'therubyracer', :platforms => :ruby
+gem 'uglifier', '>= 2.4.0'
 
 gem 'jquery-rails', '~> 3.0.4'
 
