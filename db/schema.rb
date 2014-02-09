@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209231502) do
+ActiveRecord::Schema.define(version: 20140209233130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20140209231502) do
     t.integer  "public",          default: 1
   end
 
+  add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id", using: :btree
+  add_index "attachments", ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
+  add_index "attachments", ["attachable_type"], name: "index_attachments_on_attachable_type", using: :btree
   add_index "attachments", ["posts_id"], name: "index_attachments_on_posts_id", using: :btree
 
   create_table "categories", force: true do |t|
