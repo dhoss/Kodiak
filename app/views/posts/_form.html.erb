@@ -1,4 +1,4 @@
-<%= form_for(@post, multipart: true, remote:true) do |f| %>
+<%= form_for(@post, multipart: true, :html => { :class => 'dropzone' }) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -23,12 +23,13 @@
     <div>
       <%= link_to_modal "Create new category", new_category_path %>
     </div>
-    <%= f.label :category %><br />
-    <%= f.collection_select(:category, Category.all, :id, :name, :prompt => 'Please select your category') %>
+    <%= f.label :category_id %><br />
+    <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => 'Please select your category') %>
   </div>
   <div class="field">
     <%= f.label :attachments %><br />
-    <%= f.file_field :attachments %>
+    <div class="dropzone-previews"></div>
+    <%#= f.file_field :attachments %>
   </div>
   <div class="actions">
     <%= f.submit %>
