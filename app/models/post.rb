@@ -2,10 +2,10 @@ class Post < ActiveRecord::Base
   acts_as_sane_tree
   attr_accessible :body, 
                   :category, 
-                  :parent_id, 
+                  :parent, 
                   :title, 
                   :tags, 
-                  :category, 
+                  :category_id, 
                   :user,
                   :attachments_attributes,
                   :attachments
