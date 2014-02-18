@@ -4,7 +4,7 @@ $(document).ready ->
     return
 
   $('#attachments').fileupload
-    paramName: 'attachments[]'
+    paramName: 'attachments'
     url: '/attachments.json'
     dataType: 'json'
     add: (e, data) ->
@@ -12,6 +12,8 @@ $(document).ready ->
       data.submit()
       return
     done: (e, data) -> 
+      console.log data.files[0].name
+      $('#attachment_name').val(data.files[0].name.replace(/\.[^/.]+$/, ""))
       data.context.text "Upload finished."
       return
   return 

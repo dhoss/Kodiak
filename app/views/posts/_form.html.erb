@@ -1,4 +1,5 @@
 <%= form_for(@post, multipart: true, :html => { :id => "new-post" }) do |f| %>
+  <%= hidden_field_tag(:attachment_name) %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -26,11 +27,11 @@
     <%= f.label :category_id %><br />
     <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => 'Please select your category') %>
   </div>
-  <div class="field">
-    <%= f.label :attachments %><br />
-    <input id="attachments" type="file" name="attachments[]"  multiple>
-  </div>
   <div class="actions">
     <%= f.submit 'Create post', :id => "post-submit-btn" %>
   </div>
 <% end %>
+  <div>
+    <label for="attachments">Attach files:</label>
+    <input id="attachments" type="file" name="attachments"  multiple>
+  </div>

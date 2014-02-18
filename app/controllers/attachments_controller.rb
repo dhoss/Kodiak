@@ -12,7 +12,7 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = Attachment.new(params[:attachment])
+    @attachment = Attachment.new(:attachment => params[:attachments])
     respond_to do |format|
       if @attachment.save
         format.json { 

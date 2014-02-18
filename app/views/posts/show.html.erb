@@ -32,7 +32,7 @@
 <b>Attachment(s):</b>
 <% if @post.attachments %>
   <% @post.attachments.each {|a| %>
-    <div><%= img_tag a.image_url(:thumb).to_s %></div>
+    <div><%= image_tag a.attachment_url(:thumb).to_s %></div>
   <% } %>
 <% end %>
 </p>

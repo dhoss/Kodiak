@@ -47,6 +47,11 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @post = Post.new(params[:post], :author => @user)
+    if params[:attachment_name]
+      attachment_name = params[:attachment_name] << '%'
+      @post.attachments << Attachment.where {(attachment =~ attachment_name)}
+    end
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
