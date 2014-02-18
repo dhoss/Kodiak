@@ -12,6 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery.ui.all
 //= require jquery.modal
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require jquery.fileupload-process
+//= require load-image
+//= require load-image-meta
+//= require load-image-exif
+//= require_tree .

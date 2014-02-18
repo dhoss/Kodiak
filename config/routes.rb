@@ -1,12 +1,6 @@
 Kodiak::Application.routes.draw do
 
-  get "attachments/new"
-  get "attachments/create"
-  get "attachments/update"
-  get "attachments/edit"
-  get "attachments/destroy"
-  get "attachments/index"
-  get "attachments/show"
+  resources :attachments
   get "home/index"
   resources :posts
 

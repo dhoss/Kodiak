@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<div id="status-message"></div>
 
 <p>
   <b>Title:</b>
@@ -27,6 +28,13 @@
   <% end %>
 </p>
 
-
+<p>
+<b>Attachment(s):</b>
+<% if @post.attachments %>
+  <% @post.attachments.each {|a| %>
+    <div><%= img_tag a.image_url(:thumb).to_s %></div>
+  <% } %>
+<% end %>
+</p>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
