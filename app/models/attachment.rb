@@ -1,6 +1,7 @@
 require 'carrierwave/orm/activerecord'
 
 class Attachment < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
   attr_accessible :name, :path, :mime, :attachment, :public
   belongs_to :attachable, polymorphic: true
   mount_uploader :attachment, AttachmentUploader
@@ -11,7 +12,7 @@ class Attachment < ActiveRecord::Base
       "size"          => attachment.size,
       "url"           => attachment.url,
       "thumbnail_url" => attachment.thumb.url,
-      "delete_url"    => "/attachments/"<< id,
+      "delete_url"    => attachment_path(:id => id),
       "delete_type"   => "DELETE" 
     }
   end

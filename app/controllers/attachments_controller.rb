@@ -3,10 +3,10 @@ class AttachmentsController < ApplicationController
 
 
   def index
-    @attachments = Attachments.where(:public => 1)
+    @attachments = Attachment.where(public: 1).limit(50)
     respond_to do |format|
       format.json { 
-        render json: @attachments.connect{|a| a.to_jq_upload }.to_json 
+        render json: @attachments.collect{|a| a.to_jq_upload }.to_json 
       }
     end
   end
@@ -30,6 +30,14 @@ class AttachmentsController < ApplicationController
   end
 
   def update
+    @attachment = Attachment.find(params[:id])
+    respond_to do |format|
+      if @attachment.update_attributes(params[:attachments])
+        format.json { head :no_content }
+      else 
+        format.json { render json: @attachment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
