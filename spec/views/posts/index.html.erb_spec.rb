@@ -1,17 +1,11 @@
 require 'spec_helper'
 
 describe "posts/index" do
-  include_context 'test_preparation'
   include_context 'posts'
 
   before(:each) do
-    setup
     assign(:posts, [create_post, create_post])
   end
-
-  after(:each) do
-    teardown
-  end 
 
   it "renders a list of posts" do
     render

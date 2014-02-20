@@ -1,17 +1,8 @@
 require 'spec_helper'
 
 describe UsersController do
-  include_context 'test_preparation'
   include_context 'posts'
   include_context 'users'
-
-  before(:each) do
-    setup
-  end
-
-  after(:each) do
-    teardown
-  end
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:user) }
 

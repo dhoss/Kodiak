@@ -1,18 +1,9 @@
 require 'spec_helper'
 
 describe PostsController do
-  include_context 'test_preparation'
   include_context 'posts'
   include_context 'users'
 
-  before(:each) do
-    setup
-  end
-
-  after(:each) do
-    teardown
-  end
-  
   let!(:user) { User.create! user_attributes }
   let!(:user_post) { user.posts.create! post_attributes, 
                      :category => { :name => "toots"},

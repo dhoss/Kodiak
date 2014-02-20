@@ -1,19 +1,13 @@
 require 'spec_helper'
 
 describe AttachmentsController do
-  include_context 'test_preparation'
   include_context 'posts'
   include_context 'users'
 
   before(:each) do
-    setup
     request.env["HTTP_ACCEPT"] = 'application/json'
   end
 
-  after(:each) do
-    teardown
-  end
-  
   let!(:user) { User.create! user_attributes }
   let!(:attachment) { FactoryGirl.attributes_for(:attachment) }
 

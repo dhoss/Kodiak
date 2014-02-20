@@ -2,17 +2,8 @@ require 'spec_helper'
 require'factory_girl'
 
 describe Post do
-  include_context 'test_preparation'
   include_context 'posts'
   include_context 'users'
-
-  before(:each) do
-    setup
-  end
-
-  after(:each) do
-    teardown
-  end
 
   let!(:user)       { FactoryGirl.create(:user) }
   let!(:post)       { FactoryGirl.create(:post, user: user) }

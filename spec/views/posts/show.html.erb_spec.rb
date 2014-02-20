@@ -1,18 +1,12 @@
 require 'spec_helper'
 
 describe "posts/show" do
-  include_context 'test_preparation'
   include_context 'posts'
 
   before(:each) do
-    setup
     @post = create_post
   end
 
-  after(:each) do
-    teardown
-  end 
-  
   it "renders attributes in <p>" do
     render
 
