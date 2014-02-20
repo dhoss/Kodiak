@@ -50,6 +50,7 @@ gem 'unicorn'
 gem 'debugger'
 
 group :development, :test do
+  gem 'capybara'
   gem 'factory_girl'
   gem 'rspec-rails', '~> 2.0'
   gem 'syntax'
