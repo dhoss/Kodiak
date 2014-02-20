@@ -11,6 +11,23 @@ include ActionDispatch::TestProcess
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 #ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 RSpec.configure do |config|
+
+  config.use_transactional_fixtures = false
+     
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    FactoryGirl.factories.clear
+    FactoryGirl.find_definitions
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
   config.after(:all) do
     # Get rid of the linked images
     if Rails.env.test? || Rails.env.cucumber?
