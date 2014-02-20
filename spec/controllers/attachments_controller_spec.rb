@@ -7,6 +7,7 @@ describe AttachmentsController do
 
   before(:each) do
     setup
+    request.env["HTTP_ACCEPT"] = 'application/json'
   end
 
   after(:each) do
@@ -19,7 +20,6 @@ describe AttachmentsController do
   def post_as_json(attachments) 
     sign_in user
     post :create, {
-      :format      => 'json',
       :attachments => attachments[:attachment],
       :public      => 1
     }
@@ -54,7 +54,6 @@ describe AttachmentsController do
     it "updates the requested attachment" do
       post_as_json(attachment)
       Attachment.any_instance.should_receive(:update_attributes).with({ "attachment" => "fart.jpg" })
-      request.accept = 'application/json'
       put :update, {:id => Attachment.first.to_param, :attachments => { "attachment" => "fart.jpg" }}
       assigns(:attachment).should eq(Attachment.first)
     end
@@ -63,7 +62,6 @@ describe AttachmentsController do
   describe "DELETE destroy" do
     it "destroys the requested attachment" do
       post_as_json(attachment)
-      request.accept = 'application/json'
       expect {
         delete :destroy, {:id => Attachment.first.to_param}
       }.to change(Attachment, :count).by(-1)
@@ -73,7 +71,6 @@ describe AttachmentsController do
   describe "GET 'index'" do
     it "returns http success" do
       post_as_json(attachment)
-      request.accept = 'application/json'
       get :index
       response.should be_success
     end
@@ -82,7 +79,6 @@ describe AttachmentsController do
   describe "GET 'show'" do
     it "returns http success" do
       post_as_json(attachment)
-      request.accept = 'application/json'
       get :show, {:id => Attachment.first.to_param, :format => 'json'}
       response.should be_success
       assigns(:attachment).should eq(Attachment.first)
