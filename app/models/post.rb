@@ -9,7 +9,8 @@ class Post < ActiveRecord::Base
                   :user,
                   :attachments_attributes,
                   :attachments
-
+  include PgSearch
+  multisearchable :against => [:title, :author, :body, :tags, :category]
   validates :title, presence: true
   validates :body, presence: true
  

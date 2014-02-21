@@ -33,6 +33,7 @@ gem 'jquery-modal-rails'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem 'uglifier', '>= 2.4.0'
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
+gem 'pg_search'
 
 gem 'jquery-rails', '~> 3.1.0'
 
