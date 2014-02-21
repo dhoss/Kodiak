@@ -55,9 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'syntax'
   gem 'rake'
-end
-
-group :development do
   gem 'capistrano'
   gem 'database_cleaner'
+  gem 'poltergeist'
 end

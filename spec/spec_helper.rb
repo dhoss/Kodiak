@@ -9,6 +9,17 @@ require 'database_cleaner'
 require 'factory_girl'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    :debug => true,
+    :inspector => true
+  })
+end
+Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
+
 include ActionDispatch::TestProcess
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
