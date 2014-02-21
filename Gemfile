@@ -5,7 +5,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -32,6 +32,7 @@ gem 'jquery-ui-rails', '~> 4.2.0'
 gem 'jquery-modal-rails'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem 'uglifier', '>= 2.4.0'
+gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 
 gem 'jquery-rails', '~> 3.1.0'
 
