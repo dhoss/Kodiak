@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'user creates a post' do
+feature 'create post with attachment and new category' do
   scenario 'user signs up and creates a post', :js => true do
     sign_up_with "fart@fart.com", "fartsens"
 
