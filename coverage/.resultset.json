@@ -91,8 +91,6 @@
         null,
         1,
         1,
-        null,
-        1,
         1,
         1,
         null,
@@ -109,9 +107,6 @@
       ],
       "/home/devin/projects/web/kodiak/app/controllers/application_controller.rb": [
         1,
-        null,
-        null,
-        null,
         1,
         null
       ],
@@ -137,9 +132,6 @@
         1,
         null,
         null,
-        4,
-        2,
-        2,
         null,
         1,
         6,
@@ -495,6 +487,6 @@
         null
       ]
     },
-    "timestamp": 1393010827
+    "timestamp": 1393011137
   }
 }
