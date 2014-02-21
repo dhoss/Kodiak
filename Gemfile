@@ -5,7 +5,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.0.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -50,11 +50,11 @@ gem 'debugger', '~> 1.6.5'
 
 group :development, :test do
   gem 'capybara'
-  gem 'factory_girl'
-  gem 'rspec-rails', '~> 2.0'
-  gem 'syntax'
+  gem 'factory_girl', '~> 4.4.0'
+  gem 'rspec-rails', '~> 2.14.1'
+  gem 'syntax', '~> 1.2.0'
   gem 'rake'
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.1.0'
   gem 'database_cleaner'
   gem 'poltergeist'
 end
