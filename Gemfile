@@ -20,7 +20,7 @@ gem 'friendly_id', '~> 5.0.2'
 gem 'squeel', '1.1.1'
 gem 'coveralls', require: false
 gem 'faker'
-gem 'gemnasium'
+gem 'gemnasium', '3.0.1'
 gem 'unf'
 gem 'protected_attributes'
 gem 'hashifiable'
