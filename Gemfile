@@ -11,12 +11,12 @@ gem 'rails', '4.0.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg', '0.17.1'
-gem 'devise', '~> 3.2.2'
+gem 'devise', '~> 3.2.3'
 gem 'carrierwave', '~> 0.9.0'
-gem 'asset_sync', '~> 0.5.4'
-gem 'fog', '~>1.19.0'
+gem 'asset_sync', '~> 1.0.0'
+gem 'fog', '~>1.20.0'
 gem 'mini_magick'
-gem 'friendly_id', '~> 5.0.2'
+gem 'friendly_id', '~> 5.0.3'
 gem 'squeel', '1.1.1'
 gem 'coveralls', require: false
 gem 'faker'
@@ -28,12 +28,12 @@ gem 'acts_as_sane_tree'
 
 gem 'sass-rails'
 gem 'coffee-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.0'
 gem 'jquery-modal-rails'
-gem 'therubyracer', :platforms => :ruby
+gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem 'uglifier', '>= 2.4.0'
 
-gem 'jquery-rails', '~> 3.0.4'
+gem 'jquery-rails', '~> 3.1.0'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
@@ -41,13 +41,12 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-gem 'unicorn'
+gem 'puma'
 
 # Deploy with Capistrano
 
 # To use debugger
-gem 'debugger'
+gem 'debugger', '~> 1.6.5'
 
 group :development, :test do
   gem 'capybara'
