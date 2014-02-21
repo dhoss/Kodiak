@@ -3,4 +3,7 @@ class Category < ActiveRecord::Base
   has_many :posts
   extend Hashifiable
   hashify :name, :id
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
 end
