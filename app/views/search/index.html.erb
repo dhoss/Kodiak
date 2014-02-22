@@ -1,0 +1,18 @@
+<h1>Search posts</h1>
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if @results.any? && params[:q] %>
+  <% @results.find_each do |r| %>
+    <div class="search-result">
+      <%= r.searchable.title %>
+    </div>
+  <% end %>
+<% elsif !@results.any? && params[:q] %>
+  <div class="search-result">
+    (No results)
+  </div>
+<% end %>

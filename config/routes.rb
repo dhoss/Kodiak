@@ -1,5 +1,6 @@
 Kodiak::Application.routes.draw do
 
+  resources :search
   resources :attachments
 
   resources :posts
