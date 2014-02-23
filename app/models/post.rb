@@ -35,4 +35,14 @@ class Post < ActiveRecord::Base
     self.tags.include?(tag)
   end
 
+  pg_search_scope :fast_search,
+                  :against => [:title, :body],
+                  :using   => {
+                    tsearch: {
+                      dictionary: 'english',
+                      tsvector_column: 'tsv'
+                    },
+                    trigram: {}
+                  }
+
 end

@@ -22,6 +22,34 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -143,7 +171,8 @@ CREATE TABLE posts (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     user_id integer,
-    category_id integer
+    category_id integer,
+    tsv tsvector
 );
 
 
@@ -412,10 +441,24 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: trgm_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX trgm_idx ON posts USING gin (title gin_trgm_ops, body gin_trgm_ops);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv', 'pg_catalog.english', 'title', 'body');
 
 
 --
@@ -459,3 +502,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140209233716');
 INSERT INTO schema_migrations (version) VALUES ('20140221195920');
 
 INSERT INTO schema_migrations (version) VALUES ('20140221205917');
+
+INSERT INTO schema_migrations (version) VALUES ('20140223215914');
+
+INSERT INTO schema_migrations (version) VALUES ('20140223223853');

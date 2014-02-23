@@ -101,7 +101,7 @@ describe Post do
 
   context "search posts" do
     it "returns search results" do
-      results = PgSearch.multisearch(post.title)
+      results = Post.fast_search(post.title)
       expect(results).not_to be_empty
     end
   end
