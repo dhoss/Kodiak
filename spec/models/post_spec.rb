@@ -44,9 +44,19 @@ describe Post do
   context "with sub-comments" do 
     it "has one comment with several children" do
       # turn me into a method to be re-usable
-      comment = post.comments.create(:title => "I'm a comment", :body => "toot", :user => user)
-      sub_comment = comment.comments.create(:title => "I'm a comment of '" << comment.title << "'", :body => "toot 2", :user => user)
-      sub_sub_comment = sub_comment.comments.create(:title => "I'm a comment of '" << sub_comment.title << "'", :body => "toot 3", :user => user)
+      comment         = post.comments.create(
+        :title => "I'm a comment", 
+        :body => "toot", :user => user
+      )
+      sub_comment     = comment.comments.create(
+        :title => "I'm a comment of '" << comment.title << "'", 
+        :body => "toot 2", :user => user
+      )
+      sub_sub_comment = sub_comment.comments.create(
+        :title => "I'm a comment of '" << sub_comment.title << "'", 
+        :body => "toot 3", 
+        :user => user
+      )
       expect(post.comments.count).to eq(1)
       expect(comment.comments.count).to eq(1)
       # I don't really like this.  
@@ -86,6 +96,14 @@ describe Post do
           }
         )
       end
+    end
+  end
+
+  context "search posts" do
+    it "returns search results" do
+      results = PgSearch.multisearch(post.title)
+      pp results
+      expect(results).not_to be_empty
     end
   end
 end

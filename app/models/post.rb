@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
                   :attachments_attributes,
                   :attachments
   include PgSearch
-  multisearchable :against => [:title, :author, :body, :tags, :category]
+  multisearchable :against => [:title, :author, :body, :category_id]
   validates :title, presence: true
   validates :body, presence: true
  
