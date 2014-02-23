@@ -6,9 +6,10 @@
 <% end %>
 
 <% if @results.any? && params[:q] %>
+  <div id="search-result-header">Search results:</div>
   <% @results.find_each do |r| %>
     <div class="search-result">
-      <%= r.searchable.title %>
+      <%= link_to r.title, post_path(r.id) %>
     </div>
   <% end %>
 <% elsif !@results.any? && params[:q] %>
