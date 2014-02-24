@@ -9,4 +9,5 @@ install:
  - sudo apt-get install -qq postgresql-contrib-9.1
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
+ - chmod +x ./script/ci/run_tests.sh
 script: ./script/ci/run_tests.sh
