@@ -4,11 +4,11 @@ rvm:
  - 2.0.0
  - 1.9.3
 services: postgresql
-before_script:
+install: 
  - sudo apt-get update -qq
  - sudo apt-get install -qq postgresql-contrib-9.1
- - echo `pwd`
+before_script:
  - psql -c 'create database kodiak_test;' -U postgres
- - psql -U postgres kodiak_test < sql/install_trigram_and_fuzzy_search_extensions.sql
+ - psql -U postgres kodiak_test < $HOME/sql/install_trigram_and_fuzzy_search_extensions.sql
  - export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8;RAILS_ENV=test bundle exec rake db:migrate
  - RAILS_ENV=test bundle exec rspec
