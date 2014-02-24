@@ -10,6 +10,6 @@ install:
  - bundle install
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
- - psql -U postgres kodiak_test < db/install_trigram_and_fuzzy_search_extensions.sql
+ - psql -U postgres kodiak_test < db/search_extensions.sql
  - chmod +x ./script/ci/run_tests.sh
 script: ./script/ci/run_tests.sh
