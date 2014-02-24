@@ -9,6 +9,4 @@ install:
  - sudo apt-get install -qq postgresql-contrib-9.1
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
- - psql -U postgres kodiak_test < ./sql/install_trigram_and_fuzzy_search_extensions.sql
- - export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8;RAILS_ENV=test bundle exec rake db:migrate
- - RAILS_ENV=test bundle exec rspec
+script: ./script/ci/run_tests.sh
