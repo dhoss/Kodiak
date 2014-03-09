@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
                   :user,
                   :attachments_attributes,
                   :attachments
+
   include PgSearch
   multisearchable :against => [:title, :author, :body, :category_id]
   validates :title, presence: true
@@ -31,6 +32,8 @@ class Post < ActiveRecord::Base
           :title, :tags, :category, 
           :user, :comments, :children
 
+  paginates_per 1
+
   def has_tag?(tag)
     self.tags.include?(tag)
   end
@@ -44,26 +47,5 @@ class Post < ActiveRecord::Base
                     },
                     trigram: {}
                   }
-
-  scope :page, ->(last_seen) { 
-    last_seen = (last_seen.to_i == 1) ? 50 : self.max_page_results * (last_seen.to_i - 1)
-    Post.where{id <= last_seen}
-        .order(created_at: :desc, id: :desc)
-        .limit(self.max_page_results)
-  }
-
-  scope :previous_page, ->(last_id) {
-    last_seen ||= self.max_page_results
-    Post.where{id >= last_seen}
-        .order(created_at: :desc, id: :desc)
-        .limit(self.max_page_results)
-  }
-
-  scope :last_page, -> {
-    page.maximum("created_at")
-  }
-
-  def self.max_page_results
-    50
-  end
+  
 end

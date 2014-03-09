@@ -6,6 +6,7 @@ end
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.3'
+gem 'kaminari', '0.15.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
