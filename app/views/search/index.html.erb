@@ -10,10 +10,10 @@
   <% @results.each do |r| %>
     <div class="search-result">
       <div class="search-result-link">
-        <%= link_to r[:title], post_path(r[:id]) %>
+        <%= link_to r[:title].html_safe, post_path(r[:id]) %>
       </div>
       <div class="search-result-body">
-        <%= r[:body] %>
+        <%= r[:body].html_safe %>
       </div>
 
     </div>
