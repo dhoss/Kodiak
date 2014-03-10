@@ -11,6 +11,7 @@ class Post < ActiveRecord::Base
                   :attachments
 
   include PgSearch
+  include Search
   multisearchable :against => [:title, :author, :body, :category_id]
   validates :title, presence: true
   validates :body, presence: true
@@ -47,5 +48,10 @@ class Post < ActiveRecord::Base
                     },
                     trigram: {}
                   }
-  
+
+   def self.search(params)
+    results = self.fast_search(params)
+    Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results
+   end
+
 end
