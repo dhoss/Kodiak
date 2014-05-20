@@ -9,6 +9,9 @@ gem 'rails', '4.0.3'
 gem 'kaminari', '0.15.1'
 gem 'simple-navigation'
 
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
