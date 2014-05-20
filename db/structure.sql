@@ -413,6 +413,13 @@ CREATE UNIQUE INDEX index_categories_on_name ON categories USING btree (name);
 
 
 --
+-- Name: index_posts_on_id_and_category_id_and_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_id_and_category_id_and_created_at ON posts USING btree (id, category_id, created_at);
+
+
+--
 -- Name: index_posts_tags_on_post_id_and_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -506,3 +513,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140221205917');
 INSERT INTO schema_migrations (version) VALUES ('20140223215914');
 
 INSERT INTO schema_migrations (version) VALUES ('20140223223853');
+
+INSERT INTO schema_migrations (version) VALUES ('20140224030231');
