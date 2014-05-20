@@ -55,7 +55,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :posts, 'Posts', posts_path
     primary.item :photos, 'Photos', photos_path
-    primary.item :account, 'Profile', users_path(@user), if: proc { user_signed_in? }
+    primary.item :account, 'Profile', user_path(current_user), if: proc { user_signed_in? }
     primary.item :login, 'Log in', user_session_path, unless: proc {user_signed_in?}
     primary.item :logout, 'Log out', destroy_user_session_path, method: :delete, if: proc { user_signed_in? }
     primary.item :signup, 'Sign up', new_user_registration_path, unless: proc { user_signed_in? }
