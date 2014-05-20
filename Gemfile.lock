@@ -198,6 +198,9 @@ GEM
       sprockets-rails (~> 2.0.0)
     simple-navigation (3.13.0)
       activesupport (>= 2.3.2)
+    simple-navigation-bootstrap (1.0.0)
+      railties (>= 3.1)
+      simple-navigation (>= 3.7.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -292,6 +295,7 @@ DEPENDENCIES
   rspec-rails (~> 2.14.1)
   sass-rails
   simple-navigation
+  simple-navigation-bootstrap
   squeel (= 1.1.1)
   syntax (~> 1.2.0)
   therubyracer (~> 0.12.1)
