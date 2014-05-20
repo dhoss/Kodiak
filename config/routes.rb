@@ -10,6 +10,8 @@ Kodiak::Application.routes.draw do
 
   resources :users
 
+  resources :photos
+
   resources :categories
 
   root :to => "home#index"
