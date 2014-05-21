@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "photos/new" do
   before(:each) do
-    assign(:photo, stub_model(Photo).as_new_record)
+    assign(:photo, stub_model(Attachment).as_new_record)
   end
 
   it "renders new photo form" do

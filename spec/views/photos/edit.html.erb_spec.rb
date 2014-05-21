@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "photos/edit" do
   before(:each) do
-    @photo = assign(:photo, stub_model(Photo))
+    @photo = assign(:photo, stub_model(Attachment))
   end
 
   it "renders the edit photo form" do

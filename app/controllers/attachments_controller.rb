@@ -12,9 +12,15 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = Attachment.new(:attachment => params[:attachments])
+    attachment_params = params[:attachments]
+    attachment_params[:mime] = params[:attachments].delete(:file).content_type
+    attachment_params[:name] = params[:attachments][:name]
+    @attachment = Attachment.new(attachment_params)
     respond_to do |format|
       if @attachment.save
+        format.html {
+          redirect_to @attachment, notice: 'Attachment successfully created'
+        }
         format.json { 
           render json: [@attachment.to_jq_upload].to_json,
                  status: :created, 
