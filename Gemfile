@@ -35,13 +35,13 @@ gem 'acts_as_sane_tree'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'jquery-ui-rails', '~> 4.2.0'
+gem 'jquery-fileupload-rails'
 gem 'jquery-modal-rails'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem 'uglifier', '>= 2.4.0'
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search'
 
-gem 'jquery-rails', '~> 3.1.0'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
