@@ -33,7 +33,7 @@ class Post < ActiveRecord::Base
           :title, :tags, :category, 
           :user, :comments, :children
 
-  paginates_per 1
+  paginates_per 25
 
   def has_tag?(tag)
     self.tags.include?(tag)

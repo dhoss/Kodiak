@@ -1,11 +1,9 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /photos
   def index
-    @photos = Attachment.photos.all
-
+    @photos = Attachment.photos
     respond_to do |format|
       format.html
       format.json { render json: @photos }
