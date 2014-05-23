@@ -4,7 +4,7 @@
   <tbody>
     <% @photos.each do |photo| %>
       <tr>
-        <td><%= link_to(image_tag(photo.attachment.thumb.url), photo) %></td>
+        <td><%= link_to(image_tag(photo.attachment_url(:thumb).to_s), photo) %></td>
         <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
         <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

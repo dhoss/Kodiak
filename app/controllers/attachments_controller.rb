@@ -12,9 +12,10 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    attachment_params = params[:attachments]
-    attachment_params[:mime] = params[:attachments].delete(:file).content_type
-    attachment_params[:name] = params[:attachments][:name]
+    attachment_params = {}
+    attachment_params[:attachment] = params[:photo][:imagefile]
+    attachment_params[:mime] = params[:photo][:imagefile].content_type
+    attachment_params[:name] = params[:photo][:imagefile].original_filename
     @attachment = Attachment.new(attachment_params)
     respond_to do |format|
       if @attachment.save
@@ -22,7 +23,8 @@ class AttachmentsController < ApplicationController
           redirect_to @attachment, notice: 'Attachment successfully created'
         }
         format.json { 
-          render json: [@attachment.to_jq_upload].to_json,
+          data = { id: @attachment.id, thumb: view_context.image_tag(@attachment.attachment.url(:thumb)) }
+          render json: data,
                  status: :created, 
                  location: @attachment 
         }

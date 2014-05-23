@@ -11,20 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <input type="text" name="attachments[name]">
-  </div>
-  <div class="field">
-    <%= f.label :public %><br />
-    <input type="checkbox" name="attachments[public]" checked="checked">
+  <div class="fallback">
+    <label for="attachments">Attach files:</label>
+    <input type="file" name="attachments[file]" data-url="/attachments" multiple>
   </div>
   <div>
-    <label for="attachments">Attach files:</label>
-    <input type="file" name="attachments[file]"  multiple>
+    <b>Drag and drop image files here</b>
+    <br/>
+    <br/>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+<%= javascript_include_tag 'photos' %>

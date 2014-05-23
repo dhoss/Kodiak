@@ -15,5 +15,5 @@
 //= require twitter/bootstrap
 //= require jquery.ui.all
 //= require jquery.modal
-//= require jquery-fileupload/basic
+//= require dropzone
 //= require_tree .

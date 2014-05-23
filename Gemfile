@@ -31,6 +31,8 @@ gem 'unf'
 gem 'protected_attributes'
 gem 'hashifiable'
 gem 'acts_as_sane_tree'
+gem 'jquery-rails', '~> 3.1.0'
+gem 'dropzonejs-rails'
 
 gem 'sass-rails'
 gem 'coffee-rails'
