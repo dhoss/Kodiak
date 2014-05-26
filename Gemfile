@@ -53,10 +53,6 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'puma'
 
-group :development do 
-  # To use debugger
-  gem 'debugger'
-end 
 
 group :development, :test do
   gem 'capybara'
