@@ -275,7 +275,7 @@ DEPENDENCIES
   coffee-rails
   coveralls
   database_cleaner
-  debugger (~> 1.6.5)
+  debugger
   debugger-ruby_core_source
   devise (~> 3.2.3)
   dropzonejs-rails
