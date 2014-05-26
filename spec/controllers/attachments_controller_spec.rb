@@ -11,10 +11,10 @@ describe AttachmentsController do
   let!(:user) { User.create! user_attributes }
   let!(:attachment) { FactoryGirl.attributes_for(:attachment) }
 
-  def post_as_json(attachments) 
+  def post_with_user(attachments) 
     sign_in user
     post :create, {
-      :attachments => attachments[:attachment],
+      :photo => { :imagefile => attachments[:attachment] },
       :public      => 1
     }
   end
@@ -23,12 +23,12 @@ describe AttachmentsController do
     describe "with valid attachment" do
       it "creates a post with an attachment" do
         expect {
-          post_as_json(attachment) 
+          post_with_user(attachment) 
         }.to change(Attachment, :count).by(1)
       end
 
       it "is a valid attachment object" do
-        post_as_json(attachment)
+        post_with_user(attachment)
         assigns(:attachment).should be_a(Attachment)
       end
 
@@ -36,7 +36,7 @@ describe AttachmentsController do
         pending "Not supported yet"
         expect {
           # would love to find a better way to do this
-          post_as_json([attachment, attachment, attachment])
+          post_with_user([attachment, attachment, attachment])
         }.to change(Attachment, :count).by(3)
         assigns(:attachment).each { |a| a.should be_a(Attachment) }
       end
@@ -46,7 +46,7 @@ describe AttachmentsController do
 
   describe "PUT update" do
     it "updates the requested attachment" do
-      post_as_json(attachment)
+      post_with_user(attachment)
       Attachment.any_instance.should_receive(:update_attributes).with({ "attachment" => "fart.jpg" })
       put :update, {:id => Attachment.first.to_param, :attachments => { "attachment" => "fart.jpg" }}
       assigns(:attachment).should eq(Attachment.first)
@@ -55,7 +55,7 @@ describe AttachmentsController do
 
   describe "DELETE destroy" do
     it "destroys the requested attachment" do
-      post_as_json(attachment)
+      post_with_user(attachment)
       expect {
         delete :destroy, {:id => Attachment.first.to_param}
       }.to change(Attachment, :count).by(-1)
@@ -64,7 +64,7 @@ describe AttachmentsController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      post_as_json(attachment)
+      post_with_user(attachment)
       get :index
       response.should be_success
     end
@@ -72,7 +72,7 @@ describe AttachmentsController do
 
   describe "GET 'show'" do
     it "returns http success" do
-      post_as_json(attachment)
+      post_with_user(attachment)
       get :show, {:id => Attachment.first.to_param, :format => 'json'}
       response.should be_success
       assigns(:attachment).should eq(Attachment.first)
