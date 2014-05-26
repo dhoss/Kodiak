@@ -59,7 +59,7 @@ gem 'puma'
 # Deploy with Capistrano
 
 # To use debugger
-gem 'debugger', '~> 1.6.5'
+gem 'debugger'
 
 group :development, :test do
   gem 'capybara'
