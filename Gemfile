@@ -56,10 +56,10 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'puma'
 
-# Deploy with Capistrano
-
-# To use debugger
-gem 'debugger'
+group :development do 
+  # To use debugger
+  gem 'debugger'
+end 
 
 group :development, :test do
   gem 'capybara'
