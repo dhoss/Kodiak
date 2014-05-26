@@ -9,7 +9,7 @@ describe "photos/edit" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form[action=?][method=?]", photo_path(@photo), "post" do
+    assert_select "form[action=?][method=?]", attachment_path(@photo), "post" do
     end
   end
 end

@@ -10,9 +10,6 @@ gem 'kaminari', '0.15.1'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 
-# for travis ci
-gem 'debugger-ruby_core_source'
-
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 

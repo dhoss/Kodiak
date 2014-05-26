@@ -276,7 +276,6 @@ DEPENDENCIES
   coveralls
   database_cleaner
   debugger
-  debugger-ruby_core_source
   devise (~> 3.2.3)
   dropzonejs-rails
   factory_girl (~> 4.4.0)

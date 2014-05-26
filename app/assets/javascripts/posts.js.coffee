@@ -14,7 +14,6 @@ $(document).ready ->
     closeClass: ''        
     showClose: false
     modalClass: "modal"    
-    spinnerHtml: null     
     fadeDuration: null    
     fadeDelay: 1.0          
 

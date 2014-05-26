@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "photos/index" do
   before(:each) do
     assign(:photos, [
-      stub_model(Photo),
-      stub_model(Photo)
+      stub_model(Attachment),
+      stub_model(Attachment)
     ])
   end
 
