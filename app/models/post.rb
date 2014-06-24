@@ -1,14 +1,5 @@
 class Post < ActiveRecord::Base
-  acts_as_sane_tree
-  attr_accessible :body, 
-                  :category, 
-                  :parent, 
-                  :title, 
-                  :tags, 
-                  :category_id, 
-                  :user,
-                  :attachments_attributes,
-                  :attachments
+  include Treeify
 
   include PgSearch
   include Search
@@ -19,7 +10,7 @@ class Post < ActiveRecord::Base
   extend Hashifiable
   # has many
   has_many :comments, class_name: "Post", foreign_key: "parent_id"
-  has_many :attachments, :as => :attachable
+  has_many :attachments, as: :attachable
   has_and_belongs_to_many :tags
 
   # belongs to
@@ -31,7 +22,7 @@ class Post < ActiveRecord::Base
 
   hashify :body, :category, :parent_id, 
           :title, :tags, :category, 
-          :user, :comments, :children
+          :user, :comments
 
   paginates_per 25
 

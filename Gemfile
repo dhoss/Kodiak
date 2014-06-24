@@ -5,7 +5,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.2.rc3'
 gem 'kaminari', '0.15.1'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
@@ -20,17 +20,16 @@ gem 'pg', '0.17.1'
 gem 'devise', '~> 3.2.4'
 gem 'carrierwave', '~> 0.10.0'
 gem 'asset_sync', '~> 1.0.0'
-gem 'fog', '~>1.22.0'
+gem 'fog', '1.22.0'
 gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.3'
-gem 'squeel', '1.1.1'
 gem 'coveralls', require: false
 gem 'faker', '~> 1.3.0'
 gem 'gemnasium', '3.0.1'
 gem 'unf', '~> 0.1.4'
 gem 'protected_attributes', '~> 1.0.7'
 gem 'hashifiable'
-gem 'acts_as_sane_tree', '~> 2.0.5'
+gem 'treeify'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'dropzonejs-rails', '~> 0.4.14'
 
