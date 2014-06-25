@@ -24,6 +24,7 @@ include ActionDispatch::TestProcess
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/factories/**/*.rb")].each { |f| require f }
 #ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
 RSpec.configure do |config|
 
