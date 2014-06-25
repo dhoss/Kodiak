@@ -1,5 +1,6 @@
 Kodiak::Application.routes.draw do
 
+
   resources :search
   resources :attachments
 
@@ -8,6 +9,8 @@ Kodiak::Application.routes.draw do
   devise_for :users
 
   resources :users
+
+  resources :photos
 
   resources :categories
 

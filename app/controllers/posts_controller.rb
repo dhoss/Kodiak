@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @post = Post.new(params[:post], :author => @user)
-    if params[:attachment_name]
+    if !params[:attachment_name].blank?
       attachment_name = params[:attachment_name] << '%'
       @post.attachments << Attachment.where {(attachment =~ attachment_name)}
     end

@@ -7,7 +7,6 @@ feature 'create post with attachment and new category' do
     expect(page).to have_content('Kodiak')
 
     visit new_post_path
-    print page.html
     fill_in 'post[title]', with: "farts"
     fill_in 'post[body]',  with: "fart fart fart"
     find('a#new-category').trigger('click')

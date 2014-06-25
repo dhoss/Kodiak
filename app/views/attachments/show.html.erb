@@ -1,2 +1,12 @@
-<h1>Attachments#show</h1>
-<p>Find me in app/views/attachments/show.html.erb</p>
+<div id="status-message"></div>
+
+<p>
+  <b>Name:</b>
+  <%= @attachment.name %>
+</p>
+
+<p>
+    <div><%= image_tag @attachment.attachment_url.to_s %></div>
+</p>
+<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
+<%= link_to 'Back', attachments_path %>

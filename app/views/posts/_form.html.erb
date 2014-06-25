@@ -22,7 +22,7 @@
   </div>
   <div class="field">
     <div>
-      <%= link_to_modal "Create new category", new_category_path, :id => "new-category" %>
+      <%= link_to_modal "Create new category", new_category_path, :id => "new-category", "data-spinner" => false %>
     </div>
     <%= f.label :category_id %><br />
     <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => 'Please select your category') %>
@@ -33,5 +33,5 @@
 <% end %>
   <div>
     <label for="attachments">Attach files:</label>
-    <input id="attachments" type="file" name="attachments"  multiple>
+    <input type="file" name="attachments"  multiple>
   </div>

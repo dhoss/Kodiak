@@ -4,7 +4,7 @@ $(document).ready ->
     return
 
   $.modal.defaults =
-    showSpinner: false
+    showSpinner: true
     overlay: "#000"      
     opacity: 0.75        
     zIndex: 1           
@@ -14,7 +14,6 @@ $(document).ready ->
     closeClass: ''        
     showClose: false
     modalClass: "modal"    
-    spinnerHtml: null     
     fadeDuration: null    
     fadeDelay: 1.0          
 

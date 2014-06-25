@@ -1,15 +1,8 @@
 class Post < ActiveRecord::Base
-  acts_as_sane_tree
-  attr_accessible :body, 
-                  :category, 
-                  :parent, 
-                  :title, 
-                  :tags, 
-                  :category_id, 
-                  :user,
-                  :attachments_attributes,
-                  :attachments
+  include Treeify
+
   include PgSearch
+  include Search
   multisearchable :against => [:title, :author, :body, :category_id]
   validates :title, presence: true
   validates :body, presence: true
@@ -17,19 +10,22 @@ class Post < ActiveRecord::Base
   extend Hashifiable
   # has many
   has_many :comments, class_name: "Post", foreign_key: "parent_id"
-  has_many :attachments, :as => :attachable
+  has_many :attachments, as: :attachable
   has_and_belongs_to_many :tags
 
   # belongs to
   belongs_to :post_comments, class_name: "Post"
   belongs_to :user
   belongs_to :category
+  belongs_to :parent
 
   accepts_nested_attributes_for :tags, :comments, :category, :attachments
 
   hashify :body, :category, :parent_id, 
           :title, :tags, :category, 
-          :user, :comments, :children
+          :user, :comments
+
+  paginates_per 25
 
   def has_tag?(tag)
     self.tags.include?(tag)
@@ -44,5 +40,10 @@ class Post < ActiveRecord::Base
                     },
                     trigram: {}
                   }
+
+   def self.search(params)
+    results = self.fast_search(params)
+    Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results
+   end
 
 end
