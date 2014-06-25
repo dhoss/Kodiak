@@ -50,7 +50,7 @@ RSpec.configure do |config|
   config.after(:all) do
     # Get rid of the linked images
     if Rails.env.test? || Rails.env.cucumber?
-      tmp = FactoryGirl(:attachment)
+      tmp = FactoryGirl.create(:attachment)
       store_path = File.dirname(File.dirname(tmp.url))
       temp_path = tmp.cache_dir
       FileUtils.rm_rf(Dir["#{Rails.root}/public/#{store_path}/[^.]*"])
