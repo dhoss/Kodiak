@@ -1,39 +1,22 @@
 <div id="status-message"></div>
-
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-
-<p>
-  <b>Body:</b>
+<div class="blog-post">
+  <h2 class="blog-post-title"><%= @post.title %></h2>
+  <p class="blog-post-meta">
+    <%= @post.created_at %> by <%= link_to @post.user.name, @post.user %>
+    <% if @post.category%>
+      Filed under: <%= @post.category.name %>
+    <% end %>
+  </p>
   <%= @post.body %>
-</p>
-
-<p>
-  <b>Author:</b>
-  <%= @post.user %>
-</p>
-
-<p>
-  <b>Parent:</b>
-  <%= @post.parent %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <% if @post.category%>
-    <%= @post.category.name %>
+  <div class="post-attachments">
+  <p>Attachment(s):</p>
+  <% if @post.attachments %>
+    <% @post.attachments.each {|a| %>
+      <div><%= image_tag a.attachment_url(:thumb).to_s %></div>
+    <% } %>
   <% end %>
-</p>
-
-<p>
-<b>Attachment(s):</b>
-<% if @post.attachments %>
-  <% @post.attachments.each {|a| %>
-    <div><%= image_tag a.attachment_url(:thumb).to_s %></div>
-  <% } %>
-<% end %>
-</p>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  </div>
+  <div class="post-edit">
+  <%= link_to 'Edit', edit_post_path(@post) %>
+  </div>
+</div><!-- /.blog-post -->

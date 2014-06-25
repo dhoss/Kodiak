@@ -1,3 +1,4 @@
+require 'pp'
 class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
@@ -16,8 +17,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.where(id: params[:id]).first
-
+    @post = Post.joins(:user, :attachments).find_by(id: params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @user = current_user
-    @post = Post.new(params[:post], :author => @user)
+    @post = @user.posts.new(params[:post])
     if !params[:attachment_name].blank?
       attachment_name = params[:attachment_name] << '%'
       @post.attachments << Attachment.where {(attachment =~ attachment_name)}
