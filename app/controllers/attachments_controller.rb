@@ -6,7 +6,7 @@ class AttachmentsController < ApplicationController
     @attachments = Attachment.where(public: 1).limit(50)
     respond_to do |format|
       format.json { 
-        render json: @attachments.collect{|a| a.to_jq_upload }.to_json 
+        render json: @attachments
       }
     end
   end

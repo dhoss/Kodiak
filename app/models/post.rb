@@ -17,6 +17,7 @@ class Post < ActiveRecord::Base
   belongs_to :post_comments, class_name: "Post"
   belongs_to :user
   belongs_to :category
+  belongs_to :parent
 
   accepts_nested_attributes_for :tags, :comments, :category, :attachments
 
