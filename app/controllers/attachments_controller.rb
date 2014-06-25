@@ -23,7 +23,7 @@ class AttachmentsController < ApplicationController
           redirect_to @attachment, notice: 'Attachment successfully created'
         }
         format.json { 
-          data = { id: @attachment.id, thumb: view_context.image_tag(@attachment.attachment.url(:thumb)) }
+          data = { id: @attachment.id, thumb: view_context.image_tag(@attachment.attachment_url(:thumb)) }
           render json: data,
                  status: :created, 
                  location: @attachment 
