@@ -46,10 +46,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @user = current_user
+    @attachment_name = params[:post].delete "attachment_name"
     @post = @user.posts.new(params[:post])
-    if !params[:attachment_name].blank?
-      attachment_name = params[:attachment_name] << '%'
-      @post.attachments << Attachment.where {(attachment =~ attachment_name)}
+    if !@attachment_name.blank?
+      @attachment_name << '%'
+      @post.attachments << Attachment.where("attachments.name like ?", @attachment_name)
     end
 
     respond_to do |format|

@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1
   def show
-    @photo = Attachment.where(id: params[:id]).first
+    @photo = Attachment.find_by(id: params[:id])
 
     respond_to do |format|
       format.html

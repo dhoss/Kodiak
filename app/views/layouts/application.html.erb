@@ -59,7 +59,8 @@
 
         <div class="col-sm-8 blog-main">
 
-          <%= flash[:notice] %>
+          <div id="status_message"><%= flash[:notice] %></div>
+          <div id="error_message"></div> 
           <%= yield %>
           <ul class="pager">
             <li><a href="#">Previous</a></li>
@@ -111,6 +112,7 @@
       </p>
     </div>
 
-  <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", controller_name %>
+    <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
   </body>
 </html>
