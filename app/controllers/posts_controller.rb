@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.joins(:user, :attachments).find_by(id: params[:id])
+    @post = Post.includes(:user, :attachments).find_by(id: params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
@@ -47,7 +47,11 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @attachment_name = params[:post].delete "attachment_name"
+    @new_category = params[:post].delete "new_category"
     @post = @user.posts.new(params[:post])
+    if !@new_category.blank?
+      @post.category = Category.new(name: @new_category)
+    end
     if !@attachment_name.blank?
       @attachment_name << '%'
       @post.attachments << Attachment.where("attachments.name like ?", @attachment_name)
