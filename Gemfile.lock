@@ -114,14 +114,6 @@ GEM
     hashifiable (0.1.3)
     hike (1.2.3)
     i18n (0.6.9)
-    jquery-fileupload-rails (0.4.1)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
-    jquery-modal-rails (0.0.4)
-      jquery-ui-rails
-      railties (>= 3.2.0, < 5.0)
-      thor (~> 0.14)
-      uuidtools
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -258,7 +250,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
-    uuidtools (2.1.4)
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.3.2)
@@ -285,8 +276,6 @@ DEPENDENCIES
   friendly_id (~> 5.0.3)
   gemnasium (= 3.0.1)
   hashifiable
-  jquery-fileupload-rails
-  jquery-modal-rails
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 4.2.1)
   kaminari (= 0.15.1)
