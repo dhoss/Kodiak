@@ -51,7 +51,7 @@
     <div class="container">
 
       <div class="blog-header">
-        <h1 class="blog-title"><%= content_for?(:title) ? yield(:title) : "Kodiak" %> </h1>
+        <h1 class="blog-title"><%= link_to content_for?(:title) ? yield(:title) : "Kodiak", "/" %> </h1>
         <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : "It's a bear of a blog." %> </p>
       </div>
 

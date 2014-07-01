@@ -41,6 +41,8 @@ class Post < ActiveRecord::Base
                     trigram: {}
                   }
 
+   scope :front_page, ->(page) { order(created_at: :desc).page(page) }
+
    def self.search(params)
     results = self.fast_search(params)
     Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results
