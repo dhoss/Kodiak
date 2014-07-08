@@ -8,14 +8,6 @@
     <% end %>
   </p>
   <%= post.body %>
-  <div class="post-attachments">
-  <p>Attachment(s):</p>
-  <% if post.attachments %>
-    <% post.attachments.each {|a| %>
-      <div><%= image_tag a.attachment_url(:thumb).to_s %></div>
-    <% } %>
-  <% end %>
-  </div>
   <div class="post-edit">
   <%= link_to 'Edit', edit_post_path(post) %>
   </div>

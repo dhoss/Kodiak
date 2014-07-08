@@ -1,0 +1,12 @@
+<div class="row-fluid">
+  <div class="row-fluid">
+    <% images.each do |image| %>
+      <div class="col-lg-5 col-sm-4 col-xs-6">
+        <a title="<%= image.name %>" href="#" class="lightbox-trigger">
+          <img class="thumbnail img-responsive" src="<%= image.attachment_url(:thumb) %>">
+        </a>
+      </div>
+    <% end %>
+  </div>  
+  </div>
+</div>

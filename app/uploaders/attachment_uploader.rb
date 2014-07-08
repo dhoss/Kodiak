@@ -25,7 +25,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   process :convert => 'png'
   version :thumb do
-    process :resize_to_fit => [50, 10000]
+    process :resize_to_fit => [600, 10000]
   end
   process :set_content_type
 

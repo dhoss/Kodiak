@@ -201,6 +201,11 @@
       "/home/devin/projects/web/kodiak/app/controllers/home_controller.rb": [
         1,
         1,
+        2,
+        2,
+        2,
+        2,
+        null,
         null,
         null
       ],
@@ -509,6 +514,8 @@
         null,
         null,
         null,
+        5,
+        null,
         1,
         0,
         0,
@@ -654,6 +661,6 @@
         null
       ]
     },
-    "timestamp": 1404238632
+    "timestamp": 1404244155
   }
 }
