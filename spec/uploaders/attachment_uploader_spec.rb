@@ -24,8 +24,8 @@ describe AttachmentUploader do
   end
   
   context "thumb version" do
-    it "scales to be 100px wide" do
-      @uploader.thumb.should be_no_larger_than(100, 100)
+    it "scales to be 600px wide" do
+      @uploader.thumb.should be_no_larger_than(300, 10000)
     end
   end
 end
