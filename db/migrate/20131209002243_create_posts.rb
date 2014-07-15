@@ -3,9 +3,10 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.string :title
       t.string :body
-      t.integer :author
       t.integer :parent
       t.integer :category
+      t.integer :user_id
+      t.foreign_key :users, dependent: :delete
 
       t.timestamps
     end

@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+
+  alias_attribute :author, :user
   include Treeify
 
   include PgSearch

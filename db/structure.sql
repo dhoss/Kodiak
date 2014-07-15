@@ -166,11 +166,10 @@ CREATE TABLE posts (
     id integer NOT NULL,
     title character varying(255),
     body character varying(255),
-    author integer,
     parent_id integer,
+    user_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    user_id integer,
     category_id integer,
     tsv tsvector
 );
@@ -469,6 +468,14 @@ CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXEC
 
 
 --
+-- Name: posts_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT posts_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -489,8 +496,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131209011413');
 INSERT INTO schema_migrations (version) VALUES ('20131209233929');
 
 INSERT INTO schema_migrations (version) VALUES ('20131210204218');
-
-INSERT INTO schema_migrations (version) VALUES ('20131213225953');
 
 INSERT INTO schema_migrations (version) VALUES ('20131213230141');
 
