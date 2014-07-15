@@ -40,6 +40,7 @@ gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem 'uglifier', '>= 2.5.0'
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.4'
+gem 'foreigner'
 
 
 # To use ActiveModel has_secure_password
