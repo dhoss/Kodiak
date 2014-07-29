@@ -47,14 +47,14 @@ feature 'navigate through pagination' do
 
   scenario "next page should take us to ?page=2" do
     visit "/"
-    click_link "Next ›"
+    click_link 'Next ›'
 
     expect(find('span.page.current')).to have_content("2")
   end
 
   scenario "last page should take us to ?page=10" do
     visit "/"
-    click_link "Last »"
+    click_link 'Last »'
 
     # turn me into a helper
     expect(find('span.page.current')).to have_content("10")
