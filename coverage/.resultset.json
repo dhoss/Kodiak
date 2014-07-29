@@ -52,11 +52,17 @@
         1,
         null
       ],
-      "/home/devin/projects/web/kodiak/app/models/tag.rb": [
+      "/home/devin/projects/web/kodiak/app/controllers/application_controller.rb": [
         1,
         1,
-        null,
-        null,
+        null
+      ],
+      "/home/devin/projects/web/kodiak/app/controllers/home_controller.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
         1,
         null,
         null,
@@ -108,7 +114,7 @@
         null,
         null,
         null,
-        1,
+        2,
         null,
         1,
         0,
@@ -173,16 +179,8 @@
         null,
         null,
         null
-      ],
-      "/home/devin/projects/web/kodiak/app/models/category.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        null
       ]
     },
-    "timestamp": 1405982111
+    "timestamp": 1406667715
   }
 }
