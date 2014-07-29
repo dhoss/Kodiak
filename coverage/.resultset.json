@@ -60,10 +60,10 @@
       "/home/devin/projects/web/kodiak/app/controllers/home_controller.rb": [
         1,
         1,
-        1,
-        1,
-        1,
-        1,
+        2,
+        2,
+        2,
+        2,
         null,
         null,
         null
@@ -114,7 +114,7 @@
         null,
         null,
         null,
-        2,
+        3,
         null,
         1,
         0,
@@ -179,8 +179,16 @@
         null,
         null,
         null
+      ],
+      "/home/devin/projects/web/kodiak/app/models/category.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null
       ]
     },
-    "timestamp": 1406667715
+    "timestamp": 1406670988
   }
 }

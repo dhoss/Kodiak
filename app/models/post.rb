@@ -27,7 +27,7 @@ class Post < ActiveRecord::Base
           :title, :tags, :category, 
           :user, :comments
 
-  paginates_per 25
+  paginates_per 5
 
   def has_tag?(tag)
     self.tags.include?(tag)

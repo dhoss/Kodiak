@@ -10,8 +10,10 @@ feature 'navigate through pagination' do
   end
 
   scenario 'first page should be 1' do
+    visit '/'
     
-    expect(page).to have_css ".pager"
+    expect(page).to have_css 'nav.pagination'
+    expect(find('span.page.current')).to have_content("1")
   end
 end
 
