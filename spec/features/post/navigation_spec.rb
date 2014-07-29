@@ -9,11 +9,29 @@ feature 'navigate through pagination' do
     end
   end
 
-  scenario 'first page should be 1' do
+  scenario "<nav> tag with a .pagination class" do
     visit '/'
-    
     expect(page).to have_css 'nav.pagination'
+  end
+
+  scenario 'first page should be 1' do
+    visit '/'  
     expect(find('span.page.current')).to have_content("1")
+  end
+
+  scenario "next page should have a link containing ?page=2" do
+    visit '/'
+    expect(page).to have_xpath('//span[@class="page"]/a[@href="/?page=2" and @rel="next"]')
+  end
+  
+  scenario "next page should have a link containing ?page=2" do
+    visit '/'
+    expect(page).to have_xpath('//span[@class="next"]/a[@href="/?page=2" and @rel="next"]')
+  end
+  
+  scenario "last page should have a link containing ?page=10" do
+    visit '/'
+    expect(page).to have_xpath('//span[@class="last"]/a[@href="/?page=10"]')
   end
 end
 
