@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe ArchivesController do
   describe "routing" do
+    it "routes to #index" do
+      get("/archives").should route_to("archives#index")
+    end
+
     it "routes to #year" do 
       get("/2014").should route_to("archives#year", :year => "2014")
     end

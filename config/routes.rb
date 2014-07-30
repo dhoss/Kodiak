@@ -13,6 +13,8 @@ Kodiak::Application.routes.draw do
   resources :photos
 
   resources :categories
+
+  get '/archives' => 'archives#index'
   
   get '/:year' => 'archives#year', constraints: {
     year: /\d{4}/
