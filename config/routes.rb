@@ -13,7 +13,23 @@ Kodiak::Application.routes.draw do
   resources :photos
 
   resources :categories
+  
+  get '/:year' => 'archives#year', constraints: {
+    year: /\d{4}/
+  }
+
+  get '/:year/:month' => 'archives#month', constraints: {
+    year: /\d{4}/,
+    month: /\d{1,2}/
+  }
+
+  get '/:year/:month/:day' => 'archives#day', constraints: {
+    year: /\d{4}/,
+    month: /\d{1,2}/,
+    day: /\d{1,2}/
+  }
 
   root :to => "home#index"
 
+  
 end
