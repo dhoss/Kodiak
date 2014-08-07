@@ -45,6 +45,11 @@ class Post < ActiveRecord::Base
 
    scope :front_page, ->(page) { order(created_at: :desc).page(page) }
 
+   scope :distinct_years, -> { pluck('distinct(extract(year from created_at))').map {|year| year.to_i} }
+
+   scope :posts_by_year, ->(year) { where("extract(year from created_at) = ?", year) }
+
+
    def self.search(params)
     results = self.fast_search(params)
     Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results

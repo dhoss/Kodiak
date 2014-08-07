@@ -18,14 +18,15 @@ describe ArchivesController do
   describe "GET index" do
     it "lists all posts sorted by year" do
       get :index
-      assigns(:posts).map {|d| d.created_at.year }.should eq [2014, 2013]
+      assigns(:years).should eq [2014, 2013]
     end
   end
 
   describe "GET year" do
-    it "lists posts by a specified year" 
-
-
+    it "lists posts by a specified year" do
+      get :year, { :year => 2014 }
+      assigns(:posts).should eq([post_2014])
+    end
   end
 
   describe "GET month" do
