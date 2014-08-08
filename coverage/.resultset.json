@@ -24,6 +24,10 @@
         null,
         null
       ],
+      "/home/devin/projects/Kodiak/app/helpers/archives_helper.rb": [
+        1,
+        null
+      ],
       "/home/devin/projects/Kodiak/app/helpers/attachments_helper.rb": [
         1,
         null
@@ -49,6 +53,40 @@
         null
       ],
       "/home/devin/projects/Kodiak/app/helpers/users_helper.rb": [
+        1,
+        null
+      ],
+      "/home/devin/projects/Kodiak/app/controllers/archives_controller.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/devin/projects/Kodiak/app/controllers/application_controller.rb": [
+        1,
         1,
         null
       ],
@@ -121,14 +159,6 @@
         2,
         null,
         null,
-        null
-      ],
-      "/home/devin/projects/web/kodiak/app/helpers/archives_helper.rb": [
-        1,
-        null
-      ],
-      "/home/devin/projects/web/kodiak/app/helpers/attachments_helper.rb": [
-        1,
         null
       ],
       "/home/devin/projects/Kodiak/app/controllers/categories_controller.rb": [
@@ -422,17 +452,7 @@
         2,
         null
       ],
-      "/home/devin/projects/web/kodiak/app/controllers/archives_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
+      "/home/devin/projects/Kodiak/app/uploaders/attachment_uploader.rb": [
         null,
         1,
         1,
@@ -478,18 +498,8 @@
       "/home/devin/projects/Kodiak/app/models/category.rb": [
         1,
         1,
-        null,
-        null,
-        null,
         1,
         null,
-        null,
-        1,
-        null,
-        null
-      ],
-      "/home/devin/projects/web/kodiak/app/controllers/application_controller.rb": [
-        1,
         1,
         null
       ],
@@ -539,7 +549,7 @@
         null,
         null,
         null,
-        1,
+        26,
         null,
         4,
         null,
@@ -691,6 +701,6 @@
         null
       ]
     },
-    "timestamp": 1407468122
+    "timestamp": 1407468845
   }
 }
