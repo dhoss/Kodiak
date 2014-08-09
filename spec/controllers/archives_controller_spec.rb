@@ -30,7 +30,10 @@ describe ArchivesController do
   end
 
   describe "GET month" do
-    it "lists posts by a specified month"
+    it "lists posts by a specified month" do
+      get :month, { :year => 2014, :month => 07 }
+      assigns(:posts).should eq([post_2014])
+    end
   end
 
   describe "GET day" do

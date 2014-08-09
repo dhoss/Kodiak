@@ -20,6 +20,14 @@ class ArchivesController < ApplicationController
   end
 
   def month
+    @year  = params[:year]
+    @month = params[:month]
+    @posts = Post.posts_by_month(@year, @month)
+  
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
   end
 
   def day

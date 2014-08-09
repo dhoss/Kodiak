@@ -12,7 +12,6 @@ describe 'layouts/application.html.erb' do
   context 'when we hit a page' do
     it 'displays the correct "Archives" panel' do
       sign_in user
-      pp user_post
       assign(:year_month_pairs, Post.year_month_pairs)
 
       render

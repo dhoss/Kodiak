@@ -46,6 +46,7 @@ class Post < ActiveRecord::Base
    scope :front_page, ->(page) { order(created_at: :desc).page(page) }
 
    scope :posts_by_year, ->(year) { where("extract(year from created_at) = ?", year) }
+   scope :posts_by_month, ->(year, month) { posts_by_year(year).where("extract(month from created_at) = ?", month) }
 
    def self.distinct_years
      pluck('distinct(extract(year from created_at))').map {|year| year.to_i} 
