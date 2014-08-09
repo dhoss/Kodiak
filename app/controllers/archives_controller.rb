@@ -11,7 +11,7 @@ class ArchivesController < ApplicationController
 
   def year
     @year  = params[:year]
-    @posts = Post.posts_by_year(@year)
+    @posts = Post.posts_by_year(@year).page(params[:page])
   
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,7 @@ class ArchivesController < ApplicationController
   def month
     @year  = params[:year]
     @month = params[:month]
-    @posts = Post.posts_by_month(@year, @month)
+    @posts = Post.posts_by_month(@year, @month).page(params[:page])
   
     respond_to do |format|
       format.html # index.html.erb
