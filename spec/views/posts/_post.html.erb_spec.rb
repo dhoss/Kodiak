@@ -8,7 +8,16 @@ describe 'posts/_post.html.erb' do
   let!(:user_post) { user.posts.create! post_attributes }
 
   context 'when we view a post' do
-    it 'has the correct user name displayed' 
+    it 'has the correct user name displayed' do 
+      sign_in user
+      assign(:post, user_post)
+
+      render partial: user_post
+
+      p "USER NAME *****"
+      pp user.name
+      expect(rendered).to have_link user.name, user.name
+    end
   end
 end
 

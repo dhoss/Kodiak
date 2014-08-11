@@ -43,12 +43,15 @@ class Post < ActiveRecord::Base
                     trigram: {}
                   }
 
-   scope :front_page, ->(page) { order(created_at: :desc).page(page) }
 
    scope :posts_by_year, ->(year) { where("extract(year from created_at) = ?", year).order(created_at: :desc) }
    scope :posts_by_month, ->(year, month) { 
      posts_by_year(year).where("extract(month from created_at) = ?", month).order(created_at: :desc) 
    }
+
+   scope :with_author, -> { joins(:user) }
+
+   scope :front_page, ->(page) { with_author.order(created_at: :desc).page(page) }
 
    def self.distinct_years
      pluck('distinct(extract(year from created_at))').map {|year| year.to_i} 
@@ -59,7 +62,6 @@ class Post < ActiveRecord::Base
      order("year desc").
      group("extract(year from created_at), extract(month from created_at)")
    end
-
 
    def self.search(params)
     results = self.fast_search(params)
