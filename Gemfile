@@ -51,6 +51,8 @@ gem 'bcrypt-ruby', '~> 3.1.5'
 
 gem 'puma', '~> 2.8.2'
 
+gem 'cancancan', '~> 1.9.2'
+
 
 group :development, :test do
   gem 'capybara'
