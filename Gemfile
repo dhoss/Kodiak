@@ -63,4 +63,5 @@ group :development, :test do
   gem 'capistrano', '~> 3.2.1'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist'
+  gem "codeclimate-test-reporter", require: nil
 end

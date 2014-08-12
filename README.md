@@ -1,7 +1,8 @@
 Kodiak
 ======
-![Travis CI status](https://api.travis-ci.org/dhoss/Kodiak.png?branch=master)
-[![Coverage Status](https://coveralls.io/repos/dhoss/Kodiak/badge.png?branch=%28detached+from+47d933e%29)](https://coveralls.io/r/dhoss/Kodiak?branch=%28detached+from+47d933e%29)
+[![Build Status](https://travis-ci.org/dhoss/Kodiak.svg?branch=master)](https://travis-ci.org/dhoss/Kodiak)
+[![Code Climate](https://codeclimate.com/github/dhoss/Kodiak/badges/gpa.svg)](https://codeclimate.com/github/dhoss/Kodiak)
+[![Test Coverage](https://codeclimate.com/github/dhoss/Kodiak/badges/coverage.svg)](https://codeclimate.com/github/dhoss/Kodiak)
 [![endorse](https://api.coderwall.com/dhoss/endorsecount.png)](https://coderwall.com/dhoss)
 [![Dependency Status](https://gemnasium.com/dhoss/Kodiak.png)](https://gemnasium.com/dhoss/Kodiak)
 
