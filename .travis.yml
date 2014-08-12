@@ -7,10 +7,11 @@ rvm:
  - 2.0.0
  - 1.9.3
 services: postgresql
+bundler_args: --retry 3
 install: 
  - sudo apt-get update -qq
  - sudo apt-get install -qq postgresql-contrib-9.1
- - bundle install
+ - travis_retry bundle install
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
  - psql -U postgres kodiak_test < db/search_extensions.sql
