@@ -14,8 +14,6 @@ describe 'posts/_post.html.erb' do
 
       render partial: user_post
 
-      p "USER NAME *****"
-      pp user.name
       expect(rendered).to have_link user.name, user.name
     end
   end
