@@ -60,8 +60,17 @@ describe User do
   end
 
   describe "User Roles" do
-    it "starts with the 'poster' role" do
+    it "starts with the 1 role" do
       expect(@user.roles.count).to eq (1)
+    end
+
+    it "starts with the 'poster' role" do
+      expect(@user.role?("poster")).to eq(true)
+    end
+
+    it "has the 'admin' role added" do
+      @user.add_role("admin")
+      expect(@user.role?("admin")).to eq (true)
     end
   end
 end
