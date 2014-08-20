@@ -3,10 +3,15 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+    p "USER"
+    pp user.roles
     if user.role? "admin"
       can :manage, :all
-    else
-      can :manage, Post, user_id: user.id
+    end
+    if user.role? "poster"
+      can :manage, Post do |post|
+        post.try(:user) == user
+      end
       can :read, :all
       can :create, Post
       can :update, Post do |post|

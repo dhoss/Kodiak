@@ -11,4 +11,12 @@ class User < ActiveRecord::Base
   has_many :roles, through: :users_roles
   extend Hashifiable
   hashify :email, :name, :password
+
+  def role?(role)
+    roles.include?(Role.find_by(name:role))
+  end
+
+  def add_role(role)
+    roles << Role.find_or_create_by(name: role)
+  end
 end
