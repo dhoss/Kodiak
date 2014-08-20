@@ -60,4 +60,18 @@ describe User do
       expect(Post.count).to eq(0)
     end
   end
+
+  describe "Abilities" do
+    it "adds abilities properly" do
+      user = User.create(valid_user)
+      user.add_role("poster")
+      expect(user.roles).to eq([Role.find_by(name: "poster")])
+    end
+
+    it "checks abilities properly" do
+      user = User.create(valid_user)
+      user.add_role("poster")
+      expect(user.role? "poster").to eq(true)
+    end
+  end
 end
