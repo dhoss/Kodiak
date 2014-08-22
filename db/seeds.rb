@@ -1,3 +1,3 @@
-["admin", "poster"].each do |role_name|
-  Role.create(name: role_name)
+["admin", "poster"].each do |role|
+  Role.create(name: role)
 end

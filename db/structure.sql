@@ -210,9 +210,7 @@ CREATE TABLE posts_tags (
 
 CREATE TABLE roles (
     id integer NOT NULL,
-    name character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    name character varying(255)
 );
 
 
@@ -513,14 +511,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 -- Name: index_users_roles_on_role_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_users_roles_on_role_id_and_user_id ON users_roles USING btree (role_id, user_id);
+CREATE UNIQUE INDEX index_users_roles_on_role_id_and_user_id ON users_roles USING btree (role_id, user_id);
 
 
 --
 -- Name: index_users_roles_on_user_id_and_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USING btree (user_id, role_id);
+CREATE UNIQUE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USING btree (user_id, role_id);
 
 
 --
@@ -600,11 +598,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140224030231');
 
 INSERT INTO schema_migrations (version) VALUES ('20140812225705');
 
-INSERT INTO schema_migrations (version) VALUES ('20140812225851');
+INSERT INTO schema_migrations (version) VALUES ('20140820001700');
 
-INSERT INTO schema_migrations (version) VALUES ('20140814014238');
-
-INSERT INTO schema_migrations (version) VALUES ('20140814214557');
-
-INSERT INTO schema_migrations (version) VALUES ('20140814214811');
+INSERT INTO schema_migrations (version) VALUES ('20140820001701');
 

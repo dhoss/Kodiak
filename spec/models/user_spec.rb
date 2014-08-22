@@ -59,18 +59,15 @@ describe User do
     end
   end
 
-  describe "User Roles" do
-    it "starts with the 1 role" do
-      expect(@user.roles.count).to eq (1)
+  describe "Abilities" do
+    it "adds abilities properly" do
+      @user.add_role("poster")
+      expect(@user.roles).to eq([Role.find_by(name: "poster")])
     end
 
-    it "starts with the 'poster' role" do
-      expect(@user.role?("poster")).to eq(true)
-    end
-
-    it "has the 'admin' role added" do
-      @user.add_role("admin")
-      expect(@user.role?("admin")).to eq (true)
+    it "checks abilities properly" do
+      @user.add_role("poster")
+      expect(@user.role? "poster").to eq(true)
     end
   end
 end
