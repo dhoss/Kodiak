@@ -1,25 +1,24 @@
 require 'spec_helper'
 
 describe User do
+  include_context 'users'
   let(:valid_user) {{ :email => "me@fart.com", :name => "Toots McGee", :password => "T00tpower!" }}
+  let!(:user) { User.create valid_user }
   
   describe "Basic CRUD" do
     it "inserts a user" do
-      expect(User.create(valid_user)).to be_valid
+      expect(user).to be_valid
     end
     it "finds a user" do 
-      User.create(valid_user)
-      expect(User.find_by(name: "Toots McGee").name).to eq("Toots McGee")
+      expect(User.find_by(name:user.name).name).to eq(user.name)
     end
     it "updates a user" do
-      user = User.create(valid_user)
       user.name = "Pffft"
       user.save
       expect(User.first.name).to eq("Pffft")
     end
 
     it "deletes a user" do
-      user = User.create(valid_user)
       expect(User.count).to eq(1)
       user.delete
       expect(User.count).to eq(0)
@@ -62,14 +61,13 @@ describe User do
   end
 
   describe "Abilities" do
+    let!(:user){ User.create(valid_user) }
     it "adds abilities properly" do
-      user = User.create(valid_user)
       user.add_role("poster")
       expect(user.roles).to eq([Role.find_by(name: "poster")])
     end
 
     it "checks abilities properly" do
-      user = User.create(valid_user)
       user.add_role("poster")
       expect(user.role? "poster").to eq(true)
     end

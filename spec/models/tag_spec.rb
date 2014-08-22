@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'factory_girl'
 
 describe Tag do
+  include_context 'users'
   let!(:user) { FactoryGirl.create(:user) }
   let!(:post) { FactoryGirl.create(:post, user: user) }
   describe "Basic CRUD" do

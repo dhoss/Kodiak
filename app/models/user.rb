@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :add_default_role
+
   validates :email, uniqueness: true
 
   has_many :posts
@@ -17,6 +19,16 @@ class User < ActiveRecord::Base
   end
 
   def add_role(role)
-    roles << Role.find_or_create_by(name: role)
+    roles << Role.find_by(name: role)
+  end
+
+  def add_default_role
+    p "ADDING ROLE"
+    pp roles
+    if roles.empty? || (role?("poster") == false)
+      p "ADDING ROLE EMPTY"
+      roles << Role.find_by(name: "poster")
+      pp roles
+    end
   end
 end
