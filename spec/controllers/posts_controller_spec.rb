@@ -173,17 +173,15 @@ describe PostsController do
     end
   end
 
-  context "DELETE destroy" do
+  describe "DELETE destroy" do
     let!(:user) { User.create user_attributes }
-    subject(:user_post) do
+    let!(:user_post) {
       user.posts.create! post_attributes, 
                      :category => { :name => "toots"},
                      :tag_attributes => [{ :name => "fartaculous" }] 
-    end
+    }
     it "destroys the requested post" do
       sign_in user
-      p "DELETE POST"
-      pp user_post
       expect {
         delete :destroy, {:id => user_post.to_param}
       }.to change(Post, :count).by(-1)
