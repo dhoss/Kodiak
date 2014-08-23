@@ -6,6 +6,7 @@ class Ability
     if user.role? "admin"
       can :manage, :all
     end
+
     if user.role? "poster"
       can :manage, Post do |post|
         post.try(:user) == user
