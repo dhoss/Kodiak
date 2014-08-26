@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe User do
   include_context 'users'
-#  before :each do
-#    Role.find_or_create_by(name: "poster")
-#  end
   let!(:user){ User.create! user_attributes }
 
   describe "Basic CRUD" do

@@ -39,20 +39,21 @@ describe UsersController do
 
   describe "POST create" do
     describe "with valid params" do
+      let(:user) {{ :name => "farty mcfart", :email => "fart123@fart.com", :password => "fart12345" }}
       it "creates a new User" do
         expect {
-          post :create, {:user => valid_attributes}, valid_session
+          post :create, {:user => user }
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {:user => user}
         assigns(:user).should be_a(User)
         assigns(:user).should be_persisted
       end
 
       it "redirects to the created user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {:user => user}
         response.should redirect_to(User.last)
       end
     end
