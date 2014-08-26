@@ -25,6 +25,7 @@ describe UsersController do
 
   describe "GET new" do
     it "assigns a new user as @user" do
+      sign_in user
       get :new, {}, valid_session
       assigns(:user).should be_a_new(User)
     end
@@ -32,6 +33,7 @@ describe UsersController do
 
   describe "GET edit" do
     it "assigns the requested user as @user" do
+      sign_in user
       get :edit, {:id => user.to_param}, valid_session
       assigns(:user).should eq(user)
     end
@@ -39,21 +41,21 @@ describe UsersController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:user) {{ :name => "farty mcfart", :email => "fart123@fart.com", :password => "fart12345" }}
+      let(:user) {User.new(name: "farty mcfart", email: "fart123@fart.com", password: "fart12345")}
       it "creates a new User" do
         expect {
-          post :create, {:user => user }
+          post :create, {:user => user.to_h }
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {:user => user}
+        post :create, {:user => user.to_h}
         assigns(:user).should be_a(User)
         assigns(:user).should be_persisted
       end
 
       it "redirects to the created user" do
-        post :create, {:user => user}
+        post :create, {:user => user.to_h}
         response.should redirect_to(User.last)
       end
     end
@@ -78,6 +80,7 @@ describe UsersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested user" do
+        sign_in user
         # Assuming there are no other users in the database, this
         # specifies that the User created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -87,11 +90,13 @@ describe UsersController do
       end
 
       it "assigns the requested user as @user" do
+        sign_in user
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         assigns(:user).should eq(user)
       end
 
       it "redirects to the user" do
+        sign_in user
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         response.should redirect_to(user)
       end
@@ -99,6 +104,7 @@ describe UsersController do
 
     describe "with invalid params" do
       it "assigns the user as @user" do
+        sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         put :update, {:id => user.to_param, :user => { "name" => "invalid value" }}, valid_session
@@ -106,6 +112,7 @@ describe UsersController do
       end
 
       it "re-renders the 'edit' template" do
+        sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         put :update, {:id => user.to_param, :user => { "name" => "invalid value" }}, valid_session
@@ -116,12 +123,14 @@ describe UsersController do
 
   describe "DELETE destroy" do
     it "destroys the requested user" do
+      sign_in user
       expect {
         delete :destroy, {:id => user.to_param}, valid_session
       }.to change(User, :count).by(-1)
     end
 
     it "redirects to the users list" do
+      sign_in user
       delete :destroy, {:id => user.to_param}, valid_session
       response.should redirect_to(users_url)
     end

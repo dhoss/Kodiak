@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_authorize_resource :only => [:index, :show, :new, :create]
+  before_filter :authenticate_user!, :except => [:index, :show, :new, :create]
+  
   # GET /users
   # GET /users.json
   def index
@@ -40,7 +43,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
