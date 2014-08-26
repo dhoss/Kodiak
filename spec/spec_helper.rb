@@ -10,6 +10,8 @@ require 'factory_girl'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'rake/dsl_definition'
+require 'rake'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
@@ -41,6 +43,7 @@ RSpec.configure do |config|
     FactoryGirl.factories.clear
     FactoryGirl.find_definitions
     DatabaseCleaner.start
+    Rails.application.load_seed
   end
 
   config.after(:each) do
