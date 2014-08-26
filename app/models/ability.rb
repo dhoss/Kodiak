@@ -7,6 +7,18 @@ class Ability
       can :manage, :all
     end
 
+    can :manage, User do |u|
+      user.try(:user) == user
+    end
+
+    can :update, User do |u|
+      user.try(:user) == user
+    end
+
+    can :delete, User do |u|
+      user.try(:user) == u
+    end
+
     if user.role? "poster"
       can :manage, Post do |post|
         post.try(:user) == user

@@ -10,6 +10,7 @@ describe "User" do
         ability = Ability.new(user) 
         ability.should be_able_to(:create, Post.new)
       end
+      it "should be able to manage its own user"
     end
     context "with admin role" do
       it "should be able to manage any post by any user"
