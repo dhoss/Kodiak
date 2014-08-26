@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  load_and_authorize_resource
+  skip_authorize_resource :only => [:index, :show]
   before_filter :authenticate_user!, :except => [:index, :show]
 
 
