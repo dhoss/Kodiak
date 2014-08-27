@@ -37,6 +37,20 @@ COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance betwe
 
 
 --
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -594,4 +608,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140812225705');
 INSERT INTO schema_migrations (version) VALUES ('20140820001700');
 
 INSERT INTO schema_migrations (version) VALUES ('20140820001701');
+
+INSERT INTO schema_migrations (version) VALUES ('20140827164045');
 
