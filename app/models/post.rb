@@ -54,7 +54,7 @@ class Post < ActiveRecord::Base
    scope :front_page, ->(page) { with_author.order(created_at: :desc).page(page) }
 
    def self.distinct_years
-     pluck('distinct(extract(year from created_at))').map {|year| year.to_i} 
+     order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 
    end
 
    def self.year_month_pairs
