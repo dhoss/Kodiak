@@ -257,6 +257,35 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE settings (
+    id integer NOT NULL,
+    configuration hstore
+);
+
+
+--
+-- Name: settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE settings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
+
+
+--
 -- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -378,6 +407,13 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
@@ -426,6 +462,14 @@ ALTER TABLE ONLY posts
 
 ALTER TABLE ONLY roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY settings
+    ADD CONSTRAINT settings_pkey PRIMARY KEY (id);
 
 
 --
@@ -610,4 +654,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140820001700');
 INSERT INTO schema_migrations (version) VALUES ('20140820001701');
 
 INSERT INTO schema_migrations (version) VALUES ('20140827164045');
+
+INSERT INTO schema_migrations (version) VALUES ('20140827175124');
 
