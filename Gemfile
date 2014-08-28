@@ -53,7 +53,6 @@ gem 'puma', '~> 2.8.2'
 
 gem 'cancancan', '~> 1.9.2'
 
-
 group :development, :test do
   gem 'capybara'
   gem 'factory_girl', '~> 4.4.0'

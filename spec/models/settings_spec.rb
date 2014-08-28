@@ -1,12 +1,16 @@
 require 'spec_helper'
 
 describe Settings do
-  let!(:user) { FactoryGirl.create(:user) }
   let!(:posts) { FactoryGirl.create_list(:post, 15) }
 
-  context "initial pagination" do
-    it "returns 5 results/page" do
-      expect(Post.page(1).count).to eq(5)
+  context "posts_per_page configuration" do
+    it "starts with no configuration" do
+      expect(Settings.get('posts_per_page')).to eq(nil)
+    end
+
+    it "sets pagination configuration" do
+      s = Settings.create configuration: {posts_per_page: 10}
+      expect(s.posts_per_page.to_i).to eq(10)
     end
   end
 end
