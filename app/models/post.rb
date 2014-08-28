@@ -27,7 +27,7 @@ class Post < ActiveRecord::Base
           :title, :tags, :category, 
           :user, :comments
 
-  paginates_per Settings.get('posts_per_page').to_i || 5
+  paginates_per Settings.get('posts_per_page').to_i == 0 ? 5 :  Settings.get('posts_per_page').to_i
 
   def has_tag?(tag)
     self.tags.include?(tag)
