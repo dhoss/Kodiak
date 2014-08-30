@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-
   alias_attribute :author, :user
   include Treeify
 
@@ -27,7 +26,7 @@ class Post < ActiveRecord::Base
           :title, :tags, :category, 
           :user, :comments
 
-  paginates_per Settings.get('posts_per_page').to_i == 0 ? 5 :  Settings.get('posts_per_page').to_i
+  paginates_per 5 #Rails.configuration.pagination.per_page
 
   def has_tag?(tag)
     self.tags.include?(tag)

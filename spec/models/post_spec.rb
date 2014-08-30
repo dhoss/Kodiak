@@ -68,11 +68,4 @@ describe Post do
       expect(results).not_to be_empty
     end
   end
-
-  context "pagination" do
-    let!(:posts)      { FactoryGirl.create_list(:post, 15) }
-    it "reads the initial posts per page" do
-      expect(Post.page(1).count).to eq(5)
-    end
-  end
 end

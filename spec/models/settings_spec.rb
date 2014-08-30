@@ -4,13 +4,13 @@ describe Settings do
   let!(:posts) { FactoryGirl.create_list(:post, 15) }
 
   context "posts_per_page configuration" do
-    it "starts with no configuration" do
-      expect(Settings.get('posts_per_page')).to eq(nil)
+    it "starts with default config" do
+      expect(Settings.get('banner_title')).to eq("Kodiak")
     end
 
-    it "sets pagination configuration" do
-      s = Settings.create configuration: {posts_per_page: 10}
-      expect(s.posts_per_page.to_i).to eq(10)
+    it "updates title" do
+      Settings.set("banner_title", "fart")
+      expect(Settings.get("banner_title")).to eq("fart")
     end
   end
 end
