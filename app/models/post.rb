@@ -25,8 +25,7 @@ class Post < ActiveRecord::Base
   hashify :body, :category, :parent_id, 
           :title, :tags, :category, 
           :user, :comments
-
-  paginates_per 5 #Rails.configuration.pagination.per_page
+  paginates_per APP_CONFIG['posts_per_page']
 
   def has_tag?(tag)
     self.tags.include?(tag)
