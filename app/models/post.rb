@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   validates :body, presence: true
  
   extend Hashifiable
+  extend FriendlyId
+  friendly_id :title, use: :slugged
   # has many
   has_many :comments, class_name: "Post", foreign_key: "parent_id"
   has_many :attachments, as: :attachable
