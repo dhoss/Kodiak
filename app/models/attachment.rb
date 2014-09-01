@@ -7,4 +7,5 @@ class Attachment < ActiveRecord::Base
   mount_uploader :attachment, AttachmentUploader
 
   scope :photos, -> { where(public: 1, mime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']) }
+  paginates_per APP_CONFIG['posts_per_page']
 end
