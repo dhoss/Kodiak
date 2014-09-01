@@ -85,7 +85,8 @@ CREATE TABLE attachments (
     posts_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    public integer DEFAULT 1
+    public integer DEFAULT 1,
+    gallery_id integer
 );
 
 
@@ -170,6 +171,40 @@ CREATE SEQUENCE friendly_id_slugs_id_seq
 --
 
 ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
+
+
+--
+-- Name: galleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE galleries (
+    id integer NOT NULL,
+    name character varying(255),
+    description character varying(255),
+    slug character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    user_id integer
+);
+
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE galleries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: galleries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE galleries_id_seq OWNED BY galleries.id;
 
 
 --
@@ -427,6 +462,13 @@ ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY galleries ALTER COLUMN id SET DEFAULT nextval('galleries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
 
 
@@ -487,6 +529,14 @@ ALTER TABLE ONLY categories
 
 ALTER TABLE ONLY friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: galleries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY galleries
+    ADD CONSTRAINT galleries_pkey PRIMARY KEY (id);
 
 
 --
@@ -559,6 +609,13 @@ CREATE INDEX index_attachments_on_attachable_type_and_attachable_id ON attachmen
 
 
 --
+-- Name: index_attachments_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attachments_on_gallery_id ON attachments USING btree (gallery_id);
+
+
+--
 -- Name: index_attachments_on_posts_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -598,6 +655,13 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON friendly_id_slugs USING 
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USING btree (sluggable_type);
+
+
+--
+-- Name: index_galleries_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_galleries_on_user_id ON galleries USING btree (user_id);
 
 
 --
@@ -744,4 +808,10 @@ INSERT INTO schema_migrations (version) VALUES ('20140827175124');
 INSERT INTO schema_migrations (version) VALUES ('20140831011515');
 
 INSERT INTO schema_migrations (version) VALUES ('20140831011557');
+
+INSERT INTO schema_migrations (version) VALUES ('20140831014757');
+
+INSERT INTO schema_migrations (version) VALUES ('20140831015227');
+
+INSERT INTO schema_migrations (version) VALUES ('20140901173800');
 

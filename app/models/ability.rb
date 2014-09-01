@@ -19,6 +19,18 @@ class Ability
       user.try(:user) == u
     end
 
+    can :manage, Gallery do |u|
+      user.try(:user) == user
+    end
+
+    can :update, User do |u|
+      user.try(:user) == user
+    end
+
+    can :delete, User do |u|
+      user.try(:user) == u
+    end
+
     if user.role? "poster"
       can :manage, Post do |post|
         post.try(:user) == user
