@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   has_many :comments, class_name: "Post", foreign_key: "parent_id"
   has_many :attachments, as: :attachable
   has_and_belongs_to_many :tags
+  belongs_to :gallery, -> { where(type: "post") }
 
   # belongs to
   belongs_to :post_comments, class_name: "Post"

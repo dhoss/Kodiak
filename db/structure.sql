@@ -85,8 +85,7 @@ CREATE TABLE attachments (
     posts_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    public integer DEFAULT 1,
-    gallery_id integer
+    public integer DEFAULT 1
 );
 
 
@@ -254,7 +253,9 @@ CREATE TABLE posts (
     updated_at timestamp without time zone,
     category_id integer,
     tsv tsvector,
-    slug character varying(255)
+    slug character varying(255),
+    gallery_id integer,
+    kind character varying(255) DEFAULT 'post'::character varying
 );
 
 
@@ -609,13 +610,6 @@ CREATE INDEX index_attachments_on_attachable_type_and_attachable_id ON attachmen
 
 
 --
--- Name: index_attachments_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_gallery_id ON attachments USING btree (gallery_id);
-
-
---
 -- Name: index_attachments_on_posts_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -662,6 +656,13 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USIN
 --
 
 CREATE INDEX index_galleries_on_user_id ON galleries USING btree (user_id);
+
+
+--
+-- Name: index_posts_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_gallery_id ON posts USING btree (gallery_id);
 
 
 --
@@ -814,4 +815,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140831014757');
 INSERT INTO schema_migrations (version) VALUES ('20140831015227');
 
 INSERT INTO schema_migrations (version) VALUES ('20140901173800');
+
+INSERT INTO schema_migrations (version) VALUES ('20140901215808');
+
+INSERT INTO schema_migrations (version) VALUES ('20140901221140');
 
