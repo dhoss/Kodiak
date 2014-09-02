@@ -1,8 +1,7 @@
 development:
   adapter: postgresql
   database: kodiak_dev
-  username: kodiak_dev
-  password: kodiak_dev
+  username: postgres
   host: localhost
   port: 5432
   pool: 5

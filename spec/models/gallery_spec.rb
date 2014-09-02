@@ -23,24 +23,24 @@ describe Gallery do
   end
 
   it "paginates a gallery" do
-    FactoryGirl.create_list(:post, 10)
-    Post.update_all(gallery_id: gallery, kind: "post")
+    FactoryGirl.create_list(:attachment, 10)
+    Attachment.update_all(gallery_id: gallery)
     expect(gallery.photos.page(1).count).to eq(5)
   end
 
   it "adds photos to a gallery" do 
-    Gallery.create(name: "Fart Knocker", photos:  [Post.create(title: "fart", body: "farting", kind: "photo" )])
-    expect(Gallery.find_by(name: "Fart Knocker").photos.count).to eq(1)
+    Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
+    expect(Gallery.find_by(name: "Fart Knocker").photos.count).to eq(10)
   end
 
   it "retrieves the correct photos for a gallery" do
-    gallery = Gallery.create(name: "Fart Knocker", photos: [Post.create(title: "fart", body: "farting", kind: "photo" )])
+    gallery = Gallery.create(name: "Fart Knocker", photos: FactoryGirl.create_list(:attachment, 10))
     expect(gallery.photos.pluck(:gallery_id).find{|id| id == gallery.id}).to_not be_nil
   end
 
   it "moves photos from one gallery to another" do
-    gallery1 = Gallery.create(name: "Fart Knocker", photos:  [Post.create(title: "fart 1", body: "farting", kind: "photo" )])
-    gallery2 = Gallery.create(name: "Fart Knocker", photos:  [Post.create(title: "fart 2", body: "farting", kind: "photo" )])
+    gallery1 = Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
+    gallery2 = Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
     gallery1.move_images_to_gallery(gallery1.photos, gallery2)
     expect(gallery2.photos.pluck(:gallery_id).find{|id| id == gallery2.id}).to_not be_nil
   end

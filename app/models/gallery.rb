@@ -3,7 +3,7 @@ class Gallery < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :photos, 
-    class_name: "Post",
+    class_name: "Attachment",
     foreign_key: :gallery_id
   has_one :cover, 
     class_name: "Attachment",

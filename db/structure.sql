@@ -37,6 +37,20 @@ COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance betwe
 
 
 --
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -71,7 +85,8 @@ CREATE TABLE attachments (
     posts_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    public integer DEFAULT 1
+    public integer DEFAULT 1,
+    gallery_id integer
 );
 
 
@@ -240,9 +255,7 @@ CREATE TABLE posts (
     updated_at timestamp without time zone,
     category_id integer,
     tsv tsvector,
-    slug character varying(255),
-    gallery_id integer,
-    kind character varying(255) DEFAULT 'post'::character varying
+    slug character varying(255)
 );
 
 
@@ -314,6 +327,16 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE settings (
+    id integer NOT NULL,
+    configuration hstore
+);
+
+
+--
 -- Name: settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -323,6 +346,13 @@ CREATE SEQUENCE settings_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+--
+-- Name: settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
 
 
 --
@@ -461,6 +491,13 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
@@ -528,6 +565,14 @@ ALTER TABLE ONLY roles
 
 
 --
+-- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY settings
+    ADD CONSTRAINT settings_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -562,6 +607,13 @@ CREATE INDEX index_attachments_on_attachable_type ON attachments USING btree (at
 --
 
 CREATE INDEX index_attachments_on_attachable_type_and_attachable_id ON attachments USING btree (attachable_type, attachable_id);
+
+
+--
+-- Name: index_attachments_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attachments_on_gallery_id ON attachments USING btree (gallery_id);
 
 
 --
@@ -611,13 +663,6 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USIN
 --
 
 CREATE INDEX index_galleries_on_user_id ON galleries USING btree (user_id);
-
-
---
--- Name: index_posts_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_gallery_id ON posts USING btree (gallery_id);
 
 
 --
@@ -674,6 +719,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 --
 
 CREATE UNIQUE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USING btree (user_id, role_id);
+
+
+--
+-- Name: trgm_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX trgm_idx ON posts USING gin (title gin_trgm_ops, body gin_trgm_ops);
 
 
 --
@@ -763,10 +815,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140831014757');
 INSERT INTO schema_migrations (version) VALUES ('20140831015227');
 
 INSERT INTO schema_migrations (version) VALUES ('20140901173800');
-
-INSERT INTO schema_migrations (version) VALUES ('20140901215808');
-
-INSERT INTO schema_migrations (version) VALUES ('20140901221140');
 
 INSERT INTO schema_migrations (version) VALUES ('20140901235150');
 
