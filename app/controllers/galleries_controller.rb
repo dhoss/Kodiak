@@ -1,3 +1,4 @@
+require 'pp'
 class GalleriesController < ApplicationController
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
   skip_authorize_resource :only => [:index, :show] 
@@ -23,6 +24,8 @@ class GalleriesController < ApplicationController
 
   # POST /galleries
   def create
+    gallery_params[:cover] = Attachment.new(attachment: gallery_params.delete("attachment"))
+
     @gallery = Gallery.new(gallery_params)
 
     if @gallery.save
@@ -55,6 +58,7 @@ class GalleriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description)
+      # don't like this, but can't figure out how to get the attachment parameter to pass through
+      params.require(:gallery).permit!
     end
 end

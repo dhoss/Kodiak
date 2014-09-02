@@ -37,20 +37,6 @@ COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance betwe
 
 
 --
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
-
-
---
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
-
-
---
 -- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -183,7 +169,8 @@ CREATE TABLE galleries (
     slug character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    user_id integer
+    user_id integer,
+    cover integer
 );
 
 
@@ -327,16 +314,6 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE settings (
-    id integer NOT NULL,
-    configuration hstore
-);
-
-
---
 -- Name: settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -346,13 +323,6 @@ CREATE SEQUENCE settings_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
 
 
 --
@@ -491,13 +461,6 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
@@ -562,14 +525,6 @@ ALTER TABLE ONLY posts
 
 ALTER TABLE ONLY roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
-
-
---
--- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY settings
-    ADD CONSTRAINT settings_pkey PRIMARY KEY (id);
 
 
 --
@@ -722,13 +677,6 @@ CREATE UNIQUE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USIN
 
 
 --
--- Name: trgm_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX trgm_idx ON posts USING gin (title gin_trgm_ops, body gin_trgm_ops);
-
-
---
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -819,4 +767,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140901173800');
 INSERT INTO schema_migrations (version) VALUES ('20140901215808');
 
 INSERT INTO schema_migrations (version) VALUES ('20140901221140');
+
+INSERT INTO schema_migrations (version) VALUES ('20140901235150');
 

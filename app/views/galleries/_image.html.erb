@@ -1,0 +1,12 @@
+<ul class="row">
+  <% @gallery.photos.each do |photo| %>
+    <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+      <%= link_to image_tag(photo.attachments.first), photo %>
+    </li>
+  <% end %>
+</ul><!--/.row-->
+
+<!--<%# if can? :edit, image %>
+  <div class="image-edit">
+  <%#= link_to 'Edit', edit_post_path(image) %>
+  <%# end %>-->

@@ -1,14 +1,10 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<h2 id="gallery-name">
   <%= @gallery.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @gallery.description %>
-</p>
-
+</h2>
+<div id="gallery-cover">
+  <%= image_tag(@gallery.cover.attachment_url(:thumb)) %>
+</div>
+<%= render partial: "image", object: @gallery %>
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back', galleries_path %>
