@@ -1,5 +1,7 @@
 <div>
-  <form action="/attachments" class="dropzone" id="attachment"></form>
+  <form action="/attachments" class="dropzone" id="attachment">
+  <input type="hidden" name="photo[gallery]" value="<%= params[:id] %>" />
+  </form>
   <br/>
   <br/>
 </div>

@@ -18,5 +18,9 @@ jQuery ->
             $('#status_message').html("<b style='color: red;'>An error occurred while saving the attachment.</b>")
             return
 
+          @on "sending", (file, xhr, formData) ->
+            formData.append "photo[gallery]", "<%= params[:id] %>"
+            return 
+
           return
     

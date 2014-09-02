@@ -64,6 +64,6 @@ class PhotosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def photo_params
-      params[:photo]
+      params(:photo, :attachment['gallery'])
     end
 end

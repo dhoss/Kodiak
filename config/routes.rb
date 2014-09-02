@@ -33,6 +33,8 @@ Kodiak::Application.routes.draw do
     day: /\d{1,2}/
   }, as: :day
 
+  get '/galleries/:id/photos/new' => 'photos#new', as: :gallery_photo
+
   root :to => "home#index"
 
   

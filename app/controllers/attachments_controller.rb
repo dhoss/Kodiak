@@ -17,6 +17,7 @@ class AttachmentsController < ApplicationController
     attachment_params[:attachment] = params[:attachments] || params[:photo][:imagefile]
     attachment_params[:mime]       = params[:mime]        || params[:photo][:imagefile].content_type
     attachment_params[:name]       = params[:name]        || params[:photo][:imagefile].original_filename
+    attachment_params[:gallery]    = Gallery.find_by(name: params[:photo][:gallery])
     @attachment = Attachment.new(attachment_params)
     respond_to do |format|
       if @attachment.save
