@@ -24,11 +24,16 @@ class GalleriesController < ApplicationController
 
   # POST /galleries
   def create
-    gallery_params[:cover] = Attachment.new(attachment: gallery_params.delete("attachment"))
-
+    gallery_params[:cover] = Attachment.new(attachment: params.delete(:cover))
     @gallery = Gallery.new(gallery_params)
 
     if @gallery.save
+      if gallery_params[:cover]
+        cover = @gallery.cover
+        cover.gallery = @gallery
+        cover.save
+      end
+
       redirect_to @gallery, notice: 'Gallery was successfully created.'
     else
       render :new
@@ -59,6 +64,6 @@ class GalleriesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def gallery_params
       # don't like this, but can't figure out how to get the attachment parameter to pass through
-      params.require(:gallery).permit!
+      params.permit(:gallery, :cover, :name, :description)
     end
 end

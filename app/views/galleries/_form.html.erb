@@ -24,7 +24,7 @@
     <% if @gallery.cover %>
       <%= image_tag @gallery.cover.attachment_url(:thumb) %>
     <% end %>
-    <%= f.file_field :attachment %>
+    <%= f.file_field :cover %>
   </div>
   <div class="actions">
     <%= f.submit %>

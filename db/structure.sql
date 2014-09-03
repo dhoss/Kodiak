@@ -659,6 +659,20 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USIN
 
 
 --
+-- Name: index_galleries_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_galleries_on_name ON galleries USING btree (name);
+
+
+--
+-- Name: index_galleries_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_galleries_on_slug ON galleries USING btree (slug);
+
+
+--
 -- Name: index_galleries_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -817,4 +831,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140831015227');
 INSERT INTO schema_migrations (version) VALUES ('20140901173800');
 
 INSERT INTO schema_migrations (version) VALUES ('20140901235150');
+
+INSERT INTO schema_migrations (version) VALUES ('20140902220820');
+
+INSERT INTO schema_migrations (version) VALUES ('20140902221200');
 

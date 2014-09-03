@@ -19,7 +19,7 @@ jQuery ->
             return
 
           @on "sending", (file, xhr, formData) ->
-            formData.append "photo[gallery]", "<%= params[:id] %>"
+            formData.append "photo[gallery]", $('photo[gallery]').val
             return 
 
           return

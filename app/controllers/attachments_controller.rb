@@ -1,3 +1,4 @@
+require 'pp'
 class AttachmentsController < ApplicationController
   skip_authorize_resource :only => [:index, :show]
   before_filter :authenticate_user!, :except => [:index, :show]
@@ -17,8 +18,14 @@ class AttachmentsController < ApplicationController
     attachment_params[:attachment] = params[:attachments] || params[:photo][:imagefile]
     attachment_params[:mime]       = params[:mime]        || params[:photo][:imagefile].content_type
     attachment_params[:name]       = params[:name]        || params[:photo][:imagefile].original_filename
-    attachment_params[:gallery]    = Gallery.find_by(name: params[:photo][:gallery])
+    attachment_params[:gallery]    = Gallery.friendly.find(params[:photo][:gallery])
+    p "GALLERY"
+    pp attachment_params[:gallery]
     @attachment = Attachment.new(attachment_params)
+    p "ATTACHMENT OBJECT"
+    pp @attachment
+    p "ATTACHMENTS BEFORE"
+    pp Attachment.pluck(:id)
     respond_to do |format|
       if @attachment.save
         format.html {
