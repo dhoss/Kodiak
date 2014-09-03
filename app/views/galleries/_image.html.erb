@@ -1,10 +1,10 @@
+  <div class="row">
 <% @gallery.photos.each do |photo| %>
-  <ul class="row">
-    <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-      <%= link_to image_tag(photo.attachment_url(:thumb)), photo %>
-    </li>
-  </ul><!--/.row-->
+    <div class="col-lg-3 col-sm-4 col-xs-6">
+      <%= link_to image_tag(photo.attachment_url(:thumb), class: "img-responsive"), photo, class: "thumbnail" %>
+    </div>
 <% end %>
+  </div><!--/.row-->
 <!--<%# if can? :edit, image %>
   <div class="image-edit">
   <%#= link_to 'Edit', edit_post_path(image) %>

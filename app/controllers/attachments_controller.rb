@@ -19,13 +19,7 @@ class AttachmentsController < ApplicationController
     attachment_params[:mime]       = params[:mime]        || params[:photo][:imagefile].content_type
     attachment_params[:name]       = params[:name]        || params[:photo][:imagefile].original_filename
     attachment_params[:gallery]    = Gallery.friendly.find(params[:photo][:gallery])
-    p "GALLERY"
-    pp attachment_params[:gallery]
     @attachment = Attachment.new(attachment_params)
-    p "ATTACHMENT OBJECT"
-    pp @attachment
-    p "ATTACHMENTS BEFORE"
-    pp Attachment.pluck(:id)
     respond_to do |format|
       if @attachment.save
         format.html {
