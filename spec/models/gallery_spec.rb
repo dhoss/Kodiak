@@ -2,7 +2,7 @@ require 'spec_helper'
 require'factory_girl'
 
 describe Gallery do
-  let!(:gallery) { FactoryGirl.create(:gallery) }
+  let!(:gallery) { Gallery.create!(name: "Fartss") }
   it "creates a gallery" do
     expect(gallery.name).to eq("Fartss")
   end
@@ -29,8 +29,8 @@ describe Gallery do
   end
 
   it "adds photos to a gallery" do 
-    Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
-    expect(Gallery.find_by(name: "Fart Knocker").photos.count).to eq(10)
+    gallery = Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
+    expect(gallery.photos.count).to eq(10)
   end
 
   it "retrieves the correct photos for a gallery" do
@@ -39,8 +39,8 @@ describe Gallery do
   end
 
   it "moves photos from one gallery to another" do
-    gallery1 = Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
-    gallery2 = Gallery.create(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
+    gallery1 = Gallery.create!(name: "Fart Knocker", photos:  FactoryGirl.build_list(:attachment, 10))
+    gallery2 = Gallery.create!(name: "Fart Knocker 2", photos:  FactoryGirl.build_list(:attachment, 10))
     gallery1.move_images_to_gallery(gallery1.photos, gallery2)
     expect(gallery2.photos.pluck(:gallery_id).find{|id| id == gallery2.id}).to_not be_nil
   end

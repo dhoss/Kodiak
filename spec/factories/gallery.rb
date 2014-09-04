@@ -1,8 +1,8 @@
+require "faker"
 FactoryGirl.define do
 
   factory :gallery do
-    name "Fartss"
+    name { Faker::Name.name }
     description "People farting."
-    attachment { FactoryGirl.attributes_for(:attachment) }
   end
 end

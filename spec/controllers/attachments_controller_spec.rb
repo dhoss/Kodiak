@@ -14,7 +14,7 @@ describe AttachmentsController do
   def post_with_user(attachments) 
     sign_in user
     post :create, {
-      :photo => { :imagefile => attachments[:attachment] },
+      :photo => { :imagefile => attachments[:attachment], :gallery => FactoryGirl.create(:gallery) },
       :public      => 1
     }
   end

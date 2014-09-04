@@ -65,6 +65,6 @@ class GalleriesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def gallery_params
       # don't like this, but can't figure out how to get the attachment parameter to pass through
-      params.require(:gallery).permit(:cover, :name, :description, :slug)
+      params.permit(:gallery,:cover, :name, :description, :slug)
     end
 end
