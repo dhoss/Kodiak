@@ -148,4 +148,13 @@ describe GalleriesController do
       response.should redirect_to(galleries_url)
     end
   end
+
+  describe "Update a gallery cover" do
+    it "changes the gallery cover" do
+      sign_in user
+      gallery = Gallery.create! gallery
+      put :update, {:id => gallery.to_param, :cover => attachment[:attachment]}
+      expect(Gallery.find_by(name: gallery.name).cover).not_to be_nil
+    end
+  end
 end

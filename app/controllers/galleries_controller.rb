@@ -43,7 +43,12 @@ class GalleriesController < ApplicationController
 
   # PATCH/PUT /galleries/1
   def update
-    if @gallery.update(gallery_params)
+    # put this in a common method
+    local_params = gallery_params
+    if gallery_params[:cover]
+      local_params[:cover] = Attachment.new(attachment: gallery_params.delete(:cover))
+    end
+    if @gallery.update(local_params)
       redirect_to @gallery, notice: 'Gallery was successfully updated.'
     else
       render :edit
