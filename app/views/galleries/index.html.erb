@@ -4,7 +4,7 @@
     </div>
     <% @galleries.each do |gallery| %>
       <div class="col-lg-3 col-sm-4 col-xs-6">
-        <%= link_to image_tag(gallery.cover ? gallery.cover.attachment_url(:thumb) : "default.jpg", class: "img-responsive"),  gallery, class: "thumbnail"%>
+        <%= link_to image_tag(gallery.cover_photo, class: "img-responsive"),  gallery, class: "thumbnail"%>
         <p><%= gallery.name %></p>
       </div>
     <% end %>

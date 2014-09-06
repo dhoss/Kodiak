@@ -5,9 +5,6 @@ class Gallery < ActiveRecord::Base
   has_many :photos, 
     class_name: "Attachment",
     foreign_key: :gallery_id
-  has_one :cover, 
-    class_name: "Attachment",
-    foreign_key: :id
   belongs_to :user
   paginates_per APP_CONFIG['posts_per_page']
 
@@ -17,5 +14,10 @@ class Gallery < ActiveRecord::Base
       image.save
     end
   end
+
+  def cover_photo
+    photos.first.attachment_url(:thumb) || "default.jpg"
+  end
+
 
 end

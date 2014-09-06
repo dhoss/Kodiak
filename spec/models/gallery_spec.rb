@@ -33,6 +33,13 @@ describe Gallery do
     expect(gallery.photos.count).to eq(10)
   end
 
+  it "has the correct cover photo" do
+    gallery = Gallery.create!(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
+    pp gallery
+    pp gallery.photos.first
+    expect(gallery.cover_photo).to eq(gallery.photos.first.attachment_url(:thumb))
+  end
+  
   it "retrieves the correct photos for a gallery" do
     gallery = Gallery.create(name: "Fart Knocker", photos: FactoryGirl.create_list(:attachment, 10))
     expect(gallery.photos.pluck(:gallery_id).find{|id| id == gallery.id}).to_not be_nil

@@ -4,7 +4,7 @@ describe GalleriesController do
   include_context 'users'
   let!(:attachment) { FactoryGirl.attributes_for(:attachment) }
   let!(:user) { User.create user_attributes }
-  let(:gallery) { FactoryGirl.attributes_for(:gallery) }
+  let(:gallery) { { :gallery => FactoryGirl.attributes_for(:gallery) } }
   let(:valid_session) { {} }
 
   describe "GET index" do
@@ -69,7 +69,7 @@ describe GalleriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         sign_in user
         Gallery.any_instance.stub(:save).and_return(false)
-        post :create, {"name" => "invalid value" }
+        post :create, {"gallery" => {"name" => "invalid value" }}
         assigns(:gallery).should be_a_new(Gallery)
       end
 
@@ -77,7 +77,7 @@ describe GalleriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         sign_in user
         Gallery.any_instance.stub(:save).and_return(false)
-        post :create, {"name" => "invalid value"}
+        post :create, {"gallery" => {"name" => "invalid value"}}
         response.should render_template("new")
       end
     end
@@ -93,20 +93,20 @@ describe GalleriesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Gallery.any_instance.should_receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => gallery.to_param, "name" => "MyString" }
+        put :update, {:id => gallery.to_param, "gallery" => {"name" => "MyString" }}
       end
 
       it "assigns the requested gallery as @gallery" do
         sign_in user
         gallery = Gallery.create! gallery
-        put :update, {:id => gallery.to_param, "name" => "Fart"}
+        put :update, {:id => gallery.to_param, "gallery" => {"name" => "Fart"}}
         assigns(:gallery).should eq(gallery)
       end
 
       it "redirects to the gallery" do
         sign_in user
         gallery = Gallery.create! gallery
-        put :update, {:id => gallery.to_param, "name" => "Fart"}
+        put :update, {:id => gallery.to_param, "gallery" => {"name" => "Fart"}}
         response.should redirect_to(:action => :show, :id => "fart")
       end
     end
@@ -117,7 +117,7 @@ describe GalleriesController do
         gallery = Gallery.create! gallery
         # Trigger the behavior that occurs when invalid params are submitted
         Gallery.any_instance.stub(:save).and_return(false)
-        put :update, {:id => gallery.to_param, "name" => "invalid value" }
+        put :update, {:id => gallery.to_param, "gallery" => {"name" => "invalid value" }}
         assigns(:gallery).should eq(gallery)
       end
 
@@ -126,7 +126,7 @@ describe GalleriesController do
         gallery = Gallery.create! gallery
         # Trigger the behavior that occurs when invalid params are submitted
         Gallery.any_instance.stub(:save).and_return(false)
-        put :update, {:id => gallery.to_param, "name" => "invalid value" }
+        put :update, {:id => gallery.to_param, "gallery" => {"name" => "invalid value" }}
         response.should render_template("edit")
       end
     end
@@ -150,11 +150,27 @@ describe GalleriesController do
   end
 
   describe "Update a gallery cover" do
-    it "changes the gallery cover" do
+    let!(:test_attachment) { FactoryGirl.build(:attachment) }
+    let!(:test_attachment2) { FactoryGirl.build(:attachment) }
+    let!(:gallery_with_cover) { Gallery.create!(name: "test", cover: test_attachment) }
+    it "starts with a gallery cover" do
+      pending "Need to get gallery cover updating working"
       sign_in user
-      gallery = Gallery.create! gallery
-      put :update, {:id => gallery.to_param, :cover => attachment[:attachment]}
-      expect(Gallery.find_by(name: gallery.name).cover).not_to be_nil
+      expect(gallery_with_cover.cover).to eq(test_attachment)
+    end
+
+    it "changes the gallery cover" do
+      pending "Need to get gallery cover updating working"
+      sign_in user
+      put :update, {:id => gallery_with_cover.to_param, :gallery => {:cover => test_attachment2}}
+      expect(gallery_with_cover.cover).to eq(test_attachment2)
+    end
+ 
+    it "redirects to the gallery" do
+      pending "Need to get gallery cover updating working"
+      sign_in user
+      put :update, {:id => gallery_with_cover.to_param, :gallery => {:cover => test_attachment}}
+      response.should redirect_to(:action => :show, :id => gallery_with_cover.slug)
     end
   end
 end

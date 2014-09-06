@@ -19,13 +19,6 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
-  <div class="field">
-    <%= f.label :cover %><br>
-    <% if @gallery.cover %>
-      <%= image_tag @gallery.cover.attachment_url(:thumb) %>
-    <% end %>
-    <%= f.file_field :cover %>
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

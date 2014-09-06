@@ -24,17 +24,9 @@ class GalleriesController < ApplicationController
 
   # POST /galleries
   def create
-    local_params = gallery_params
-    local_params[:cover] = Attachment.new(attachment: gallery_params.delete(:cover))
-    @gallery = Gallery.new(local_params)
+    @gallery = Gallery.new(gallery_params)
 
     if @gallery.save
-      if local_params[:cover]
-        cover = @gallery.cover
-        cover.gallery = @gallery
-        cover.save
-      end
-
       redirect_to @gallery, notice: 'Gallery was successfully created.'
     else
       render :new
@@ -43,12 +35,7 @@ class GalleriesController < ApplicationController
 
   # PATCH/PUT /galleries/1
   def update
-    # put this in a common method
-    local_params = gallery_params
-    if gallery_params[:cover]
-      local_params[:cover] = Attachment.new(attachment: gallery_params.delete(:cover))
-    end
-    if @gallery.update(local_params)
+    if @gallery.update(gallery_params)
       redirect_to @gallery, notice: 'Gallery was successfully updated.'
     else
       render :edit
@@ -70,6 +57,6 @@ class GalleriesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def gallery_params
       # don't like this, but can't figure out how to get the attachment parameter to pass through
-      params.permit(:gallery,:cover, :name, :description, :slug)
+      params.require(:gallery).permit(:cover, :name, :description, :slug)
     end
 end
