@@ -82,7 +82,6 @@ CREATE TABLE attachments (
     path character varying(255),
     mime character varying(255),
     attachment character varying(255),
-    posts_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_public integer DEFAULT 1,
@@ -617,13 +616,6 @@ CREATE INDEX index_attachments_on_gallery_id ON attachments USING btree (gallery
 
 
 --
--- Name: index_attachments_on_posts_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_posts_id ON attachments USING btree (posts_id);
-
-
---
 -- Name: index_categories_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -757,6 +749,14 @@ CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXEC
 
 
 --
+-- Name: attachments_gallery_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY attachments
+    ADD CONSTRAINT attachments_gallery_id_fk FOREIGN KEY (gallery_id) REFERENCES galleries(id) ON DELETE CASCADE;
+
+
+--
 -- Name: posts_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -835,4 +835,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140901235150');
 INSERT INTO schema_migrations (version) VALUES ('20140902220820');
 
 INSERT INTO schema_migrations (version) VALUES ('20140902221200');
+
+INSERT INTO schema_migrations (version) VALUES ('20140907230532');
 

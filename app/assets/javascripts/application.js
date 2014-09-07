@@ -8,3 +8,4 @@
 //= require dropzone
 //= require image-picker
 //= require attachments
+//= require app_util
