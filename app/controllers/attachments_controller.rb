@@ -43,6 +43,9 @@ class AttachmentsController < ApplicationController
   def update
     @attachment = Attachment.find(params[:id])
     attachment_attributes = params[:attachment]
+    if attachment_attributes[:gallery]
+      attachment_attributes[:gallery] = Gallery.find(attachment_attributes[:gallery])
+    end
     respond_to do |format|
       if @attachment.update(attachment_attributes)
         format.json { head :no_content }

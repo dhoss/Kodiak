@@ -17,6 +17,10 @@
     <%= f.label :is_public %><br />
     <%= f.check_box :is_public %>
   </div>
+  <div class="field">
+    <%= f.label :gallery %><br />
+    <%= collection_select(:attachment, :gallery, Gallery.all, :id, :name, selected: @attachment.gallery.id , prompt: true) %>
+  </div>
   <div class="actions">
     <%= f.submit 'Save', :id => "attachment-submit-btn" %>
   </div>
