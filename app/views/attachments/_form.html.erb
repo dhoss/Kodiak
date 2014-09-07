@@ -19,9 +19,25 @@
   </div>
   <div class="field">
     <%= f.label :gallery %><br />
-    <%= collection_select(:attachment, :gallery, Gallery.all, :id, :name, selected: @attachment.gallery.id , prompt: true) %>
+    <%= f.select(:gallery, 
+          options_for_select(
+            Gallery.all.collect {|g| 
+              [
+                g.name, 
+                g.id, 
+                {
+                  "data-img-src"   => g.cover_photo,
+                  "data-img-label" => g.name 
+                }
+              ]
+            }, @attachment.gallery.id),  
+            {},  
+            {  class: "image-picker show-html"}
+            )
+         %>
   </div>
   <div class="actions">
     <%= f.submit 'Save', :id => "attachment-submit-btn" %>
   </div>
 <% end %>
+
