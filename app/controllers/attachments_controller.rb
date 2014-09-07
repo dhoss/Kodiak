@@ -68,7 +68,10 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment = Attachment.find(params[:id])
     @attachment.destroy
-    render :json => true
+    respond_to do |format|
+      format.html { redirect_to galleries_url, notice: "Attachment was successfully destroyed" }
+      format.json { head :no_content }
+    end
   end
 
   def show

@@ -16,6 +16,6 @@ class Gallery < ActiveRecord::Base
   end
 
   def cover_photo
-    photos.first.attachment_url(:thumb) || "default.jpg"
+    photos.first ? photos.first.attachment_url(:thumb) : "default.jpg"
   end
 end
