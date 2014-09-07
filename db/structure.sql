@@ -85,7 +85,7 @@ CREATE TABLE attachments (
     posts_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    public integer DEFAULT 1,
+    is_public integer DEFAULT 1,
     gallery_id integer
 );
 

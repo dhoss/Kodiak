@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :attachment do
     name "jimmy rustler"
     mime "image/jpg"
-    public 1
+    is_public 1
     attachment { 
       Rack::Test::UploadedFile.new(
         Rails.root.join(

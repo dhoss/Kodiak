@@ -6,7 +6,7 @@ class GalleriesController < ApplicationController
 
   # GET /galleries
   def index
-    @galleries = Gallery.all
+    @galleries = Gallery.page(params[:page])
   end
 
   # GET /galleries/1

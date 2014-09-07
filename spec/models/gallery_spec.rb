@@ -35,14 +35,21 @@ describe Gallery do
 
   it "has the correct cover photo" do
     gallery = Gallery.create!(name: "Fart Knocker", photos:  FactoryGirl.create_list(:attachment, 10))
-    pp gallery
-    pp gallery.photos.first
     expect(gallery.cover_photo).to eq(gallery.photos.first.attachment_url(:thumb))
   end
   
   it "retrieves the correct photos for a gallery" do
     gallery = Gallery.create(name: "Fart Knocker", photos: FactoryGirl.create_list(:attachment, 10))
     expect(gallery.photos.pluck(:gallery_id).find{|id| id == gallery.id}).to_not be_nil
+  end
+
+  it "retrieves only public photos" do
+    gallery = Gallery.create(name: "Fart Knocker", photos: FactoryGirl.create_list(:attachment, 10))
+    gallery.photos.take(5).each do |photo|
+      photo.is_public = 0
+      photo.save
+    end
+    expect(gallery.photos.pluck(:is_public).select{|is_public| is_public != 1}.empty?).to eq(true)
   end
 
   it "moves photos from one gallery to another" do

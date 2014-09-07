@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
 
 
   def index
-    @attachments = Attachment.where(public: 1).limit(50)
+    @attachments = Attachment.where(is_public: 1).page(params[:page])
     respond_to do |format|
       format.json { 
         render json: @attachments
@@ -42,10 +42,11 @@ class AttachmentsController < ApplicationController
 
   def update
     @attachment = Attachment.find(params[:id])
-    attachment_attributes = params[:attachments] || params[:photo][:imagefile]
+    attachment_attributes = params[:attachment]
     respond_to do |format|
-      if @attachment.update_attributes(attachment_attributes)
+      if @attachment.update(attachment_attributes)
         format.json { head :no_content }
+        format.html { redirect_to @attachment, notice: 'Attachment was successfully updated.' }
       else 
         format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
@@ -53,6 +54,12 @@ class AttachmentsController < ApplicationController
   end
 
   def edit
+    @attachment = Attachment.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @attachment }
+    end
   end
 
   def destroy
@@ -62,7 +69,7 @@ class AttachmentsController < ApplicationController
   end
 
   def show
-    @attachment = Attachment.where(id: params[:id]).first
+    @attachment = Attachment.find(params[:id])
 
     respond_to do |format|
       format.html
