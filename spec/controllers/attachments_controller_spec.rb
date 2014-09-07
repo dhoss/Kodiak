@@ -47,8 +47,8 @@ describe AttachmentsController do
   describe "PUT update" do
     it "updates the requested attachment" do
       post_with_user(attachment)
-      Attachment.any_instance.should_receive(:update_attributes).with({ "attachment" => "fart.jpg" })
-      put :update, {:id => Attachment.first.to_param, :attachments => { "attachment" => "fart.jpg" }}
+      Attachment.any_instance.should_receive(:update).with({ "name" => "fart" })
+      put :update, {:id => Attachment.first.to_param, :attachment => { "name" => "fart" }}
       assigns(:attachment).should eq(Attachment.first)
     end
   end
