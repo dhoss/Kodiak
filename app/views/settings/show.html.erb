@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+<%# make me a helper %>
+<% @setting.configuration.each do |k, v| %>
+  <div><%= k %> => <%= @setting.configuration[k] %></div>
+<% end %>
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
