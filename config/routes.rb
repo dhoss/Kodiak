@@ -1,5 +1,6 @@
 Kodiak::Application.routes.draw do
 
+  resources :settings
 
   resources :galleries
 
