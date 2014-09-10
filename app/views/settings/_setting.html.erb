@@ -1,0 +1,6 @@
+<%# make me a helper %>
+<% if setting.configuration %>
+  <% setting.configuration.each do |k, v| %>
+    <div><%= k %> => <%= setting.configuration[k] %></div>
+  <% end %>
+<% end %>
