@@ -20,7 +20,11 @@ server 'localhost', user: 'deploy', roles: %w{web app}, my_property: :my_value
 
 set :app_name, "kodiak-development"
 set :user, "deploy"
+set :scm, :git
+set :repo_url, 'https://github.com/dhoss/Kodiak.git'
 
+# Define where to put your application code
+set :deploy_to, "/home/deployer/apps/my_app"
 namespace :foreman do
   desc "Export the Procfile to Debian's startup scripts"
   task :export, :roles => :app do
