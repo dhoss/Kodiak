@@ -1,12 +1,10 @@
 require 'spec_helper'
 require'factory_girl'
 describe "settings/index" do
-  before(:each) do
-    assign(:settings, FactoryGirl.create(:setting))
-  end
+  let!(:settings){ FactoryGirl.create_list(:setting, 5) }
 
   it "renders a list of settings" do
+    @settings = settings
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
   end
 end

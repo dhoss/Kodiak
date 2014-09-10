@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe "settings/show" do
-  before(:each) do
-    @setting = assign(:setting, stub_model(Setting))
-  end
+  let!(:setting){ FactoryGirl.create(:setting) }
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
+    @setting = setting
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
   end
 end
