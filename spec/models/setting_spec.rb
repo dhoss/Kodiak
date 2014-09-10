@@ -11,7 +11,6 @@ describe Setting do
     it "updates title" do
       s = Setting.get('site_text')
       s['settings']['headings']['banner_title'] = "fart"
-      Setting.set(s)
       expect(Setting.get('site_text')['settings']['headings']['banner_title']).to eq("fart")
     end
   end
