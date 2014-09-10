@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Kodiak" %></title>
+    <title><%= content_for?(:title) ? yield(:title) :  Setting.get("site_text")['settings']["headings"]["site_title"] %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -52,8 +52,8 @@
     <div class="container">
 
       <div class="blog-header">
-        <h1 class="blog-title"><%= link_to content_for?(:title) ? yield(:title) : "Kodiak", "/" %> </h1>
-        <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : "It's a bear of a blog." %> </p>
+        <h1 class="blog-title"><%= link_to image_tag(Setting.get("site_images")['settings']["banner_img"], alt: content_for?(:title) ? yield(:title) : Setting.get("site_text")["settings"]["headings"]["banner_title"]), "/" %> </h1>
+        <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : Setting.get("site_text")["settings"]["headings"]["tag_line"] %> </p>
       </div>
 
       <div class="row">
@@ -70,7 +70,7 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <%= Setting.get("site_text")["settings"]["page_sections"]["about_section"] %>
           </div>
           <div class="sidebar-module">
             <h4>Archives</h4>
@@ -85,9 +85,9 @@
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
+              <% Setting.get("site_text")["settings"]["page_sections"]["other_places"].each do |k,v|%>
+                <li><a href="<%= Setting.get("site_text")["settings"]["page_sections"]["other_places"][k]%>"><%= k %></a></li>
+              <% end %>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->
