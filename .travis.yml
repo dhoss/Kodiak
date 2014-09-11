@@ -7,7 +7,8 @@ addons:
 rvm: 
  - 2.0.0
 services: postgresql
-bundler_args: --retry 3
+bundler_args: --retry 3 --without development --deployment
+cache: bundler
 install: 
  - sudo apt-get update -qq
  - sudo apt-get install -qq postgresql-contrib-9.1
