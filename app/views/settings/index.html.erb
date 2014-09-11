@@ -12,10 +12,8 @@
   <tbody>
     <% @settings.each do |setting| %>
       <tr>
-        <% setting.configuration.each do |k, v| %>
-          <td><%= k %></td>
-          <td><%= setting.configuration[k] %></td>
-        <% end %>
+        <td><%= setting.configuration['type'] %></td>
+        <td><pre><%=  raw JSON.pretty_generate(setting.configuration) %></pre></td>
         <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
         <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

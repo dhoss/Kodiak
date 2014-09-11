@@ -1,6 +1,3 @@
-["admin", "poster"].each do |role|
-  Role.create(name: role)
-end
 config = [{
     type: "site_text",
     settings:
@@ -26,4 +23,6 @@ config = [{
 config.each do |c|
   Setting.create configuration: c
 end
-
+["admin", "poster"].each do |role|
+  Role.create(name: role)
+end
