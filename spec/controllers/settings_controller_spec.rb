@@ -60,14 +60,14 @@ describe SettingsController do
       it "assigns a newly created but unsaved setting as @setting" do
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        post :create, {:setting => {  }}, valid_session
+        post :create, {:setting => { :configuration => { :balls => "invalid" }}}
         assigns(:setting).should be_a_new(Setting)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        post :create, {:setting => {  }}, valid_session
+        post :create, {:setting => { :configuration => { :balls => "invalid" }}}
         response.should render_template("new")
       end
     end
@@ -103,7 +103,7 @@ describe SettingsController do
         setting = Setting.first
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        put :update, {:id => setting.to_param, :setting => {  }}, valid_session
+        put :update, {:id => setting.to_param, :setting => {:configuration => { :balls => "fart"}  }}, valid_session
         assigns(:setting).should eq(setting)
       end
 
@@ -111,7 +111,7 @@ describe SettingsController do
         setting = Setting.first
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        put :update, {:id => setting.to_param, :setting => {  }}, valid_session
+        put :update, {:id => setting.to_param, :setting => {:configuration => {:balls=>"fart"}}}, valid_session
         response.should render_template("edit")
       end
     end

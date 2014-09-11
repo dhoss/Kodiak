@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "settings/edit" do
   before(:each) do
-    @setting = assign(:setting, stub_model(Setting))
+    @setting = FactoryGirl.create(:setting)
   end
 
   it "renders the edit setting form" do

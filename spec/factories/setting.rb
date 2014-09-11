@@ -2,7 +2,10 @@ FactoryGirl.define do
   factory :setting do
     configuration { 
       {
-        fart: "farted"
+        type: "fart",
+        settings: {
+          fart: "farted"
+        }  
       }
     }
   end
