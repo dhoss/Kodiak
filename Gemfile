@@ -64,7 +64,7 @@ group :development, :test do
   gem 'capistrano-puma', require: false
   gem 'capistrano-rails',   '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
-  gem 'capistrano-rvm',   '~> 0.1', require: false
+  gem 'rvm1-capistrano3', require: false
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist'
   gem "codeclimate-test-reporter", require: nil
