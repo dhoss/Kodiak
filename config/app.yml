@@ -1,0 +1,10 @@
+default: &default
+  posts_per_page: 5
+
+production: *default
+
+development: *default
+
+test: *default
+
+test_local: *default

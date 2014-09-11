@@ -1,0 +1,5 @@
+<h2>Posts for <%= Date::MONTHNAMES[@month.to_i] %>, <%= @year %></h2>
+<%= render partial: @posts %>
+
+<br />
+<%= render 'posts/page' %>

@@ -1,0 +1,30 @@
+<%= form_for(@gallery, multipart: true) do |f| %>
+  <% if @gallery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+
+      <ul>
+      <% @gallery.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= image_tag @gallery.cover_photo %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+    <% if @gallery.id %>
+      <%= link_to 'Delete', gallery_path(@gallery), method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
+    <% end %>
+  </div>
+<% end %>

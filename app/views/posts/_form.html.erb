@@ -1,0 +1,35 @@
+<%= form_for(@post, multipart: true, :html => { :id => "new-post" }) do |f| %>
+  <input type="hidden" name="post[attachment_name]" />
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    
+    <%= f.label :category_id %><br />
+    <%= f.collection_select(:category_id, Category.all, :id, :name, :prompt => 'Please select your category') %>
+  </div>
+  <div class="field">
+    <p>Or create a new category</p>
+      <input type="text" name="post[new_category]" />
+    </div>
+  <div class="actions">
+    <%= f.submit 'Create post', :id => "post-submit-btn" %>
+  </div>
+<% end %>

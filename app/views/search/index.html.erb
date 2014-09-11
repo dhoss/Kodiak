@@ -1,0 +1,25 @@
+<h1>Search posts</h1>
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if @results.any? && params[:q] %>
+  <div id="search-result-header">Search results:</div>
+  <% @results.each do |r| %>
+    <div class="search-result">
+      <div class="search-result-link">
+        <%= link_to r[:title].html_safe, post_path(r[:id]) %>
+      </div>
+      <div class="search-result-body">
+        <%= r[:body].html_safe %>
+      </div>
+
+    </div>
+  <% end %>
+<% elsif !@results.any? && params[:q] %>
+  <div class="search-result">
+    (No results)
+  </div>
+<% end %>
