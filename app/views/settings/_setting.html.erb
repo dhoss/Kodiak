@@ -1,6 +1,11 @@
 <%# make me a helper %>
-<% if setting.configuration %>
-  <% setting.configuration.each do |k, v| %>
-    <div><%= k %> => <%= setting.configuration[k] %></div>
-  <% end %>
-<% end %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  <tr>
+    <td><%= setting.configuration['type'] %></td>
+  </td>
+   <td><pre><%=  raw JSON.pretty_generate(setting.configuration['settings']) %></pre>
+  </tr>
+</table>

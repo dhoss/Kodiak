@@ -9,6 +9,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/1
   def show
+    pp @setting
   end
 
   # GET /settings/new
@@ -18,6 +19,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/1/edit
   def edit
+    pp @setting
   end
 
   # POST /settings
@@ -54,6 +56,6 @@ class SettingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def setting_params
-      params[:setting]
+      params.require(:setting).permit!
     end
 end
