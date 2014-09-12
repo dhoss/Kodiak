@@ -49,6 +49,15 @@ set :puma_init_active_record, true
 set :puma_preload_app, true
 
 namespace :setup do
+  desc "Set up directories"
+  task :setup_directories do
+    on roles(:app) do
+      execute :sudo, "mkdir -p /var/www/kodiak"
+      execute :sudo, "chown -hR deploy:www-data /var/www/kodiak"
+      execute :sudo, "chmod 0755 /var/www/kodiak"
+    end
+  end
+  
   desc "Set up database"
   task :setup_db do
     on roles(:app) do
