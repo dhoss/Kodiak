@@ -47,6 +47,7 @@ set :puma_threads, [0, 16]
 set :puma_workers, 0
 set :puma_init_active_record, true
 set :puma_preload_app, true
+set :rvm1_ruby_version, "2.0.0"
 
 namespace :setup do
   desc "Set up directories"
