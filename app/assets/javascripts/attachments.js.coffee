@@ -1,3 +1,3 @@
 $(document).ready ->
-  $("select").imagepicker({ show_label: true })
+  $(".image-picker").imagepicker({ show_label: true }) if $(".image-picker").length
   return
