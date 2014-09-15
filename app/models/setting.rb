@@ -10,7 +10,13 @@ class Setting < ActiveRecord::Base
     create(configuration: hash)
   end
 
-  def self.distinct_settings
+  def self.distinct_settings(page=nil)
+    page ||= 1
+    settings = []
     select("DISTINCT ON(settings.id) settings.*")
+      .page(page)
+      .order(id: :desc)
+      .map{|setting| settings << {:id => setting.id}.merge(setting.configuration)}
+    settings.uniq!{|s| s['type']}
   end
 end
