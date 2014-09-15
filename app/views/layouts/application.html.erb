@@ -42,17 +42,12 @@
 
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top"> <!--class="blog-masthead">-->
-      <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Lumos</a>
-          </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-          <%= render_navigation :expand_all => true, :renderer => :list%>
-          </ul>
-        </div>
-      </div>
+     <div class="blog-masthead">
+       <div class="container">
+        <nav class="blog-nav">
+          <%= render_navigation :expand_all => true, :renderer => :links %>
+        </nav>
+       </div>
     </div>
 
     <div class="container">

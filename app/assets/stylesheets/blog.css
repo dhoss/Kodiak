@@ -149,6 +149,11 @@ h6, .h6 {
   color: #999;
 }
 
+.blog-post-body {
+  word-break: break-all;
+}
+
+
 
 /*
  * Footer

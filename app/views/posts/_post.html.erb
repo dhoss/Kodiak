@@ -6,7 +6,9 @@
       Filed under: <%= post.category.name %>
     <% end %>
   </p>
-  <%= post.body %>
+  <div class="blog-post-body">
+    <%= post.body %>  
+  </div>
   <% if can? :edit, post %>
   <div class="post-edit">
     <%= link_to 'Edit', edit_post_path(post) %>
