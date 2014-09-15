@@ -9,4 +9,8 @@ class Setting < ActiveRecord::Base
   def self.set(hash)
     create(configuration: hash)
   end
+
+  def self.distinct_settings
+    select("DISTINCT ON(settings.id) settings.*")
+  end
 end
