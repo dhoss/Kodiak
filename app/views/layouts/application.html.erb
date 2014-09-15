@@ -11,6 +11,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag controller_name, :media => "all" %>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -41,27 +42,30 @@
 
   </head>
   <body>
-    <div class="blog-masthead">
+    <div class="navbar navbar-inverse navbar-fixed-top"> <!--class="blog-masthead">-->
       <div class="container">
-        <nav class="blog-nav">
-          <%= render_navigation :expand_all => true, :renderer => :links%>
-        </nav>
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Lumos</a>
+          </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          <%= render_navigation :expand_all => true, :renderer => :list%>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="container">
 
       <div class="blog-header">
-        <h1 class="blog-title"><%= link_to image_tag(Setting.get("site_images")['settings']["banner_img"], alt: content_for?(:title) ? yield(:title) : Setting.get("site_text")["settings"]["headings"]["banner_title"]), "/" %> </h1>
+        <h1 class="blog-title"><%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/" %> </h1>
         <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : Setting.get("site_text")["settings"]["headings"]["tag_line"] %> </p>
       </div>
 
       <div class="row">
 
         <div class="col-sm-8 blog-main">
-
-          <div id="status_message"><%= flash[:notice] %></div>
-          <div id="error_message"></div> 
+          <%= render partial: "shared/flash_messages", flash: flash %> 
           <%= yield %>
           
 
@@ -70,7 +74,7 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
-            <%= Setting.get("site_text")["settings"]["page_sections"]["about_section"] %>
+            <%= Setting.get("site_text")["settings"]["page_sections"]["about"] %>
           </div>
           <div class="sidebar-module">
             <h4>Archives</h4>
@@ -93,17 +97,19 @@
         </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
-
     </div><!-- /.container -->
 
     <div class="blog-footer">
-      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>Copyright &copy; <a href="https://lumospottery.com">lumospottery.com</a>.</p>
       <p>
         <a href="#">Back to top</a>
       </p>
     </div>
 
-    <%= javascript_include_tag "application", controller_name %>
+
+    
+
+    <%= javascript_include_tag 'application', controller_name %>
     <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
   </body>
 </html>
