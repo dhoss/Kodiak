@@ -4,7 +4,7 @@ class SettingsController < ApplicationController
 
   # GET /settings
   def index
-    @settings = Setting.all
+    @settings = Setting.distinct_settings(params[:page])
   end
 
   # GET /settings/1

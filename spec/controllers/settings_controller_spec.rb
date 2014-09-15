@@ -7,7 +7,7 @@ describe SettingsController do
 
   describe "GET index" do
     it "assigns all settings as @settings" do
-      setting = Setting.all
+      setting = Setting.distinct_settings
       get :index, {}, valid_session
       assigns(:settings).should eq(setting)
     end
