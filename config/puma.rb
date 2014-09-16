@@ -1,4 +1,6 @@
 # config/puma.rb
+
+daemonize true
 threads 1, 6
 workers 2
 pidfile "/var/www/kodiak/shared/tmp/puma/pid"
