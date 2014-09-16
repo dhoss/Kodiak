@@ -1,6 +1,8 @@
 # config/puma.rb
 threads 1, 6
 workers 2
+pidfile "/var/www/kodiak/shared/tmp/puma/pid"
+state_path "/var/www/kodiak/shared/tmp/puma/state"
 
 on_worker_boot do
   require "active_record"
