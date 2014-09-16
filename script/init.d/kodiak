@@ -29,8 +29,8 @@ RAILS_ENV="production"
 # internal /bin/sh variables such as PATH, EDITOR or SHELL.
 app_user="kodiak"
 app_root="/var/www/$app_user/current"
-pid_path="/var/www/kodiak/shared/tmp/puma/pid"
-socket_path="/var/www/kodiak/shared/tmp/puma/socket"
+pid_path="/var/www/kodiak/shared/tmp/puma"
+socket_path="/var/www/kodiak/shared/tmp/puma/"
 web_server_pid_path="$pid_path/puma.pid"
 
 # Read configuration variable file if it is present
