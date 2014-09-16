@@ -60,7 +60,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "sudo PUMA_CONFIG=/var/www/kodiak/shared/ service puma restart"
+      queue "sudo service puma restart"
     end
   end
 end
