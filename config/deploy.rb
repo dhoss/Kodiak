@@ -43,6 +43,7 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma/sockets"]
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+  queue! %[cp #{deploy_to}/script/init.d/kodiak /etc/init.d/kodiak"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
