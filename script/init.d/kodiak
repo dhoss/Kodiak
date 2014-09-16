@@ -44,6 +44,7 @@ check_pids(){
 
 ## Called when we have started the two processes and are waiting for their pid files.
 wait_for_pids(){
+  echo $web_server_pid_path
   # We are sleeping a bit here mostly because sidekiq is slow at writing it's pid
   i=0;
   while [ ! -f $web_server_pid_path ]; do
