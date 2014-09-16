@@ -40,6 +40,7 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma/pid"]
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma/state"]
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma/sockets"]
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
@@ -62,7 +63,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "sudo service kodiak restart"
+      queue "sudo service nginx restart"
     end
   end
 end
