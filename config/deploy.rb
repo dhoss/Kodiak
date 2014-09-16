@@ -31,7 +31,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.0.0@default]'
+  invoke :'rvm:use[ruby-2.0.0-p481@kodiak]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -62,7 +62,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "sudo service puma restart"
+      queue "sudo service kodiak restart"
     end
   end
 end
