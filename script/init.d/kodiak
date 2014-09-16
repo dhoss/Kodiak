@@ -1,8 +1,6 @@
 #! /bin/sh
 
 # kodiak
-# Maintainer: @randx
-# Authors: rovanion.luckey@gmail.com, @randx
 
 ### BEGIN INIT INFO
 # Provides:          kodiak
@@ -30,7 +28,7 @@ RAILS_ENV="production"
 # Script variable names should be lower-case not to conflict with
 # internal /bin/sh variables such as PATH, EDITOR or SHELL.
 app_user="kodiak"
-app_root="/home/$app_user/kodiak/current"
+app_root="/var/www/$app_user/current"
 pid_path="$app_root/tmp/pids"
 socket_path="$app_root/tmp/sockets"
 web_server_pid_path="$pid_path/puma.pid"
@@ -138,6 +136,7 @@ start_kodiak() {
     echo -n "Starting both the kodiak puma and Sidekiq"
   elif [ "$web_status" != "0" ]; then
     echo -n "Starting kodiak puma"
+  fi
 
   # Then check if the service is running. If it is: don't start again.
   if [ "$web_status" = "0" ]; then
