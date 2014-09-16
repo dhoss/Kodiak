@@ -35,26 +35,11 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    asset_sync (1.0.0)
-      activemodel
-      fog (>= 1.8.0)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
     builder (3.2.2)
     cancancan (1.9.2)
-    capistrano (3.2.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (~> 1.3)
-    capistrano-bundler (1.1.3)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-puma (0.2.3)
-      capistrano (>= 3.0)
-    capistrano-rails (1.1.2)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -154,6 +139,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mina (0.3.0)
+      open4
+      rake
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     mini_portile (0.6.0)
@@ -164,6 +152,7 @@ GEM
     net-ssh (2.9.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    open4 (1.3.4)
     orm_adapter (0.5.0)
     pg (0.17.1)
     pg_search (0.7.4)
@@ -214,9 +203,6 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rvm1-capistrano3 (1.2.6)
-      capistrano (~> 3.0)
-      sshkit (>= 1.2)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -242,10 +228,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sshkit (1.4.0)
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
-      term-ansicolor
     subexec (0.2.3)
     syntax (1.2.0)
     term-ansicolor (1.3.0)
@@ -284,13 +266,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  asset_sync (~> 1.0.0)
   bcrypt-ruby (~> 3.1.5)
   cancancan (~> 1.9.2)
-  capistrano (~> 3.2.1)
-  capistrano-bundler (~> 1.1)
-  capistrano-puma
-  capistrano-rails (~> 1.1)
   capybara
   carrierwave (~> 0.10.0)
   codeclimate-test-reporter
@@ -311,6 +288,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 4.2.1)
   kaminari (= 0.15.1)
   less-rails
+  mina
   mini_magick
   pg (= 0.17.1)
   pg_search (~> 0.7.4)
@@ -321,7 +299,6 @@ DEPENDENCIES
   rails (= 4.1.2.rc3)
   rake (~> 10.3.2)
   rspec-rails (~> 2.14.2)
-  rvm1-capistrano3
   sass-rails (~> 4.0.3)
   simple-navigation
   simple-navigation-bootstrap

@@ -20,7 +20,7 @@ gem "twitter-bootstrap-rails", '~> 2.2.8'
 gem 'pg', '0.17.1'
 gem 'devise', '~> 3.2.4'
 gem 'carrierwave', '~> 0.10.0'
-gem 'asset_sync', '~> 1.0.0'
+#gem 'asset_sync', '~> 1.0.0'
 gem 'fog', '1.22.0'
 gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.3'
@@ -60,12 +60,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'syntax', '~> 1.2.0'
   gem 'rake', '~> 10.3.2'
-  gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-puma', require: false
-  gem 'capistrano-rails',   '~> 1.1', require: false
-  gem 'capistrano-bundler', '~> 1.1', require: false
-  gem 'rvm1-capistrano3', require: false
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist'
   gem "codeclimate-test-reporter", require: nil
+  gem "mina"
 end
