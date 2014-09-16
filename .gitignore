@@ -1,3 +1,5 @@
 *.swp
 /config/database.yml
 /db/create_kodiak_users_prod.sql
+log/*
+tmp/*
