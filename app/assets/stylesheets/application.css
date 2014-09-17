@@ -14,3 +14,11 @@
  *= require jquery.ui.all
  *= require image-picker.css
  */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
