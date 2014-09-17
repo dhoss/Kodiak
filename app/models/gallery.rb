@@ -16,6 +16,6 @@ class Gallery < ActiveRecord::Base
   end
 
   def cover_photo
-    photos.first ? photos.first.attachment_url(:thumb) : ActionController::Base.helpers.asset_path("images/default.jpg")
+    photos.first ? photos.first.attachment_url(:thumb) : ActionController::Base.helpers.asset_path("default.jpg")
   end
 end
