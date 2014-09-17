@@ -1,5 +1,4 @@
 <%= form_for(@post, multipart: true, :html => { :id => "new-post" }) do |f| %>
-  <input type="hidden" name="post[attachment_name]" />
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -33,3 +32,4 @@
     <%= f.submit 'Create post', :id => "post-submit-btn" %>
   </div>
 <% end %>
+<% @deferred_content = javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>

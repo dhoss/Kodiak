@@ -7,7 +7,7 @@
     <% end %>
   </p>
   <div class="blog-post-body">
-    <%= post.body %>  
+    <%= raw post.body %>  
   </div>
   <% if can? :edit, post %>
   <div class="post-edit">
