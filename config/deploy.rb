@@ -1,73 +1,77 @@
-# config valid only for Capistrano 3.1
-lock '3.2.1'
+require 'mina/bundler'
+require 'mina/rails'
+require 'mina/git'
+# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
-set :application, 'kodiak'
-set :repo_url, 'git@github.com:dhoss/Kodiak.git'
+# Basic settings:
+#   domain       - The hostname to SSH to.
+#   deploy_to    - Path to deploy into.
+#   repository   - Git repo to clone from. (needed by mina/git)
+#   branch       - Branch name to deploy. (needed by mina/git)
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
-# Default deploy_to directory is /var/www/my_app
+set :domain, 'stonecolddev.in'
 set :deploy_to, '/var/www/kodiak'
+set :repository, 'git@bitbucket.org:djaustin/stonecolddev.in.git'
+set :branch, 'master'
 
-# Default value for :scm is :git
-set :scm, :git
+# Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
+# They will be linked in the 'deploy:link_shared_paths' step.
+set :shared_paths, ['config/database.yml', 'log']
 
-# Default value for :format is :pretty
-set :format, :pretty
+# Optional settings:
+set :user, 'kodiak'    # Username in the server to SSH to.
+set :port, '1023'     # SSH port number.
 
-# Default value for :log_level is :debug
-set :log_level, :debug
+# This task is the environment that is loaded for most commands, such as
+# `mina deploy` or `mina rake`.
+task :environment do
+  # If you're using rbenv, use this to load the rbenv environment.
+  # Be sure to commit your .rbenv-version to your repository.
+  # invoke :'rbenv:load'
 
-# Default value for :pty is false
-set :pty, true
-
-# Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
-
-# Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
-set :keep_releases, 5
-
-# Puma settings
-set :puma_rackup, -> { File.join(current_path, 'config.ru') }
-set :puma_state, "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
-set :puma_conf, "#{shared_path}/puma.rb"
-set :puma_access_log, "#{shared_path}/log/puma_error.log"
-set :puma_error_log, "#{shared_path}/log/puma_access.log"
-set :puma_role, :app
-set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
-set :puma_threads, [0, 16]
-set :puma_workers, 0
-set :puma_init_active_record, true
-set :puma_preload_app, true
-
-namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  # For those using RVM, use this to load an RVM version@gemset.
+  invoke :'rvm:use[ruby-2.0.0-p481@kodiak]'
 end
+
+# Put any custom mkdir's in here for when `mina setup` is ran.
+# For Rails apps, we'll make some of the shared paths that are shared between
+# all releases.
+task :setup => :environment do
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma"]
+  queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+  queue! %[sudo cp "#{deploy_to}/current/script/init.d/kodiak" /etc/init.d/kodiak]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+
+  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue! %[cd #{deploy_to!}/current && RAILS_ENV=production bundle exec rake db:seed]
+  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+end
+
+desc "Deploys the current version to the server."
+task :deploy => :environment do
+  deploy do
+    # Put things that will set up an empty directory into a fully set-up
+    # instance of your project.
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:install'
+    invoke :'rails:db_migrate'
+    invoke :'rails:assets_precompile'
+
+    to :launch do
+      queue "sudo service kodiak restart"
+    end
+  end
+end
+
+# For help in making your deploy script, see the Mina documentation:
+#
+#  - http://nadarei.co/mina
+#  - http://nadarei.co/mina/tasks
+#  - http://nadarei.co/mina/settings
+#  - http://nadarei.co/mina/helpers
+
