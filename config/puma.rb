@@ -3,7 +3,7 @@
 daemonize true
 threads 1, 6
 workers 2
-pidfile "/var/www/kodiak/shared/tmp/puma/pid"
+pidfile "/var/www/kodiak/shared/tmp/puma/puma.pid"
 state_path "/var/www/kodiak/shared/tmp/puma/state"
 
 on_worker_boot do
