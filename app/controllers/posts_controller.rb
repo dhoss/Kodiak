@@ -74,8 +74,14 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.friendly.find(params[:id])
+    post_params = params[:post]
+    if !post_params[:new_category].blank?
+      post_params[:category] = Category.new(name: post_params.delete(:new_category))
+    else
+      post_params.delete(:new_category)
+    end
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else

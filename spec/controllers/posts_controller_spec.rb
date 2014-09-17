@@ -152,6 +152,13 @@ describe PostsController do
         put :update, {:id => user_post.to_param, :post => post_attributes}
         response.should redirect_to(user_post)
       end
+
+      it "updates the category correctly" do
+        sign_in user
+        put :update, {:id => user_post.to_param, :post => post_attributes.merge({ new_category: "farted" })}
+        assigns(:post).category.name.should eq("farted")
+      end
+
     end
 
     context "with invalid params" do

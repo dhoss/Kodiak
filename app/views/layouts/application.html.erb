@@ -104,7 +104,7 @@
 
     
 
-    <%= javascript_include_tag 'application', controller_name %>
     <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
+    <%= javascript_include_tag 'application', controller_name %>
   </body>
 </html>
