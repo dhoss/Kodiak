@@ -47,6 +47,7 @@ task :setup => :environment do
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
   queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue! %[cd #{deploy_to!}/current && RAILS_ENV=production bundle exec rake db:seed]
   queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
@@ -62,7 +63,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "sudo service nginx restart"
+      queue "sudo service kodiak restart"
     end
   end
 end
