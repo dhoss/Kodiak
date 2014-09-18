@@ -12,7 +12,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{Rails.root}/public/uploads/attachments"
+    "/var/www/kodiak/shared/public/uploads/attachments"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

@@ -40,6 +40,7 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma"]
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[mkdir -p "#{deploy_to}/shared/public/uploads/attachments"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
   queue! %[sudo cp "#{deploy_to}/current/script/init.d/kodiak" /etc/init.d/kodiak]
 
@@ -47,7 +48,7 @@ task :setup => :environment do
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
   queue! %[touch "#{deploy_to}/shared/config/database.yml"]
-  queue! %[cd #{deploy_to!}/current && RAILS_ENV=production bundle exec rake db:seed]
+  #queue! %[cd #{deploy_to!}/current && RAILS_ENV=production bundle exec rake db:seed]
   queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
