@@ -31,6 +31,7 @@ ActiveRecord::Base.logger = Logger.new(STDOUT) if ENV['SHOW_SQL']
 RSpec.configure do |config|
 
   config.include Capybara::DSL, type:  :feature
+  config.include Requests::SessionHelpers, type: :request
   config.include Features::SessionHelpers, type: :feature
 
   config.use_transactional_fixtures = false
