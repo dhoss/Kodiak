@@ -95,15 +95,11 @@
     </div><!-- /.container -->
 
     <div class="blog-footer">
-      <p>Copyright &copy; <a href="https://lumospottery.com">lumospottery.com</a>.</p>
+      <p><%= raw Setting.get("site_text")["settings"]["page_sections"]["footer"] %></p>
       <p>
         <a href="#">Back to top</a>
       </p>
     </div>
-
-
-    
-
     <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
     <%= javascript_include_tag 'application', controller_name %>
   </body>
