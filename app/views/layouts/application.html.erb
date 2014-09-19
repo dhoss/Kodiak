@@ -39,6 +39,20 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+   <% if Rails.env == "production" %>
+    <!-- pingdom RUM -->
+    <script>
+      var _prum = [['id', '541bf1e1abe53d695828c003'],
+                   ['mark', 'firstbyte', (new Date()).getTime()]];
+      (function() {
+        var s = document.getElementsByTagName('script')[0]
+          , p = document.createElement('script');
+            p.async = 'async';
+            p.src = '//rum-static.pingdom.net/prum.min.js';
+            s.parentNode.insertBefore(p, s);
+      })();
+    </script>
+  <% end %>
 
   </head>
   <body>
