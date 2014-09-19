@@ -7,12 +7,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "shared/public/uploads/attachments/"
+    return Rails.env == "production" ? "prod/uploads" : "dev/uploads"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
