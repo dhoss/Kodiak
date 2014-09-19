@@ -20,10 +20,18 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     ActionController::Base.helpers.asset_path([version_name, "default.jpg"].compact.join('_'))
   end
 
-  process :convert => 'png'
   version :thumb do
-    process :resize_to_fit => [300, 10000]
+    process :resize_to_fit => [100, 10000]
   end
+
+  version :standard_size do
+    process :resize_to_limit => [600, 10000]
+  end
+
+  version :display_size do
+    process :resize_to_limit => [300, 10000]
+  end
+
   process :set_content_type
 
   def extension_white_list
