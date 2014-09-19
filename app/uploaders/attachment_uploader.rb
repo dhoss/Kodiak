@@ -17,8 +17,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
       return "prod/uploads"
     when "dev"
       return "dev/uploads"
-    when "test" || "test_local"
-      "uploads"
+    when "test" 
+      "public/uploads/attachments"
+    when "test_local"
+      "public/uploads/attachments"
     end
   end
 
