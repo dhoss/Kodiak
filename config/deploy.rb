@@ -52,6 +52,11 @@ task :setup => :environment do
   queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
+desc "Setup symlinks"
+task :symlinks => :environment do
+  queue %["rm -rf #{deploy_to}/public/shared && ln -nfs #{deploy_to}/shared  #{release_path}/public/shared"]
+end
+
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
@@ -62,6 +67,7 @@ task :deploy => :environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
+    invoke :'symlinks'
 
     to :launch do
       queue "sudo service kodiak restart"
