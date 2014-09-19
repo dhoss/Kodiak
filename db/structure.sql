@@ -248,7 +248,7 @@ ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
 CREATE TABLE posts (
     id integer NOT NULL,
     title character varying(255),
-    body character varying(255),
+    body text,
     parent_id integer,
     user_id integer,
     created_at timestamp without time zone,
@@ -838,4 +838,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140902220820');
 INSERT INTO schema_migrations (version) VALUES ('20140902221200');
 
 INSERT INTO schema_migrations (version) VALUES ('20140907230532');
+
+INSERT INTO schema_migrations (version) VALUES ('20140919021640');
 
