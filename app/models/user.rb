@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def add_role(role)
-    roles << Role.find_by(name: role)
+    roles << Role.where(name: role).first_or_initialize
   end
 
   def add_default_role
