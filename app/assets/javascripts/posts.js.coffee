@@ -1,1 +1,3 @@
-tinymce.init selector: "textarea"
+$(document).ready ->
+  tinymce.init selector: "textarea"
+  return
