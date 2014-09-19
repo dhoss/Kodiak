@@ -9,7 +9,6 @@ class SettingsController < ApplicationController
 
   # GET /settings/1
   def show
-    pp @setting
   end
 
   # GET /settings/new
@@ -19,7 +18,6 @@ class SettingsController < ApplicationController
 
   # GET /settings/1/edit
   def edit
-    pp @setting
   end
 
   # POST /settings
