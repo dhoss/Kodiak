@@ -60,11 +60,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'syntax', '~> 1.2.0'
   gem 'rake', '~> 10.3.2'
-  gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-puma', require: false
-  gem 'capistrano-rails',   '~> 1.1', require: false
-  gem 'capistrano-bundler', '~> 1.1', require: false
-  gem 'capistrano-rvm',   '~> 0.1', require: false
   gem 'database_cleaner', '~> 1.3.0'
   gem 'poltergeist'
   gem "codeclimate-test-reporter", require: nil
