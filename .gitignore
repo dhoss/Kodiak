@@ -3,3 +3,8 @@
 /db/create_kodiak_users_prod.sql
 log/*
 tmp/*
+*~
+public/shared
+public/upload
+shared/
+public/uploads
