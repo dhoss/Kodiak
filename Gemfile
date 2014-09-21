@@ -38,10 +38,10 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails'
 gem 'jquery-ui-rails', '~> 4.2.1'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
-gem 'uglifier', '>= 2.5.0'
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.4'
 gem 'foreigner'
+gem 'yui-compressor'
 
 
 # To use ActiveModel has_secure_password
