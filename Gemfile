@@ -7,6 +7,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.2.rc3'
 gem 'kaminari', '0.15.1'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'foreman-export-initscript'
