@@ -37,7 +37,8 @@ gem 'dropzonejs-rails', '~> 0.4.14'
 gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails'
 gem 'jquery-ui-rails', '~> 4.2.1'
-gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
+gem 'closure-sprockets'
+#gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.4'
 gem 'foreigner'
