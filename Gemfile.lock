@@ -53,8 +53,6 @@ GEM
       mime-types (>= 1.16)
     cliver (0.3.2)
     closure-compiler (1.1.11)
-    closure-sprockets (0.1.0)
-      tilt
     codeclimate-test-reporter (0.4.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.0.1)
@@ -271,7 +269,6 @@ DEPENDENCIES
   capybara
   carrierwave (~> 0.10.0)
   closure-compiler
-  closure-sprockets
   codeclimate-test-reporter
   coffee-rails
   coveralls
