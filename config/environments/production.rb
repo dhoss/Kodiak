@@ -16,8 +16,8 @@ Kodiak::Application.configure do
 
   # Compress JavaScripts and CSS
   #config.assets.compress = true
-  config.assets.js_compressor  = :yui
-  config.assets.css_compressor = :yui
+  config.assets.js_compressor  = :closure
+  config.assets.css_compressor = :closure
 
   config.assets.compile = true
 
