@@ -58,11 +58,50 @@
   <body>
      <div class="blog-masthead">
        <div class="container">
-        <nav class="blog-nav">
-          <%= render_navigation :expand_all => true, :renderer => :links %>
-        </nav>
-       </div>
-     </div
+<div class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/", class: "navbar-brand" %>
+  </div>
+       <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav nav-pills">
+          <li><a href="/">Home</a></li>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Profile', user_path(current_user) %></li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        <li class="dropdown">
+          <%= link_to raw('Posts <b class="caret"></b>'), posts_path, data: { toggle: "dropdown" }, class: "dropdown-toggle" %>
+          <ul class="dropdown-menu">
+            <li><%= link_to "View All", posts_path %></li>
+          <% if can? :create, Post -%> 
+              <li><%= link_to "New Post", new_post_path %></li>
+              <li><%= link_to "Drafts", posts_path %></li>
+          <% end %>
+          </ul><!--/.dropdown-menu -->
+          </li><!--/.dropdown-->
+          <% if current_user.role? "admin" %>
+        <li class="dropdown pull-right">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Manage Posts</a></li>
+                <li><a href="#">Manage Users</a></li>
+                <li><a href="#">Manage Attachments</a></li>
+                <li class="divider"></li>
+                <li><%= link_to 'Settings', settings_path %></a></li>
+            </ul>
+            </li>
+          <% end %>
+    </ul>
+  </div>
+</div>
+  </div>
      <!-- stonecold-responsive -->
      <ins class="adsbygoogle"
           style="display:block"

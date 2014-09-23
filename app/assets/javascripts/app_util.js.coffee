@@ -42,3 +42,14 @@ $.rails.allowAction = (element) ->
   $modal_html.modal()
   # Prevent the original link from working
   return false
+
+$(".navbar .dropdown").hover (->
+  $(this).find(".dropdown-menu").first().stop(true, true).slideDown 150
+  return
+), ->
+  $(this).find(".dropdown-menu").first().stop(true, true).slideUp 105
+  return
+
+$(document).ready ->
+  $("a[href=\"" + @location.pathname + "\"]").parent().addClass "active"
+  return

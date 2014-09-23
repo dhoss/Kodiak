@@ -1,8 +1,6 @@
 <h1>Listing posts</h1>
+<br />
 <%= render partial: @posts %>
 
-<br />
-<% if can? :create, Post %>
-  <%= link_to 'New Post', new_post_path %>
-<% end %>
+
 <%= render 'posts/page' %>
