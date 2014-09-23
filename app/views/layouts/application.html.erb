@@ -86,7 +86,8 @@
           <% end %>
           </ul><!--/.dropdown-menu -->
           </li><!--/.dropdown-->
-          <% if current_user.role? "admin" %>
+          <% if user_signed_in? %>
+           <% if current_user.role? "admin" %>
         <li class="dropdown pull-right">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -98,6 +99,7 @@
             </ul>
             </li>
           <% end %>
+        <% end %>
     </ul>
   </div>
 </div>
