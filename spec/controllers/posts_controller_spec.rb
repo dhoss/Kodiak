@@ -42,6 +42,7 @@ describe PostsController do
       end
     end
  end
+
   describe "POST create" do
     let!(:user) { User.create user_attributes }
     subject(:user_post) do
@@ -68,39 +69,6 @@ describe PostsController do
         sign_in user
         post :create, {:post => post_attributes}
         response.should redirect_to(Post.last)
-      end
-    end
-
-    describe "POST attachment" do
-      context "with valid attachment" do
-        it "creates a post with an attachment" do
-          sign_in user
-          expect {
-            post :create, {
-              :post => post_attributes.merge(attachments_attributes: [ FactoryGirl.attributes_for(:attachment) ])
-            }
-          }.to change(Attachment, :count).by(1)
-        end
-
-        it "is a valid attachment object" do
-          sign_in user
-          post :create, {
-              :post => post_attributes.merge(attachments_attributes: [ FactoryGirl.attributes_for(:attachment) ])
-          }
-          assigns(:post).attachments.first.should be_a(Attachment)
-        end
-
-        it "allows you to upload multiple images" do
-          sign_in user
-          expect {
-            post :create, {
-              :post => post_attributes.merge(attachments_attributes: [ 
-                FactoryGirl.attributes_for(:attachment), FactoryGirl.attributes_for(:attachment), FactoryGirl.attributes_for(:attachment)
-              ])
-            }
-          }.to change(Attachment, :count).by(3)
-          assigns(:post).attachments.each { |a| a.should be_a(Attachment) }
-        end
       end
     end
 
@@ -200,4 +168,29 @@ describe PostsController do
       response.should redirect_to(posts_url)
     end
   end 
+
+  describe "Post replies" do
+    let!(:user) { User.create user_attributes }
+    let!(:user_post) { 
+      user.posts.create! post_attributes
+    }
+    context "with no replies" do
+      it "has a reply count of 0" do
+        get :show, :id => user_post.to_param
+        expect(assigns(:post).comments.count).to eq(0)
+      end
+    end
+
+    context "with one reply" do
+      it "creates a reply" do
+        sign_in user
+        expect {
+          post :reply, { 
+            :id   => user_post.to_param,
+            :post => post_attributes
+          }
+        }.to change(Post, :count).by(1)
+      end
+    end
+  end
 end

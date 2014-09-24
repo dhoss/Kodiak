@@ -13,9 +13,7 @@ class Post < ActiveRecord::Base
   friendly_id :title, use: :slugged
   # has many
   has_many :comments, class_name: "Post", foreign_key: "parent_id"
-  has_many :attachments, as: :attachable
   has_and_belongs_to_many :tags
-  belongs_to :gallery, -> { where(type: "post") }
 
   # belongs to
   belongs_to :post_comments, class_name: "Post"
@@ -23,7 +21,7 @@ class Post < ActiveRecord::Base
   belongs_to :category
   belongs_to :parent
 
-  accepts_nested_attributes_for :tags, :comments, :category, :attachments
+  accepts_nested_attributes_for :tags, :comments, :category
 
   hashify :body, :category, :parent_id, 
           :title, :tags, :category, 

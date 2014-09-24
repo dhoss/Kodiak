@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.includes(:user, :attachments).friendly.find(params[:id])
+    @post = Post.includes(:user).friendly.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,15 +48,10 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @user = current_user
-    @attachment_name = params[:post].delete "attachment_name"
     @new_category = params[:post].delete "new_category"
     @post = @user.posts.new(params[:post])
     if !@new_category.blank?
       @post.category = Category.new(name: @new_category)
-    end
-    if !@attachment_name.blank?
-      @attachment_name << '%'
-      @post.attachments << Attachment.where("attachments.name like ?", @attachment_name)
     end
 
     respond_to do |format|
@@ -99,6 +94,19 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to posts_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def reply
+    @post = Post.friendly.find(params[:id])
+    @post.comments.create(
+      title: "RE: #{@post.title}", 
+      body: params[:post][:body]
+    )
+
+    respond_to do |format|
+      format.html { redirect_to posts_url(@post) }
       format.json { head :no_content }
     end
   end

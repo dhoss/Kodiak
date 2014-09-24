@@ -1,5 +1,7 @@
 Kodiak::Application.routes.draw do
 
+  post '/posts/:id/reply' => "posts#reply", as: :post_reply
+
   resources :settings
 
   resources :galleries
