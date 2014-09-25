@@ -53,3 +53,6 @@ $(".navbar .dropdown").hover (->
 $(document).ready ->
   $("a[href=\"" + @location.pathname + "\"]").parent().addClass "active"
   return
+
+$(document).ready -> 
+  $('.blog-post-body table').addClass 'table table-striped table-bordered'
