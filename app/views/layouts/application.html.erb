@@ -154,15 +154,12 @@
       </div><!-- /.row -->
     </div><!-- /.container -->
 
-    <div class="blog-footer">
+    <div class="footer">
       <p><%= raw Setting.get("site_text")["settings"]["page_sections"]["footer"] %></p>
       <p>
         <a href="#">Back to top</a>
       </p>
     </div>
-
-
-    
 
     <%= javascript_include_tag 'application', controller_name %>
     <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
