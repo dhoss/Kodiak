@@ -192,5 +192,18 @@ describe PostsController do
         }.to change(Post, :count).by(1)
       end
     end
+    context "with one reply to a reply" do
+      it "creates a reply to a reply" do
+        sign_in user
+        parent = FactoryGirl.create(:post)
+        child  = parent.comments.create(title: "I'm a reply to #{parent.title}", body: "fart")
+        expect {
+          post :reply, { 
+            :id   => child.to_param,
+            :post => post_attributes
+          }
+        }.to change(child.comments, :count).by(1)
+      end
+    end
   end
 end
