@@ -8,3 +8,4 @@
 //= require dropzone
 //= require attachments
 //= require app_util
+//= require jquery.tmpl.min
