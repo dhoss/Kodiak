@@ -1,0 +1,22 @@
+<%= form_for(reply, url: { action: "reply" }, method: "reply") do |f| %>
+  <% if reply.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+
+      <ul>
+      <% reply.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body, rows: 8, cols: 75, :value => "" %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Create reply', :id => "reply-submit-btn" %>
+  </div>
+<% end %>
+<% @deferred_content = javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>
