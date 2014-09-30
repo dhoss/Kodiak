@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.includes(:user).friendly.find(params[:id])
+    @post = Post.includes(:user, :parent).friendly.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -99,15 +99,22 @@ class PostsController < ApplicationController
   end
 
   def reply
-    @post = Post.friendly.find(params[:id])
+    @post = Post.includes(:parent).friendly.find(params[:id])
     @post.comments.create(
+      user: user_signed_in? ? current_user : User.find_or_initialize(name: params[:commentor_name]),
       title: "RE: #{@post.title}", 
-      body: params[:post][:body]
+      body: params[:post][:body],
+      category: @post.category
+
     )
 
     respond_to do |format|
-      format.html { redirect_to posts_url(@post) }
+      format.html { redirect_to post_url(@post) }
       format.json { head :no_content }
     end
+  end
+
+  def new_reply
+    @post = Post.friendly.find(params[:id])
   end
 end
