@@ -62,6 +62,17 @@ describe Post do
     end
   end
 
+  context "reply tree" do
+    it "has a valid tree of replies provided a parent/root id" do
+      parent = FactoryGirl.create(:post)
+      first_child = Post.new(title: "RE: " + parent.title, body: "pfffft")
+      parent.comments << first_child 
+      first_child.comments << Post.new(title: "RE: " + first_child.title, body: "pfffft 2")
+      reply_tree = parent.reply_tree
+      expect(reply_tree.length).to eq(1)
+    end
+  end
+
   context "search posts" do
     it "returns search results" do
       results = Post.fast_search(post.title)

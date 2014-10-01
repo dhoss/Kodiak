@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   belongs_to :post_comments, class_name: "Post"
   belongs_to :user
   belongs_to :category
-  belongs_to :parent
+  belongs_to :parent, class_name: "Post"
 
   accepts_nested_attributes_for :tags, :comments, :category
 
@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
 
    scope :with_author, -> { joins(:user) }
 
-   scope :front_page, ->(page) { with_author.order(created_at: :desc).page(page) }
+   scope :front_page, ->(page) { with_author.where(parent: nil).order(created_at: :desc).page(page) }
 
    def self.distinct_years
      order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 
@@ -65,6 +65,29 @@ class Post < ActiveRecord::Base
    def self.search(params)
     results = self.fast_search(params)
     Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results
+   end
+
+   def reply_tree
+     # give build_tree an array of hashes with the AR objects serialized into a hash
+     build_tree(descendents.to_a.map(&:serializable_hash))
+   end
+
+   def build_tree(data)
+     # turn our AoH into a hash where we've mapped the ID column
+     # to the rest of the hash + a comments array for nested comments
+     nested_hash = Hash[data.map{|e| [e['id'], e.merge('comments' => [])]}]
+
+     # if we have a parent ID, grab all the comments
+     # associated with that parent and push them into the comments array
+     nested_hash.each do |id, item|
+       parent = nested_hash[item['parent_id']]
+       parent['comments'] << item if parent
+     end
+ 
+     # return the values of our nested hash, ie our actual comment hash data
+     # reject any descendents whose parent ID already exists in the main hash so we don't
+     # get orphaned descendents listed as their own comment
+     nested_hash.reject{|id, item| nested_hash.has_key? item['parent_id']}.values
    end
 
 end
