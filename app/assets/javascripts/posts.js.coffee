@@ -21,10 +21,11 @@ $(document).ready ->
         content: "Test 2"
       }
     ]
-    
+
+  
   return
 
 $.get '/api/v1/replies/' + window.location.pathname.split("/")[window.location.pathname.split("/").length - 1], (data) ->
-   $('#commentTemplate').tmpl(data).appendTo '#replies'
+  $('#commentTemplate').tmpl(data).appendTo '#replies'
     
   return

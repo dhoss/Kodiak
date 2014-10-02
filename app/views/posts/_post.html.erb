@@ -17,10 +17,10 @@
     <hr />
     <div class="blog-post">
       <p class="blog-post-meta">
-        {{= created_at}} by {{= user_id}}
+        {{= created_at}} by {{= name}}
       </p>
       <div class="blog-post-body">
-        {{= body}}
+        {{html body}}
       </div>                                                                                                                                
       <p><a href="/posts/{{= slug}}/reply">reply to this post</a></p>
       {{if comments}}

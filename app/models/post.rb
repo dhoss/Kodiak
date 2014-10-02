@@ -80,6 +80,7 @@ class Post < ActiveRecord::Base
      # if we have a parent ID, grab all the comments
      # associated with that parent and push them into the comments array
      nested_hash.each do |id, item|
+       nested_hash[id]['name'] = item['user_id'] ? User.find(item['user_id']).name : "Anonymous"
        parent = nested_hash[item['parent_id']]
        parent['comments'] << item if parent
      end
@@ -87,7 +88,9 @@ class Post < ActiveRecord::Base
      # return the values of our nested hash, ie our actual comment hash data
      # reject any descendents whose parent ID already exists in the main hash so we don't
      # get orphaned descendents listed as their own comment
-     nested_hash.reject{|id, item| nested_hash.has_key? item['parent_id']}.values
+     nested_hash.reject{|id, item| 
+       nested_hash.has_key? item['parent_id']
+     }.values
    end
 
 end
