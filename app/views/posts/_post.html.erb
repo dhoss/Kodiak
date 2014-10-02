@@ -8,6 +8,7 @@
     <% if post.parent %>
       in reply to <%= link_to post.parent.title, post_path(post.parent) %>
     <% end %>
+    <%= link_to "Comments (#{post.comments.count})", post %>
   </p>
   <div class="blog-post-body">
     <%= raw post.body %>  
