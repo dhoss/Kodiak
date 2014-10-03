@@ -1,6 +1,7 @@
-<%= form_for(reply, url: { action: "reply" }, method: "reply") do |f| %>
-  <% if reply.errors.any? %>
-    <div id="error_explanation">
+<% if user_signed_in? %> 
+  <%= form_for(reply, url: { action: "reply" }, method: "reply") do |f| %>
+    <% if reply.errors.any? %>
+      <div id="error_explanation">
       <h2><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
 
       <ul>
@@ -18,5 +19,8 @@
   <div class="actions">
     <%= f.submit 'Create reply', :id => "reply-submit-btn" %>
   </div>
+  <% end %>
+  <% @deferred_content = javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>
+<% else %>
+  <%= link_to 'Sign in to reply', new_user_session_url %>
 <% end %>
-<% @deferred_content = javascript_include_tag '//tinymce.cachefly.net/4.1/tinymce.min.js' %>
