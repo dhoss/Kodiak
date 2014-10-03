@@ -22,7 +22,6 @@ $(document).ready ->
       }
     ]
 
-  
   return
 
 $.get '/api/v1/replies/' + window.location.pathname.split("/")[window.location.pathname.split("/").length - 1], (data) ->
