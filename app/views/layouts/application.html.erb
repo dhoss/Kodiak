@@ -162,7 +162,7 @@
       </p>
     </div>
 
-    <%= javascript_include_tag 'application', controller_name %>
+    <%= javascript_include_tag 'application', controller_name, async: true %>
     <%= @deferred_content.nil? ? "" : @deferred_content.html_safe %>
 <% if Rails.env == "production" %>
    <script>
