@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) :  Setting.get("site_text")['settings']["headings"]["site_title"] %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= stylesheet_link_tag controller_name, :media => "all" %>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
