@@ -58,7 +58,7 @@ class Post < ActiveRecord::Base
 
    def self.year_month_pairs
      select("extract(year from created_at) as year, extract(month from created_at) as month").
-     order("year desc").
+     order("year desc, month desc").
      group("extract(year from created_at), extract(month from created_at)")
    end
 
