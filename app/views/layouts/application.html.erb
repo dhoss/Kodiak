@@ -105,13 +105,15 @@
   </div>
 </div>
   </div>
-     <!-- stonecold-responsive -->
-     <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-8235962495693803"
-          data-ad-slot="9909766461"
-          data-ad-format="auto"></ins>
-    <div class="container">
+     
+  <div class="container">
+
+       <!-- stonecold-responsive -->
+       <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-8235962495693803"
+            data-ad-slot="9909766461"
+            data-ad-format="auto"></ins>
 
       <div class="blog-header">
         <h1 class="blog-title"><%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/" %> </h1>
@@ -131,6 +133,23 @@
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
             <%= Setting.get("site_text")["settings"]["page_sections"]["about"] %>
+          </div>
+          <div class="sidebar-module">
+            <h4>Recent Activity</h4>
+            <hr />
+            <p>Posts:</p>
+            <ol class="list-unstyled">
+              <% @recent_posts.each do |post| %>
+                <li><%= link_to post.title, post %> on <%= post.created_at.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
+              <% end %>
+            </ol>
+            <hr />
+            <p>Photos:</p>
+            <ol class="list-unstyled">
+              <% @recent_photos.each do |photo| %>
+                <li><%= link_to image_tag(photo.attachment_url(:thumb)), photo %> on <%= photo.created_at.to_s(:posted_on) %> in <%= link_to photo.gallery.name, photo %></li>
+              <% end %>
+            </ol>
           </div>
           <div class="sidebar-module">
             <h4>Archives</h4>
