@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
 
    scope :with_author, -> { joins(:user) }
 
-   scope :front_page, ->(page) { with_author.where(parent: nil).order(created_at: :desc).page(page) }
+   scope :front_page, ->(page) { with_author.where(parent: nil, is_public: 1).order(created_at: :desc).page(page) }
 
    def self.distinct_years
      order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 

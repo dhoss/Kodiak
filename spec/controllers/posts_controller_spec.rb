@@ -17,6 +17,14 @@ describe PostsController do
         get :index
         assigns(:posts).should eq([user_post])
       end
+
+      it "doesn't have any drafts" do 
+        get :index
+        assigns(:posts).each do |post|
+          post.is_public.should eq(1)
+        end
+      end
+
     end
 
     context "GET show" do

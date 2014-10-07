@@ -26,8 +26,12 @@
   </div>
   <div class="field">
     <p>Or create a new category</p>
-      <input type="text" name="post[new_category]" />
-    </div>
+    <input type="text" name="post[new_category]" />
+  </div>
+  <div class="field">
+    <%= f.label :is_public %>
+    <%= f.check_box :is_public %>
+  </div>
   <div class="actions">
     <%= f.submit 'Create post', :id => "post-submit-btn" %>
   </div>
