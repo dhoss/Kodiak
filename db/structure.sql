@@ -117,7 +117,8 @@ CREATE TABLE categories (
     id integer NOT NULL,
     name character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    slug character varying(255)
 );
 
 
@@ -625,6 +626,13 @@ CREATE UNIQUE INDEX index_categories_on_name ON categories USING btree (name);
 
 
 --
+-- Name: index_categories_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_categories_on_slug ON categories USING btree (slug);
+
+
+--
 -- Name: index_friendly_id_slugs_on_slug_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -843,4 +851,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140907230532');
 INSERT INTO schema_migrations (version) VALUES ('20140919021640');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007004000');
+
+INSERT INTO schema_migrations (version) VALUES ('20141007211818');
 

@@ -12,6 +12,7 @@ describe 'layouts/application.html.erb' do
       entry.created_at = DateTime.new(2014, 8, 8)
       entry.save
       sign_in user
+      assign(:categories_section, [FactoryGirl.create(:category)])
       assign(:recent_posts, [entry])
       assign(:recent_photos, [FactoryGirl.create(:attachment)])
       assign(:year_month_pairs, Post.year_month_pairs)

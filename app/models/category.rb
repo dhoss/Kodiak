@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
-  extend Hashifiable
-  hashify :name, :id
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   validates :name, presence: true, uniqueness: true
 end
