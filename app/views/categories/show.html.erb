@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= render partial: 'posts/post', collection: @category.posts  %>
 <% if can? :edit, @category %>
   <%= link_to 'Edit', edit_category_path(@category) %> |
 <% end %>
