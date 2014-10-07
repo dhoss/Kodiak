@@ -79,4 +79,12 @@ describe Post do
       expect(results).not_to be_empty
     end
   end
+
+  context "drafts" do
+    it "front page returns no drafts" do
+      expect(Post.front_page(1).to_a.map(&:serializable_hash).any? {|post| 
+        post['is_public'] == 1 
+      }).to be_true
+    end
+  end
 end

@@ -255,7 +255,8 @@ CREATE TABLE posts (
     updated_at timestamp without time zone,
     category_id integer,
     tsv tsvector,
-    slug character varying(255)
+    slug character varying(255),
+    is_public integer
 );
 
 
@@ -840,4 +841,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140902221200');
 INSERT INTO schema_migrations (version) VALUES ('20140907230532');
 
 INSERT INTO schema_migrations (version) VALUES ('20140919021640');
+
+INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 

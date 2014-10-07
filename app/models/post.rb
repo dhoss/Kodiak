@@ -88,9 +88,6 @@ class Post < ActiveRecord::Base
      # return the values of our nested hash, ie our actual comment hash data
      # reject any descendents whose parent ID already exists in the main hash so we don't
      # get orphaned descendents listed as their own comment
-     pp nested_hash.reject{|id, item| 
-       nested_hash.has_key? item['parent_id']
-     }.values
      
      nested_hash.reject{|id, item| 
        nested_hash.has_key? item['parent_id']
