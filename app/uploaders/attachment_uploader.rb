@@ -18,9 +18,9 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     when "dev"
       return "dev/uploads"
     when "test" 
-      "public/uploads/attachments"
+      File.join(Rails.root, "spec","data")
     when "test_local"
-      "public/uploads/attachments"
+      File.join(Rails.root, "spec","data")
     end
   end
 
