@@ -11,6 +11,8 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 
 gem 'grape'
 
+gem 'redis-rails'
+
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", '~> 2.2.8'
 
