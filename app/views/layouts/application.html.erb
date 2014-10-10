@@ -174,7 +174,7 @@
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
-              <% cache @year_month_pairs do %>
+              <% cache ['year_month_pairs', expires_in: 30.minutes] do %>
                 <% @year_month_pairs.each do |ym| %>
                   <%# turn me into a helper %>
                   <li><a href="/<%= ym.year.to_i %>/<%= sprintf '%02d', ym.month.to_i %>">
