@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   skip_authorize_resource :only => [:index, :show] 
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  caches_action :index
+  caches_action :index, :layout => false
 
   # GET /posts
   # GET /posts.json

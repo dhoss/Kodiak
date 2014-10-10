@@ -1,7 +1,7 @@
 require 'actionpack/action_caching'
 class HomeController < ApplicationController
   
-  caches_action :index
+  caches_action :index, :layout => false
 
 
   def index
