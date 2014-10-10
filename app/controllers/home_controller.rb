@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def index
     @posts = Post.front_page(params[:page])                                                                                                                                                                                   
-    expires_in 10.minute, public: true
+    expires_in 5.minute, public: true
     fresh_when last_modified: Post.maximum("updated_at")
   end
 end

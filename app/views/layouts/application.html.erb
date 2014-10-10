@@ -154,10 +154,8 @@
             <hr />
             <p>Photos:</p>
             <ol class="list-unstyled">
-              <% cache @recent_photos do %>
-                <% @recent_photos.each do |photo| %>
-                  <li><%= link_to image_tag(photo.attachment_url(:thumb)), photo %> on <%= photo.created_at.to_s(:posted_on) %> in <%= link_to photo.gallery.name, photo %></li>
-                <% end %>
+              <% @recent_photos.each do |photo| %>
+                <li><%= link_to image_tag(photo.attachment_url(:thumb)), photo %> on <%= photo.created_at.to_s(:posted_on) %> in <%= link_to photo.gallery.name, photo %></li>
               <% end %>
             </ol>
           </div>
