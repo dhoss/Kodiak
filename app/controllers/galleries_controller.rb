@@ -11,7 +11,7 @@ class GalleriesController < ApplicationController
 
   # GET /galleries
   def index
-    @galleries = Gallery.page(params[:page])
+    @galleries = Gallery.page(params[:page]).order(created_at: :desc)
     expires_in 5.minute, public: true
     fresh_when last_modified: Gallery.maximum("updated_at")
   end
