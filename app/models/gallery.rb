@@ -2,7 +2,7 @@ class Gallery < ActiveRecord::Base
   paginates_per APP_CONFIG['posts_per_page']
   extend FriendlyId
   friendly_id :name, use: :slugged
-  has_many :photos, -> { where(is_public: 1) },
+  has_many :photos, -> { where(is_public: 1).order(created_at: :desc) },
     class_name: "Attachment",
     foreign_key: :gallery_id
   belongs_to :user
