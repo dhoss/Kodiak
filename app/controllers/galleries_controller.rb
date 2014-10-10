@@ -1,16 +1,25 @@
 require 'pp'
+require 'actionpack/action_caching'
 class GalleriesController < ApplicationController
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
   skip_authorize_resource :only => [:index, :show] 
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  caches_action :index
+  caches_action :show, expires_in: 5.minutes, layout: false
+
+
   # GET /galleries
   def index
     @galleries = Gallery.page(params[:page])
+    expires_in 5.minute, public: true
+    fresh_when last_modified: Gallery.maximum("updated_at")
   end
 
   # GET /galleries/1
   def show
+    expires_in 1.minute, public: true
+    fresh_when last_modified: @gallery.photos.maximum("updated_at")
   end
 
   # GET /galleries/new

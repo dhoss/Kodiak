@@ -1,25 +1,24 @@
 require 'pp'
+require 'actionpack/action_caching'
 class PostsController < ApplicationController
   skip_authorize_resource :only => [:index, :show] 
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  caches_action :index
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.front_page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
+    expires_in 1.minute, public: true
+    fresh_when last_modified: Post.maximum("updated_at")
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = Post.includes(:user, :parent).friendly.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
@@ -56,6 +55,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        expire_action :action => :index
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else

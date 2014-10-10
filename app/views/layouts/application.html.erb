@@ -67,7 +67,9 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/", class: "navbar-brand" %>
+    <% cache [ 'banner-title', expires_in: 5.minutes ] do %>
+      <%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/", class: "navbar-brand" %>
+    <% end %>
   </div>
        <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav nav-pills">
@@ -115,10 +117,12 @@
             data-ad-slot="9909766461"
             data-ad-format="auto"></ins>
 
-      <div class="blog-header">
-        <h1 class="blog-title"><%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/" %> </h1>
-        <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : Setting.get("site_text")["settings"]["headings"]["tag_line"] %> </p>
-      </div>
+      <% cache [ 'blog-header', expires_in: 5.minutes ] do %>
+        <div class="blog-header">
+          <h1 class="blog-title"><%= link_to Setting.get("site_text")["settings"]["headings"]["banner_title"], "/" %> </h1>
+          <p class="lead blog-description"><%= content_for?(:tag_line) ? yield(:tag_line) : Setting.get("site_text")["settings"]["headings"]["tag_line"] %> </p>
+        </div>
+      <% end %>
 
       <div class="row">
 
@@ -132,48 +136,60 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
-            <%= Setting.get("site_text")["settings"]["page_sections"]["about"] %>
+            <% cache [ 'about-section', expires_in: 5.minutes ] do %>
+              <%= Setting.get("site_text")["settings"]["page_sections"]["about"] %>
+            <% end %>
           </div>
           <div class="sidebar-module">
             <h4>Recent Activity</h4>
             <hr />
             <p>Posts:</p>
             <ol class="list-unstyled">
-              <% @recent_posts.each do |post| %>
-                <li><%= link_to post.title, post %> on <%= post.created_at.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
+              <% cache @recent_posts do %>
+                <% @recent_posts.each do |post| %>
+                  <li><%= link_to post.title, post %> on <%= post.created_at.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
+                <% end %>
               <% end %>
             </ol>
             <hr />
             <p>Photos:</p>
             <ol class="list-unstyled">
-              <% @recent_photos.each do |photo| %>
-                <li><%= link_to image_tag(photo.attachment_url(:thumb)), photo %> on <%= photo.created_at.to_s(:posted_on) %> in <%= link_to photo.gallery.name, photo %></li>
+              <% cache @recent_photos do %>
+                <% @recent_photos.each do |photo| %>
+                  <li><%= link_to image_tag(photo.attachment_url(:thumb)), photo %> on <%= photo.created_at.to_s(:posted_on) %> in <%= link_to photo.gallery.name, photo %></li>
+                <% end %>
               <% end %>
             </ol>
           </div>
           <div class="sidebar-module">
             <h4>Categories</h4>
             <ol class="list-unstyled">
-              <% @categories_section.each do |c| %>
-                <li><%= link_to c.name, c %></li>
+              <% cache @categories_section do %>
+                <% @categories_section.each do |c| %>
+                  <li><%= link_to c.name, c %></li>
+                <% end %>
               <% end %>
             </ol>
           </div>
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
-              <% @year_month_pairs.each do |ym| %>
-                <%# turn me into a helper %>
-                <li><a href="/<%= ym.year.to_i %>/<%= sprintf '%02d', ym.month.to_i %>">
-                  <%= Date::MONTHNAMES[ym.month.to_i] %> <%= ym.year.to_i %></a></li>
+              <% cache @year_month_pairs do %>
+                <% @year_month_pairs.each do |ym| %>
+                  <%# turn me into a helper %>
+                  <li><a href="/<%= ym.year.to_i %>/<%= sprintf '%02d', ym.month.to_i %>">
+                    <%= Date::MONTHNAMES[ym.month.to_i] %> <%= ym.year.to_i %></a></li>
+                <% end %>
               <% end %>
             </ol>
           </div>
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <% Setting.get("site_text")["settings"]["page_sections"]["other_places"].each do |k,v|%>
-                <li><a href="<%= Setting.get("site_text")["settings"]["page_sections"]["other_places"][k]%>"><%= k %></a></li>
+              <% cache [ 'elsewhere-section', expires_in: 30.minutes ] do %>
+                <% Setting.get("site_text")["settings"]["page_sections"]["other_places"].each do |k,v|%>
+                  <li><a href="<%= Setting.get("site_text")["settings"]["page_sections"]["other_places"][k]%>"><%= k %></a></li>
+                <% end %>
               <% end %>
             </ol>
           </div>
@@ -183,7 +199,9 @@
     </div><!-- /.container -->
 
     <div class="footer">
-      <p><%= raw Setting.get("site_text")["settings"]["page_sections"]["footer"] %></p>
+      <% cache [ 'footer', expires_in: 30.minutes ] do %>
+        <p><%= raw Setting.get("site_text")["settings"]["page_sections"]["footer"] %></p>
+      <% end %>
       <p>
         <a href="#">Back to top</a>
       </p>

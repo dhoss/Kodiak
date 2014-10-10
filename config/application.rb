@@ -11,6 +11,8 @@ end
 
 module Kodiak
   class Application < Rails::Application
+    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+    config.action_controller.perform_caching = true
     config.less.paths << "#{Rails.root}/app/assets/stylesheets"
     config.less.compress = true
     # Settings in config/environments/* take precedence over those specified here.

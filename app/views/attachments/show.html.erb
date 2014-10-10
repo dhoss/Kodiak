@@ -1,12 +1,13 @@
 <div id="status-message"></div>
 
 <p>
-  <b>Name:</b>
   <%= @attachment.name %>
 </p>
 
-<p>
+<div>
+  <% cache @attachment do %>
     <div><%= image_tag @attachment.attachment_url(:standard_size).to_s %></div>
-</p>
+  <% end %>
+</div>
 <%= link_to 'Edit', edit_attachment_path(@attachment) %> |
 <%= link_to 'Back', gallery_path(Gallery.find(@attachment.gallery_id).slug) %>
