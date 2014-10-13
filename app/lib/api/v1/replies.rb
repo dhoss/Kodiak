@@ -14,7 +14,7 @@ module API
             # this should go somewhere else
             post = Post.includes(:user).friendly.find(params[:id])
            
-            cache(key: "api:replies:#{post.id}", etag: post.updated_at, expires_in: Setting.get('reply-tree-expiry') || 5.minutes) do
+            cache(key: "api:replies:#{post.id}", etag: post.updated_at, expires_in: 2.minutes) do
               post.reply_tree.map{ |reply| 
                 reply.merge({'body' => reply.delete('body').html_safe}) 
               }
