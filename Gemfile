@@ -44,6 +44,8 @@ gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.4'
 gem 'foreigner'
 gem 'closure-compiler'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 
 # To use ActiveModel has_secure_password
