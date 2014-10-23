@@ -85,4 +85,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.include(Omniauth)
+
 end
+OmniAuth.config.test_mode = true
