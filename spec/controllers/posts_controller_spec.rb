@@ -214,4 +214,17 @@ describe PostsController do
       end
     end
   end
+
+  describe "Drafts" do
+    let!(:user) { User.create user_attributes }
+    let!(:user_post) { user.posts.create! post_attributes }
+
+    context "no drafts" do
+      it "retrieves 0 drafts" do
+        sign_in user
+        get :drafts
+        expect(assigns(:posts).count).to eq(0)
+      end
+    end
+  end
 end
