@@ -8,10 +8,10 @@ describe ArchivesController do
   let!(:post_2014) { user.posts.create! post_attributes }
   let!(:post_2013) { user.posts.create! post_attributes }
   before(:each) do
-    post_2014.created_at = DateTime.new(2014, 7, 31)
+    post_2014.published_on = DateTime.new(2014, 7, 31)
     post_2014.save
 
-    post_2013.created_at = DateTime.new(2013, 8, 1)
+    post_2013.published_on = DateTime.new(2013, 8, 1)
     post_2013.save
   end
 

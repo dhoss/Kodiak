@@ -43,26 +43,27 @@ class Post < ActiveRecord::Base
                   }
 
 
-   scope :posts_by_year, ->(year) { where("extract(year from created_at) = ?", year).order(created_at: :desc) }
+   scope :posts_by_year, ->(year) { where("extract(year from published_on) = ?", year).order(published_on: :desc) }
    scope :posts_by_month, ->(year, month) { 
-     posts_by_year(year).where("extract(month from created_at) = ?", month).order(created_at: :desc) 
+     posts_by_year(year).where("extract(month from published_on) = ?", month).order(published_on: :desc) 
    }
 
    scope :with_author, -> { joins(:user) }
 
-   # front_page shouldn't take a page parameter, it's one fucking page
-   scope :front_page, ->(page) { with_author.where(parent: nil, is_public: 1).order(created_at: :desc).page(page) }
+   scope :front_page, ->(page) { with_author.where(parent: nil).where.not(published_on: nil).order(published_on: :desc).page(page) }
 
-   scope :drafts, -> { where(is_public: 0) }
+   scope :drafts, -> { where(published_on: nil) }
+
+   scope :published, -> { where.not(published_on: nil) }
 
    def self.distinct_years
-     order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 
+     order('cast(extract(year from published_on) as integer) DESC').pluck('distinct(cast(extract(year from published_on) as integer))') 
    end
 
    def self.year_month_pairs
-     select("extract(year from created_at) as year, extract(month from created_at) as month").
+     select("extract(year from published_on) as year, extract(month from published_on) as month").
      order("year desc, month desc").
-     group("extract(year from created_at), extract(month from created_at)")
+     group("extract(year from published_on), extract(month from published_on)")
    end
 
    def self.search(params)

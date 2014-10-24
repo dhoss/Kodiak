@@ -1,7 +1,7 @@
 <div class="blog-post">
   <h2 class="blog-post-title"><%= link_to post.title, post %></h2>
   <p class="blog-post-meta">
-  <%= post.created_at.to_s(:posted_on) %> by <% if post.user %> <%= link_to post.user.name, user_path(post.user) %> <% else %> (no name) <% end %>
+  <%= post.published_on.to_s(:posted_on) %> by <% if post.user %> <%= link_to post.user.name, user_path(post.user) %> <% else %> (no name) <% end %>
     <% if post.category%>
       in <%= post.category.name %>
     <% end %>
@@ -18,7 +18,7 @@
     <hr />
     <div class="blog-post">
       <p class="blog-post-meta">
-      {{= created_at}} by {{= name}}
+      {{= published_on}} by {{= name}}
       </p>
       <div class="blog-post-body">
         {{html body}}

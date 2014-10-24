@@ -147,7 +147,7 @@
             <ol class="list-unstyled">
               <% cache @recent_posts do %>
                 <% @recent_posts.each do |post| %>
-                  <li><%= link_to post.title, post %> on <%= post.created_at.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
+                  <li><%= link_to post.title, post %> on <%= post.published_on.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
                 <% end %>
               <% end %>
             </ol>

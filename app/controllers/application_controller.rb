@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def recent_activity
-    @recent_posts  = Post.where(is_public: 1).order(created_at: :desc).limit(5)
+    @recent_posts  = Post.published.limit(5)
     @recent_photos = Attachment.where(is_public: 1).order(created_at: :desc).limit(5) 
   end
 
