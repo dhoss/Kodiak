@@ -119,7 +119,7 @@ class PostsController < ApplicationController
   end
 
   def drafts
-    @posts = current_user.posts.drafts
+    @posts = current_user.posts.drafts.page(params[:page]||1)
   end
 
 end
