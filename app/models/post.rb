@@ -50,7 +50,10 @@ class Post < ActiveRecord::Base
 
    scope :with_author, -> { joins(:user) }
 
+   # front_page shouldn't take a page parameter, it's one fucking page
    scope :front_page, ->(page) { with_author.where(parent: nil, is_public: 1).order(created_at: :desc).page(page) }
+
+   scope :drafts, -> { where(is_public: 0) }
 
    def self.distinct_years
      order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 
