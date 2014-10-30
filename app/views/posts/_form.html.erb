@@ -30,7 +30,7 @@
   </div>
   <div class="field">
     <%= f.label :published_on %>
-    <%= f.date_field :published_on %>
+    <%= f.datetime_local_field :published_on, min: Date.today.beginning_of_year %>
   </div>
   <div class="actions">
     <%= f.submit 'Create post', :id => "post-submit-btn" %>
