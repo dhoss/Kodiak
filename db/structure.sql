@@ -86,9 +86,7 @@ CREATE TABLE attachments (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_public integer DEFAULT 1,
-    gallery_id integer,
-    width integer,
-    height integer
+    gallery_id integer
 );
 
 
@@ -855,8 +853,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140919021640');
 INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007211818');
-
-INSERT INTO schema_migrations (version) VALUES ('20141010212941');
 
 INSERT INTO schema_migrations (version) VALUES ('20141024215012');
 
