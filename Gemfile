@@ -5,7 +5,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.2.rc3'
+gem 'rails', '4.1.6'
 gem 'kaminari', '0.15.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
@@ -32,7 +32,7 @@ gem 'gemnasium', '3.0.1'
 gem 'unf', '~> 0.1.4'
 gem 'protected_attributes', '~> 1.0.7'
 gem 'hashifiable'
-gem 'treeify'
+gem 'treeify', '0.04'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'dropzonejs-rails', '~> 0.4.14'
 

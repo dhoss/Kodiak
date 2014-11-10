@@ -21,7 +21,7 @@ describe PostsController do
       it "doesn't have any drafts" do 
         get :index
         assigns(:posts).each do |post|
-          post.is_public.should eq(1)
+          post.published_on.should_not eq(nil)
         end
       end
 
@@ -211,6 +211,19 @@ describe PostsController do
             :post => post_attributes
           }
         }.to change(child.comments, :count).by(1)
+      end
+    end
+  end
+
+  describe "Drafts" do
+    let!(:user) { User.create user_attributes }
+    let!(:user_post) { user.posts.create! post_attributes }
+
+    context "no drafts" do
+      it "retrieves 0 drafts" do
+        sign_in user
+        get :drafts
+        expect(assigns(:posts).count).to eq(0)
       end
     end
   end

@@ -117,4 +117,9 @@ class PostsController < ApplicationController
   def new_reply
     @post = Post.friendly.find(params[:id])
   end
+
+  def drafts
+    @posts = current_user.posts.drafts.page(params[:page]||1)
+  end
+
 end

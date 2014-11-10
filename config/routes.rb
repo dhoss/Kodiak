@@ -2,6 +2,8 @@ Kodiak::Application.routes.draw do
 
   mount API::Root => '/'
 
+  get 'posts/drafts' => 'posts#drafts', as: :drafts
+
   get '/posts/:id/reply'   => "posts#new_reply", as: :new_post_reply
 
   post '/posts/:id/reply' => "posts#reply", as: :post_reply

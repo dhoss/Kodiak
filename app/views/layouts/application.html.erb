@@ -85,7 +85,7 @@
             <li><%= link_to "View All", posts_path %></li>
           <% if can? :create, Post -%> 
               <li><%= link_to "New Post", new_post_path %></li>
-              <li><%= link_to "Drafts", posts_path %></li>
+              <li><%= link_to "Drafts", drafts_path %></li>
           <% end %>
           </ul><!--/.dropdown-menu -->
           </li><!--/.dropdown-->
@@ -147,7 +147,7 @@
             <ol class="list-unstyled">
               <% cache @recent_posts do %>
                 <% @recent_posts.each do |post| %>
-                  <li><%= link_to post.title, post %> on <%= post.created_at.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
+                  <li><%= link_to post.title, post %> on <%= post.published_on.to_s(:posted_on) %> by <%= link_to post.user.name, post.user %></li>
                 <% end %>
               <% end %>
             </ol>

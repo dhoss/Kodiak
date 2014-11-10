@@ -9,7 +9,7 @@ describe 'layouts/application.html.erb' do
   context 'when we hit a page' do
     it 'displays the correct "Archives" panel' do
       entry = user.posts.create! post_attributes 
-      entry.created_at = DateTime.new(2014, 8, 8)
+      entry.published_on = DateTime.new(2014, 8, 8)
       entry.save
       sign_in user
       assign(:categories_section, [FactoryGirl.create(:category)])

@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   alias_attribute :author, :user
   include Treeify
+  tree_config :cols => [:title, :user_id, :body]
 
   include PgSearch
   include Search
@@ -43,23 +44,27 @@ class Post < ActiveRecord::Base
                   }
 
 
-   scope :posts_by_year, ->(year) { where("extract(year from created_at) = ?", year).order(created_at: :desc) }
+   scope :posts_by_year, ->(year) { where("extract(year from published_on) = ?", year).order(published_on: :desc) }
    scope :posts_by_month, ->(year, month) { 
-     posts_by_year(year).where("extract(month from created_at) = ?", month).order(created_at: :desc) 
+     posts_by_year(year).where("extract(month from published_on) = ?", month).order(published_on: :desc) 
    }
 
    scope :with_author, -> { joins(:user) }
 
-   scope :front_page, ->(page) { with_author.where(parent: nil, is_public: 1).order(created_at: :desc).page(page) }
+   scope :front_page, ->(page) { with_author.where(parent: nil).where.not(published_on: nil).order(published_on: :desc).page(page) }
+
+   scope :drafts, -> { where(published_on: nil) }
+
+   scope :published, -> { where.not(published_on: nil) }
 
    def self.distinct_years
-     order('cast(extract(year from created_at) as integer) DESC').pluck('distinct(cast(extract(year from created_at) as integer))') 
+     order('cast(extract(year from published_on) as integer) DESC').pluck('distinct(cast(extract(year from published_on) as integer))') 
    end
 
    def self.year_month_pairs
-     select("extract(year from created_at) as year, extract(month from created_at) as month").
+     select("extract(year from published_on) as year, extract(month from published_on) as month").
      order("year desc, month desc").
-     group("extract(year from created_at), extract(month from created_at)")
+     group("extract(year from published_on), extract(month from published_on)")
    end
 
    def self.search(params)
@@ -71,27 +76,4 @@ class Post < ActiveRecord::Base
      # give build_tree an array of hashes with the AR objects serialized into a hash
      build_tree(descendents.to_a.map(&:serializable_hash))
    end
-
-   def build_tree(data)
-     # turn our AoH into a hash where we've mapped the ID column
-     # to the rest of the hash + a comments array for nested comments
-     nested_hash = Hash[data.map{|e| [e['id'], e.merge('comments' => [])]}]
-
-     # if we have a parent ID, grab all the comments
-     # associated with that parent and push them into the comments array
-     nested_hash.each do |id, item|
-       nested_hash[id]['name'] = item['user_id'] ? User.find(item['user_id']).name : "Anonymous"
-       parent = nested_hash[item['parent_id']]
-       parent['comments'] << item if parent
-     end
-
-     # return the values of our nested hash, ie our actual comment hash data
-     # reject any descendents whose parent ID already exists in the main hash so we don't
-     # get orphaned descendents listed as their own comment
-     
-     nested_hash.reject{|id, item| 
-       nested_hash.has_key? item['parent_id']
-     }.values
-   end
-
 end

@@ -82,8 +82,13 @@ describe Post do
 
   context "drafts" do
     it "front page returns no drafts" do
-      post.update(is_public: 0)
+      post.update(published_on: nil)
       expect(Post.front_page(1).count).to eq(0)
+    end
+
+    it "retrieves drafts properly" do
+      post.update(published_on: nil)
+      expect(Post.drafts.count).to eq(1)
     end
   end
 end
