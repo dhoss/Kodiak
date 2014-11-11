@@ -86,7 +86,9 @@ CREATE TABLE attachments (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_public integer DEFAULT 1,
-    gallery_id integer
+    gallery_id integer,
+    width integer,
+    height integer
 );
 
 
@@ -207,6 +209,39 @@ CREATE SEQUENCE galleries_id_seq
 --
 
 ALTER SEQUENCE galleries_id_seq OWNED BY galleries.id;
+
+
+--
+-- Name: identities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE identities (
+    id integer NOT NULL,
+    user_id integer,
+    provider character varying(255),
+    uid character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE identities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: identities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
 
 
 --
@@ -472,6 +507,13 @@ ALTER TABLE ONLY galleries ALTER COLUMN id SET DEFAULT nextval('galleries_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
 
 
@@ -540,6 +582,14 @@ ALTER TABLE ONLY friendly_id_slugs
 
 ALTER TABLE ONLY galleries
     ADD CONSTRAINT galleries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY identities
+    ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
 
 
 --
@@ -679,6 +729,13 @@ CREATE UNIQUE INDEX index_galleries_on_slug ON galleries USING btree (slug);
 --
 
 CREATE INDEX index_galleries_on_user_id ON galleries USING btree (user_id);
+
+
+--
+-- Name: index_identities_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_identities_on_user_id ON identities USING btree (user_id);
 
 
 --
@@ -854,5 +911,9 @@ INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007211818');
 
+INSERT INTO schema_migrations (version) VALUES ('20141010212941');
+
 INSERT INTO schema_migrations (version) VALUES ('20141024215012');
+
+INSERT INTO schema_migrations (version) VALUES ('20141110233523');
 

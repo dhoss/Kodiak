@@ -1,6 +1,7 @@
 Kodiak::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
+  config.app_domain = "stonecolddev.in"
 
   config.eager_load = true
 
@@ -54,6 +55,18 @@ Kodiak::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: config.app_domain }
+  config.action_mailer.smtp_settings = {
+    address: 'mail.gandi.net', 
+    port: '587',
+    enable_starttls_auto: true,
+    user_name: 'devin@stonecolddev.in',
+    password: 'qu44ck@@',
+    authentication: :plain,
+    domain: config.app_domain
+  }
 
   # Enable threaded mode
   # config.threadsafe!

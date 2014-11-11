@@ -1,5 +1,6 @@
 Kodiak::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.app_domain = "localhost"
 
   config.eager_load = false
 
@@ -15,7 +16,18 @@ Kodiak::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: config.app_domain }
+  config.action_mailer.smtp_settings = {
+    address: 'mail.gandi.net', 
+    port: '587',
+    enable_starttls_auto: true,
+    user_name: 'devin@stonecolddev.in',
+    password: 'qu44ck@@',
+    authentication: :plain,
+    domain: config.app_domain
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
