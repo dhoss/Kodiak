@@ -4,14 +4,10 @@ class PostsController < ApplicationController
   skip_authorize_resource :only => [:index, :show] 
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  caches_action :index, :layout => false
-
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.front_page(params[:page])
-    expires_in 1.minute, public: true
-    fresh_when last_modified: Post.maximum("updated_at")
   end
 
   # GET /posts/1
