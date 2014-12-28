@@ -1,3 +1,4 @@
+require 'pp'
 class Ability
   include CanCan::Ability
 
@@ -8,11 +9,11 @@ class Ability
     end
 
     can :manage, Attachment do |u|
-      user.try(:user) == user
+      user.try(:user) == u
     end
 
     can :update, Attachment do |u|
-      user.try(:user) == user
+      user.try(:user) == u
     end
 
     can :delete, Attachment do |u|
@@ -32,14 +33,6 @@ class Ability
     end
 
     can :manage, Gallery do |u|
-      user.try(:user) == user
-    end
-
-    can :update, User do |u|
-      user.try(:user) == user
-    end
-
-    can :delete, User do |u|
       user.try(:user) == u
     end
 
