@@ -1,11 +1,18 @@
 require 'spec_helper'
-
+require 'pp'
 describe "Users" do
-  describe "GET /users" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get users_path
-      response.status.should be(200)
+  describe "Twitter auth" do
+    it "allows a user to authenticate via twitter" do
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+        :provider => 'twitter',
+        :uid => '123545'
+      })
+      get user_omniauth_authorize_path(:twitter)
+      response.status.should be(302)
+      pp response
+      pp User.last
+      User.last.uid.should eq(123545)
     end
   end
 end

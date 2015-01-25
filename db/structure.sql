@@ -86,9 +86,7 @@ CREATE TABLE attachments (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     is_public integer DEFAULT 1,
-    gallery_id integer,
-    width integer,
-    height integer
+    gallery_id integer
 );
 
 
@@ -442,7 +440,9 @@ CREATE TABLE users (
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255)
+    last_sign_in_ip character varying(255),
+    provider character varying(255),
+    uid character varying(255)
 );
 
 
@@ -911,9 +911,9 @@ INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007211818');
 
-INSERT INTO schema_migrations (version) VALUES ('20141010212941');
-
 INSERT INTO schema_migrations (version) VALUES ('20141024215012');
 
 INSERT INTO schema_migrations (version) VALUES ('20141110233523');
+
+INSERT INTO schema_migrations (version) VALUES ('20141224233011');
 

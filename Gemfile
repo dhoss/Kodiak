@@ -9,6 +9,7 @@ gem 'rails', '4.1.6'
 gem 'kaminari', '0.15.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
+
 gem 'grape'
 gem 'grape-rails-cache'
 
@@ -22,6 +23,8 @@ gem "actionpack-action_caching"
 
 gem 'pg', '0.17.1'
 gem 'devise', '~> 3.2.4'
+gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'carrierwave', '~> 0.10.0'
 gem 'fog', '1.22.0'
 gem 'mini_magick'
@@ -44,8 +47,6 @@ gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.4'
 gem 'foreigner'
 gem 'closure-compiler'
-gem 'omniauth'
-gem 'omniauth-twitter'
 
 
 # To use ActiveModel has_secure_password

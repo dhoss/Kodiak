@@ -9,6 +9,9 @@ Kodiak::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # redis caching
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 2.minutes }
+
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
