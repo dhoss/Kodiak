@@ -1,3 +1,4 @@
+require 'pp'
 class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -39,22 +40,18 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
-    puts "INSIDE FIND_FOR_TWITTER_OAUTH"
-    user = User.find_by(provider: auth.provider, uid:auth.uid)
+    user = User.find_by(provider: auth['provider'], uid:auth['uid'])
     if user
-      puts "FOUND USER"
       return user
     else
-      puts "FOUND REGISTERED USER"
-      registered_user = User.find_by(email: auth.uid + "@twitter.com")
+      registered_user = User.find_by(email: auth['uid'] + "@twitter.com")
       if registered_user
         return registered_user
       else
-        puts "CREATING USER"
-        user = User.create(name:auth.extra.raw_info.name,
-                           provider:auth.provider,
-                           uid:auth.uid,
-                           email:auth.uid+"@twitter.com",
+        user = User.create(name:auth['info']['name'],
+                           provider:auth['provider'],
+                           uid:auth['uid'],
+                           email:auth['uid']+"@twitter.com",
                            password:Devise.friendly_token[0,20])
       end
     end
