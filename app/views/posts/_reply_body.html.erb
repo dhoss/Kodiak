@@ -10,7 +10,7 @@
       <ul class="replies">
       <% reply.comments.each do |subreply| %>
         <li>
-        <%= render partial: 'reply_body', locals: { reply: subreply } %>
+        <%= render partial: 'posts/reply_body', locals: { reply: subreply } %>
         </li>
       <% end %>
       </ul>

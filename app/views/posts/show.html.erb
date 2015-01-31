@@ -3,4 +3,8 @@
 <br />
 
 <p>Replies:</p>
-<div id="replies"></div>
+<% if @post.comments %>
+  <% @post.comments.each do |reply| %>
+    <%= render partial: 'posts/reply_body', locals: { reply: reply } %>
+  <% end %>
+<% end %>

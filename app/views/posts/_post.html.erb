@@ -14,9 +14,6 @@
     <%= raw post.body %>  
   </div>
   <hr />
-  <% @post.comments.each do |reply| %>
-    <%= render partial: 'reply_body', locals: { reply: reply } %>
-  <% end %>
   <% if can? :edit, post %>
   <div class="post-edit">
     <%= link_to 'Edit', edit_post_path(post) %>
