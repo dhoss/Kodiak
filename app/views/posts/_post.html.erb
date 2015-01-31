@@ -13,26 +13,10 @@
   <div class="blog-post-body">
     <%= raw post.body %>  
   </div>
-  <div id="comments"></div>
-  <script type="text/x-jquery-tmpl" id="commentTemplate">
-    <hr />
-    <div class="blog-post">
-      <p class="blog-post-meta">
-      {{= published_on}} by {{= name}}
-      </p>
-      <div class="blog-post-body">
-        {{html body}}
-      </div>                                                                                                                                
-      <p><a href="/posts/{{= slug}}/reply">reply to this post</a></p>
-      {{if comments}}
-        <ul class="replies">
-          <li>
-          {{tmpl(comments) "#commentTemplate"}}
-          </li>
-        </ul>
-      {{/if}}
-    </div>
- </script>
+  <hr />
+  <% @post.comments.each do |reply| %>
+    <%= render partial: 'reply_body', locals: { reply: reply } %>
+  <% end %>
   <% if can? :edit, post %>
   <div class="post-edit">
     <%= link_to 'Edit', edit_post_path(post) %>

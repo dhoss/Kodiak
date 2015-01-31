@@ -1,0 +1,18 @@
+<div class="blog-post">
+    <p class="blog-post-meta">
+    <%= reply.published_on %> by <%= reply.author.name %>
+    </p>
+      <div class="blog-post-body">
+      <%= raw reply.body %>
+      </div>                                                                                                                                
+    <p><%= link_to 'Reply', new_post_reply_url(reply) %></p>
+    <% if reply.comments %>
+      <ul class="replies">
+      <% reply.comments.each do |subreply| %>
+        <li>
+        <%= render partial: 'reply_body', locals: { reply: subreply } %>
+        </li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
