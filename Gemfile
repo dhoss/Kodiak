@@ -5,47 +5,47 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.6'
-gem 'kaminari', '0.15.1'
+gem 'rails', '4.2.0'
+gem 'kaminari', '0.16.2'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
 
-gem 'grape'
+gem 'grape', '~> 0.10.1'
 gem 'grape-rails-cache'
 
 gem 'redis-rails'
 
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails", '~> 2.2.8'
+gem "less-rails", '2.6.0' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails", '~> 3.2.0'
 gem "actionpack-action_caching"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg', '0.17.1'
-gem 'devise', '~> 3.2.4'
+gem 'pg', '0.18.1'
+gem 'devise', '~> 3.4.1'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'carrierwave', '~> 0.10.0'
-gem 'fog', '1.22.0'
-gem 'mini_magick'
-gem 'friendly_id', '~> 5.0.3'
-gem 'coveralls', require: false
-gem 'faker', '~> 1.3.0'
-gem 'gemnasium', '3.0.1'
+gem 'fog', '1.27.0'
+gem 'mini_magick', '~> 4.0.3'
+gem 'friendly_id', '~> 5.1.0'
+gem 'coveralls', '~> 0.7.8', require: false
+gem 'faker', '~> 1.4.3'
+gem 'gemnasium', '3.2.1'
 gem 'unf', '~> 0.1.4'
-gem 'protected_attributes', '~> 1.0.7'
+gem 'protected_attributes', '~> 1.0.8'
 gem 'hashifiable'
-gem 'treeify', '0.04'
-gem 'jquery-rails', '~> 3.1.0'
-gem 'dropzonejs-rails', '~> 0.4.14'
+gem 'treeify', '0.05.01'
+gem 'jquery-rails', '~> 4.0.3'
+gem 'dropzonejs-rails', '~> 0.5.3'
 
-gem 'sass-rails', '~> 4.0.3'
-gem 'coffee-rails'
-gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'sass-rails', '~> 5.0.1'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'jquery-ui-rails', '~> 5.0.3'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
-gem 'pg_search', '~> 0.7.4'
-gem 'foreigner'
+gem 'pg_search', '~> 0.7.8'
+gem 'foreigner', '~> 1.7.2'
 gem 'closure-compiler'
 
 
@@ -55,9 +55,9 @@ gem 'bcrypt-ruby', '~> 3.1.5'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-gem 'puma', '~> 2.8.2'
+gem 'puma', '~> 2.11.0'
 
-gem 'cancancan', '~> 1.9.2'
+gem 'cancancan', '~> 1.10.1'
 
 group :development, :test do
   gem 'capybara'
