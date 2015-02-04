@@ -45,7 +45,6 @@ gem 'jquery-ui-rails', '~> 5.0.3'
 gem 'therubyracer', '~> 0.12.1', :platforms => :ruby
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem 'pg_search', '~> 0.7.8'
-gem 'foreigner', '~> 1.7.2'
 gem 'closure-compiler'
 
 
@@ -62,10 +61,11 @@ gem 'cancancan', '~> 1.10.1'
 group :development, :test do
   gem 'capybara'
   gem 'factory_girl', '~> 4.4.0'
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activemodel-mocks'
   gem 'syntax', '~> 1.2.0'
-  gem 'rake', '~> 10.3.2'
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'rake', '~> 10.4.2'
+  gem 'database_cleaner', '~> 1.4.0'
   gem 'poltergeist'
   gem "codeclimate-test-reporter", require: nil
   gem "mina"

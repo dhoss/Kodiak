@@ -4,13 +4,13 @@ CodeClimate::TestReporter.start
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'database_cleaner'
 require 'factory_girl'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'rake/dsl_definition'
+require 'rspec/active_model/mocks'
 require 'rake'
 
 Capybara.register_driver :poltergeist do |app|
@@ -29,6 +29,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 Dir[Rails.root.join("spec/factories/**/*.rb")].each { |f| require f }
 ActiveRecord::Base.logger = Logger.new(STDOUT) if ENV['SHOW_SQL']
 RSpec.configure do |config|
+
+  config.infer_spec_type_from_file_location!
 
   config.include Capybara::DSL, type:  :feature
   config.include Requests::SessionHelpers, type: :request

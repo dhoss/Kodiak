@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostsController do
+describe PostsController, :type => :controller do
   include_context 'posts'
   include_context 'users'
 
@@ -15,7 +15,7 @@ describe PostsController do
     context "GET index" do
       it "assigns all posts as @posts" do
         get :index
-        assigns(:posts).should eq([user_post])
+        expect(assigns(:posts)).to eq([user_post])
       end
 
       it "doesn't have any drafts" do 
@@ -30,7 +30,7 @@ describe PostsController do
     context "GET show" do
       it "assigns the requested post as @post" do
         get :show, {:id => user_post.to_param}
-        assigns(:post).should eq(user_post)
+        expect(assigns(:post)).to eq(user_post)
       end
     end
 
@@ -38,7 +38,7 @@ describe PostsController do
       it "assigns a new post as @post" do
         sign_in user
         get :new
-        assigns(:post).should be_a_new(Post)
+        expect(assigns(:post)).to be_a_new(Post)
       end
     end
 
@@ -46,7 +46,7 @@ describe PostsController do
       it "assigns the requested post as @post" do
         sign_in user
         get :edit, {:id => user_post.to_param}
-        assigns(:post).should eq(user_post)
+        expect(assigns(:post)).to eq(user_post)
       end
     end
  end
@@ -69,14 +69,14 @@ describe PostsController do
       it "assigns a newly created post as @post" do
         sign_in user
         post :create, {:post => post_attributes}
-        assigns(:post).should be_a(Post)
-        assigns(:post).should be_persisted
+        expect(assigns(:post)).to be_a(Post)
+        expect(assigns(:post)).to be_persisted
       end
 
       it "redirects to the created post" do
         sign_in user
         post :create, {:post => post_attributes}
-        response.should redirect_to(Post.last)
+        expect(response).to redirect_to(Post.last)
       end
     end
 
@@ -84,17 +84,17 @@ describe PostsController do
       it "assigns a newly created but unsaved post as @post" do
         sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Post).to receive(:save).and_return(false)
         post :create, {:post => { "title" => "invalid value" }}
-        assigns(:post).should be_a_new(Post)
+        expect(assigns(:post)).to be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
         sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Post).to receive(:save).and_return(false)
         post :create, {:post => { "title" => "invalid value" }}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -113,26 +113,26 @@ describe PostsController do
         # specifies that the Post created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Post.any_instance.should_receive(:update_attributes).with({ "title" => "MyString" })
+        allow_any_instance_of(User).to receive(:update_attributes).with({ "title" => "MyString" })
         put :update, {:id => user_post.to_param, :post => { "title" => "MyString" }}
       end
 
       it "assigns the requested post as @post" do
         sign_in user
         put :update, {:id => user_post.to_param, :post => post_attributes}
-        assigns(:post).should eq(user_post)
+        expect(assigns(:post)).to eq(user_post)
       end
 
       it "redirects to the post" do
         sign_in user
         put :update, {:id => user_post.to_param, :post => post_attributes}
-        response.should redirect_to(user_post)
+        expect(response).to redirect_to(user_post)
       end
 
       it "updates the category correctly" do
         sign_in user
         put :update, {:id => user_post.to_param, :post => post_attributes.merge({ new_category: "farted" })}
-        assigns(:post).category.name.should eq("farted")
+        expect(assigns(:post).category.name).to eq("farted")
       end
 
     end
@@ -141,17 +141,17 @@ describe PostsController do
       it "assigns the post as @post" do
         sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Post).to receive(:save).and_return(false)
         put :update, {:id => user_post.to_param, :post => { "title" => "invalid value" }}
-        assigns(:post).should eq(user_post)
+        expect(assigns(:post)).to eq(user_post)
       end
 
       it "re-renders the 'edit' template" do
         sign_in user
         # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Post).to receive(:save).and_return(false)
         put :update, {:id => user_post.to_param, :post => { "title" => "invalid value" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -173,7 +173,7 @@ describe PostsController do
     it "redirects to the posts list" do
       sign_in user
       delete :destroy, {:id => user_post.to_param}
-      response.should redirect_to(posts_url)
+      expect(response).to redirect_to(posts_url)
     end
   end 
 

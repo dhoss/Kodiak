@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'factory_girl' 
 
-describe SettingsController do
+describe SettingsController, :type => :controller do
 
   let(:valid_session) { {} }
 
@@ -9,7 +9,7 @@ describe SettingsController do
     it "assigns all settings as @settings" do
       setting = Setting.distinct_settings
       get :index, {}, valid_session
-      assigns(:settings).should eq(setting)
+      expect(assigns(:settings)).to eq(setting)
     end
   end
 
@@ -17,14 +17,14 @@ describe SettingsController do
     it "assigns the requested setting as @setting" do
       setting = Setting.first
       get :show, {:id => setting.to_param}, valid_session
-      assigns(:setting).should eq(setting)
+      expect(assigns(:setting)).to eq(setting)
     end
   end
 
   describe "GET new" do
     it "assigns a new setting as @setting" do
       get :new, {}, valid_session
-      assigns(:setting).should be_a_new(Setting)
+      expect(assigns(:setting)).to be_a_new(Setting)
     end
   end
 
@@ -32,7 +32,7 @@ describe SettingsController do
     it "assigns the requested setting as @setting" do
       setting = Setting.first
       get :edit, {:id => setting.to_param}, valid_session
-      assigns(:setting).should eq(setting)
+      expect(assigns(:setting)).to eq(setting)
     end
   end
 
@@ -46,29 +46,29 @@ describe SettingsController do
 
       it "assigns a newly created setting as @setting" do
         post :create, {:setting => FactoryGirl.attributes_for(:setting)}, valid_session
-        assigns(:setting).should be_a(Setting)
-        assigns(:setting).should be_persisted
+        expect(assigns(:setting)).to be_a(Setting)
+        expect(assigns(:setting)).to be_persisted
       end
 
       it "redirects to the created setting" do
         post :create, {:setting => FactoryGirl.attributes_for(:setting)}, valid_session
-        response.should redirect_to(Setting.last)
+        expect(response).to redirect_to(Setting.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved setting as @setting" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Setting.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Setting).to receive(:save).and_return(false)
         post :create, {:setting => { :configuration => { :balls => "invalid" }}}
-        assigns(:setting).should be_a_new(Setting)
+        expect(assigns(:setting)).to be_a_new(Setting)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Setting.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Setting).to receive(:save).and_return(false)
         post :create, {:setting => { :configuration => { :balls => "invalid" }}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -81,20 +81,20 @@ describe SettingsController do
         # specifies that the Setting created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Setting.any_instance.should_receive(:update).with({ "these" => "params" })
+        expect_any_instance_of(Setting).to receive(:update).with({ "these" => "params" })
         put :update, {:id => setting.to_param, :setting => { "these" => "params" }}, valid_session
       end
 
       it "assigns the requested setting as @setting" do
         setting = Setting.first
         put :update, {:id => setting.to_param, :setting => FactoryGirl.attributes_for(:setting)}, valid_session
-        assigns(:setting).should eq(setting)
+        expect(assigns(:setting)).to eq(setting)
       end
 
       it "redirects to the setting" do
         setting = Setting.first
         put :update, {:id => setting.to_param, :setting => FactoryGirl.attributes_for(:setting)}, valid_session
-        response.should redirect_to(setting)
+        expect(response).to redirect_to(setting)
       end
     end
 
@@ -102,17 +102,17 @@ describe SettingsController do
       it "assigns the setting as @setting" do
         setting = Setting.first
         # Trigger the behavior that occurs when invalid params are submitted
-        Setting.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Setting).to receive(:save).and_return(false)
         put :update, {:id => setting.to_param, :setting => {:configuration => { :balls => "fart"}  }}, valid_session
-        assigns(:setting).should eq(setting)
+        expect(assigns(:setting)).to eq(setting)
       end
 
       it "re-renders the 'edit' template" do
         setting = Setting.first
         # Trigger the behavior that occurs when invalid params are submitted
-        Setting.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Setting).to receive(:save).and_return(false)
         put :update, {:id => setting.to_param, :setting => {:configuration => {:balls=>"fart"}}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AttachmentsController do
+describe AttachmentsController, :type => :controller do
   include_context 'posts'
   include_context 'users'
 
@@ -29,7 +29,7 @@ describe AttachmentsController do
 
       it "is a valid attachment object" do
         post_with_user(attachment)
-        assigns(:attachment).should be_a(Attachment)
+        expect(assigns(:attachment)).to be_a(Attachment)
       end
 
       it "allows you to upload multiple images" do
@@ -47,9 +47,9 @@ describe AttachmentsController do
   describe "PUT update" do
     it "updates the requested attachment" do
       post_with_user(attachment)
-      Attachment.any_instance.should_receive(:update).with({ "name" => "fart" })
+      expect_any_instance_of(Attachment).to receive(:update).with({ "name" => "fart" })
       put :update, {:id => Attachment.first.to_param, :attachment => { "name" => "fart" }}
-      assigns(:attachment).should eq(Attachment.first)
+      expect(assigns(:attachment)).to eq(Attachment.first)
     end
   end
 
@@ -66,7 +66,7 @@ describe AttachmentsController do
     it "returns http success" do
       post_with_user(attachment)
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -74,8 +74,8 @@ describe AttachmentsController do
     it "returns http success" do
       post_with_user(attachment)
       get :show, {:id => Attachment.first.to_param, :format => 'json'}
-      response.should be_success
-      assigns(:attachment).should eq(Attachment.first)
+      expect(response).to be_success
+      expect(assigns(:attachment)).to eq(Attachment.first)
     end
   end
 

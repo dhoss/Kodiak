@@ -1,7 +1,5 @@
 class AddGalleryForeignKeyToAttachments < ActiveRecord::Migration
   def change
-    change_table :attachments do |t|
-      t.foreign_key :galleries, dependent: :delete
-    end
+    add_foreign_key :attachments, :galleries, on_delete: :cascade
   end
 end

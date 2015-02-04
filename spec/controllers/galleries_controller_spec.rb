@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe GalleriesController do
+describe GalleriesController, :type => :controller do
   include_context 'users'
   let!(:attachment) { FactoryGirl.attributes_for(:attachment) }
   let!(:user) { User.create user_attributes }
@@ -11,7 +11,7 @@ describe GalleriesController do
     it "assigns all galleries as @galleries" do
       gallery = Gallery.create! gallery
       get :index
-      assigns(:galleries).should eq([gallery])
+      expect(assigns(:galleries)).to eq([gallery])
     end
   end
 
@@ -19,7 +19,7 @@ describe GalleriesController do
     it "assigns the requested gallery as @gallery" do
       gallery = Gallery.create! gallery
       get :show, {:id => gallery.to_param}
-      assigns(:gallery).should eq(gallery)
+      expect(assigns(:gallery)).to eq(gallery)
     end
   end
 
@@ -27,7 +27,7 @@ describe GalleriesController do
     it "assigns a new gallery as @gallery" do
       sign_in user
       get :new
-      assigns(:gallery).should be_a_new(Gallery)
+      expect(assigns(:gallery)).to be_a_new(Gallery)
     end
   end
 
@@ -36,7 +36,7 @@ describe GalleriesController do
       sign_in user
       gallery = Gallery.create! gallery
       get :edit, {:id => gallery.to_param}
-      assigns(:gallery).should eq(gallery)
+      expect(assigns(:gallery)).to eq(gallery)
     end
   end
 
@@ -53,14 +53,14 @@ describe GalleriesController do
       it "assigns a newly created gallery as @gallery" do
         sign_in user
         post :create, gallery
-        assigns(:gallery).should be_a(Gallery)
-        assigns(:gallery).should be_persisted
+        expect(assigns(:gallery)).to be_a(Gallery)
+        expect(assigns(:gallery)).to be_persisted
       end
 
       it "redirects to the created gallery" do
         sign_in user
         post :create, gallery
-        response.should redirect_to(Gallery.last)
+        expect(response).to redirect_to(Gallery.last)
       end
     end
 
@@ -68,15 +68,15 @@ describe GalleriesController do
       it "assigns a newly created but unsaved gallery as @gallery" do
         # Trigger the behavior that occurs when invalid params are submitted
         sign_in user
-        Gallery.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Gallery).to receive(:save).and_return(false)
         post :create, {"gallery" => {"name" => "invalid value" }}
-        assigns(:gallery).should be_a_new(Gallery)
+        expect(assigns(:gallery)).to be_a_new(Gallery)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         sign_in user
-        Gallery.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Gallery).to receive(:save).and_return(false)
         post :create, {"gallery" => {"name" => "invalid value"}}
         response.should render_template("new")
       end
@@ -92,7 +92,7 @@ describe GalleriesController do
         # specifies that the Gallery created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Gallery.any_instance.should_receive(:update).with({ "name" => "MyString" })
+        expect_any_instance_of(Gallery).to receive(:update).with({ "name" => "MyString" })
         put :update, {:id => gallery.to_param, "gallery" => {"name" => "MyString" }}
       end
 
@@ -100,14 +100,14 @@ describe GalleriesController do
         sign_in user
         gallery = Gallery.create! gallery
         put :update, {:id => gallery.to_param, "gallery" => {"name" => "Fart"}}
-        assigns(:gallery).should eq(gallery)
+        expect(assigns(:gallery)).to eq(gallery)
       end
 
       it "redirects to the gallery" do
         sign_in user
         gallery = Gallery.create! gallery
         put :update, {:id => gallery.to_param, "gallery" => {"name" => "Fart"}}
-        response.should redirect_to(:action => :show, :id => "fart")
+        expect(response).to redirect_to(:action => :show, :id => "fart")
       end
     end
 
@@ -116,16 +116,16 @@ describe GalleriesController do
         sign_in user
         gallery = Gallery.create! gallery
         # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Gallery).to receive(:save).and_return(false)
         put :update, {:id => gallery.to_param, "gallery" => {"name" => "invalid value" }}
-        assigns(:gallery).should eq(gallery)
+        expect(assigns(:gallery)).to eq(gallery)
       end
 
       it "re-renders the 'edit' template" do
         sign_in user
         gallery = Gallery.create! gallery
         # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
+        expect_any_instance_of(Gallery).to receive(:save).and_return(false)
         put :update, {:id => gallery.to_param, "gallery" => {"name" => "invalid value" }}
         response.should render_template("edit")
       end
@@ -145,7 +145,7 @@ describe GalleriesController do
       sign_in user
       gallery = Gallery.create! gallery
       delete :destroy, {:id => gallery.to_param}
-      response.should redirect_to(galleries_url)
+      expect(response).to redirect_to(galleries_url)
     end
   end
 
@@ -168,6 +168,7 @@ describe GalleriesController do
  
     it "redirects to the gallery" do
       pending "Need to get gallery cover updating working"
+      fail
       sign_in user
       put :update, {:id => gallery_with_cover.to_param, :gallery => {:cover => test_attachment}}
       response.should redirect_to(:action => :show, :id => gallery_with_cover.slug)

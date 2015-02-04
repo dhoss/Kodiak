@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require photos.css
- *= require jquery.ui.all
+ *= require jquery-ui
  *= require image-picker.css
  */
 html {

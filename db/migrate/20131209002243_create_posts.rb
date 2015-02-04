@@ -6,9 +6,9 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :parent
       t.integer :category
       t.integer :user_id
-      t.foreign_key :users, dependent: :delete
 
       t.timestamps
     end
+    add_foreign_key :posts, :users, on_delete: :cascade
   end
 end

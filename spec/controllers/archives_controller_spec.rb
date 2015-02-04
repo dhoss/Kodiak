@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArchivesController do
+describe ArchivesController, :type => :controller do
   include_context 'posts'
   include_context 'users'
 
@@ -18,21 +18,21 @@ describe ArchivesController do
   describe "GET index" do
     it "lists all posts sorted by year" do
       get :index
-      assigns(:years).should eq [2014, 2013]
+      expect(assigns(:years)).to eq [2014, 2013]
     end
   end
 
   describe "GET year" do
     it "lists posts by a specified year" do
       get :year, { :year => 2014 }
-      assigns(:posts).should eq([post_2014])
+      expect(assigns(:posts)).to eq([post_2014])
     end
   end
 
   describe "GET month" do
     it "lists posts by a specified month" do
       get :month, { :year => 2014, :month => 07 }
-      assigns(:posts).should eq([post_2014])
+      expect(assigns(:posts)).to eq([post_2014])
     end
   end
 
