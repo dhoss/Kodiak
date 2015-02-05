@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @user = current_user
     @post = Post.new
     @post.user(@user)
-
+    @post.published_on = DateTime.now
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
