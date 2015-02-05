@@ -58,6 +58,8 @@ gem 'puma', '~> 2.11.0'
 
 gem 'cancancan', '~> 1.10.1'
 
+gem 'fluorescent', '~> 0.0.1'
+
 group :development, :test do
   gem 'capybara'
   gem 'factory_girl', '~> 4.4.0'

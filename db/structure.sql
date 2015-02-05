@@ -816,19 +816,19 @@ CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXEC
 
 
 --
--- Name: fk_rails_46cea6b3ed; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_46cea6b3ed FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-
-
---
--- Name: fk_rails_915c51ddaf; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_79cc4fb986; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY attachments
-    ADD CONSTRAINT fk_rails_915c51ddaf FOREIGN KEY (gallery_id) REFERENCES galleries(id) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_rails_79cc4fb986 FOREIGN KEY (gallery_id) REFERENCES galleries(id) ON DELETE CASCADE;
+
+
+--
+-- Name: fk_rails_9953e7df6f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT fk_rails_9953e7df6f FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --

@@ -69,7 +69,10 @@ class Post < ActiveRecord::Base
 
    def self.search(params)
     results = self.fast_search(params)
-    Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body]).formatted_results
+    s = Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body])
+    p "S"
+    pp s
+    s.formatted_results
    end
 
    def reply_tree
