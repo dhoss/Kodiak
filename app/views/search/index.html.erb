@@ -1,9 +1,5 @@
 <h1>Search posts</h1>
-<%= form_tag("/search", method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
-<% end %>
+<%= render partial: 'search/form' %>
 
 <% if @results.any? && params[:q] %>
   <div id="search-result-header">Search results:</div>
