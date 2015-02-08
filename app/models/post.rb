@@ -49,7 +49,7 @@ class Post < ActiveRecord::Base
      posts_by_year(year).where("extract(month from published_on) = ?", month).order(published_on: :desc) 
    }
 
-   scope :with_author, -> { joins(:user) }
+   scope :with_author, -> { eager_load(:user) }
 
    scope :front_page, ->(page) { with_author.where(parent: nil).where.not(published_on: nil).order(published_on: :desc).page(page) }
 
@@ -68,11 +68,19 @@ class Post < ActiveRecord::Base
    end
 
    def self.search(params)
-    results = self.fast_search(params)
-    s = Search::Result.new(:results => results, :terms => params, :columns => [:title,:body], :to_filter => [:body])
-    p "S"
-    pp s
-    s.formatted_results
+     order_options =  params.has_key?('order_by')     ? 
+       { params['order_by'] => params['order_type'] } : 
+       { :published_on => 'desc'}
+     results = with_author.published.fast_search(params['q'])
+                          .page(params['page'])
+                          .order(order_options)
+     Search::Result.new(
+       :results   => results, 
+       :terms     => params['q'], 
+       :columns   => [:title,:body], 
+       :to_filter => [:body]
+     )
+     
    end
 
    def reply_tree

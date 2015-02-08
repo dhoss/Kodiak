@@ -2,7 +2,8 @@ class SearchController < ApplicationController
   def index
     @results = []
     if params[:q]
-      @results = Post.search(params[:q])
+      @results = Post.search(params.to_h)
+      pp @results.formatter.formatted_results
       respond_to do |format|
         format.html { render action: "index" }
         format.json { render json: @results }

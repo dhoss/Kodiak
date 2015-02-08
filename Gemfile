@@ -35,7 +35,7 @@ gem 'gemnasium', '3.2.1'
 gem 'unf', '~> 0.1.4'
 gem 'protected_attributes', '~> 1.0.8'
 gem 'hashifiable'
-gem 'treeify', '0.05.01'
+gem 'treeify', '0.05.02'
 gem 'jquery-rails', '~> 4.0.3'
 gem 'dropzonejs-rails', '~> 0.5.3'
 
@@ -58,7 +58,7 @@ gem 'puma', '~> 2.11.0'
 
 gem 'cancancan', '~> 1.10.1'
 
-gem 'fluorescent', '~> 0.0.1'
+gem 'fluorescent', '~> 0.0.3'
 
 group :development, :test do
   gem 'capybara'

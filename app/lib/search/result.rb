@@ -2,12 +2,10 @@ require 'fluorescent'
 require 'pp'
 module Search
   class Result
-    attr_reader :columns, :to_filter
-    def Result.new args
-      pp args
-      f = Fluorescent.new(args)
-      pp f.formatted_results
-      return f
+    attr_reader :formatter, :raw
+    def initialize args
+      @formatter = Fluorescent.new(args)
+      @raw   = args[:results]
     end
   end
 end
