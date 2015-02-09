@@ -1,13 +1,14 @@
 <%= render partial: 'search/form' %>
 
-<% if @results.formatter.formatted_results.any? && params[:q] %>
+<% if params[:q] %>
+ <% if @results.formatter.formatted_results.any? %>
   <div class="search-results">
     <% @results.formatter.formatted_results.each do |r| %>
       <div class="blog-post">
-        <div><%= link_to r[:title].html_safe, post_path(r['id']) %></div>
+        <div><%= link_to r[:title].html_safe, post_path(r[:id]) %></div>
         <div class="blog-post-meta">
-          by <%= link_to User.find(r['user_id']).name, user_path(r['user_id']) %> 
-          on <%= r['published_on'] %>
+          by <%= link_to User.find(r[:user_id]).name, user_path(r[:user_id]) %> 
+          on <%= r[:published_on] %>
         </div>
         <div class="blog-post-body">
           <%= r[:body].html_safe %>
@@ -16,11 +17,12 @@
       <hr />
     <% end %>
   </div>
-  <% elsif !@results.formatter.formatted_results.any? && params[:q] %>
+  <% elsif !@results.formatter.formatted_results.any?%>
   <div class="search-result">
     (No results)
   </div>
+  <% end %>
 <% end %>
-<% if @results.formatter.formatted_results.any? && params[:q] %>
+<% if params[:q] && @results.formatter.formatted_results.any? %>
   <%= render partial: 'search/page', local: {object: @results} %> 
 <% end %>
