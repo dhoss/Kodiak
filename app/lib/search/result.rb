@@ -1,4 +1,5 @@
 require 'fluorescent'
+#require_relative '../../../../fluorescent/lib/fluorescent'
 require 'pp'
 module Search
   class Result
