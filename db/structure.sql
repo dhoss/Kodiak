@@ -72,44 +72,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: attachments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE attachments (
-    id integer NOT NULL,
-    attachable_id integer,
-    attachable_type character varying(255),
-    name character varying(255),
-    path character varying(255),
-    mime character varying(255),
-    attachment character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    is_public integer DEFAULT 1,
-    gallery_id integer
-);
-
-
---
--- Name: attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE attachments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE attachments_id_seq OWNED BY attachments.id;
-
-
---
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -172,41 +134,6 @@ CREATE SEQUENCE friendly_id_slugs_id_seq
 --
 
 ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
-
-
---
--- Name: galleries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE galleries (
-    id integer NOT NULL,
-    name character varying(255),
-    description character varying(255),
-    slug character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    user_id integer,
-    cover integer
-);
-
-
---
--- Name: galleries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE galleries_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: galleries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE galleries_id_seq OWNED BY galleries.id;
 
 
 --
@@ -444,13 +371,6 @@ CREATE TABLE users_roles (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY attachments ALTER COLUMN id SET DEFAULT nextval('attachments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
@@ -459,13 +379,6 @@ ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_s
 --
 
 ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly_id_slugs_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY galleries ALTER COLUMN id SET DEFAULT nextval('galleries_id_seq'::regclass);
 
 
 --
@@ -511,14 +424,6 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY attachments
-    ADD CONSTRAINT attachments_pkey PRIMARY KEY (id);
-
-
---
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -532,14 +437,6 @@ ALTER TABLE ONLY categories
 
 ALTER TABLE ONLY friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
-
-
---
--- Name: galleries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY galleries
-    ADD CONSTRAINT galleries_pkey PRIMARY KEY (id);
 
 
 --
@@ -591,34 +488,6 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_attachments_on_attachable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_attachable_id ON attachments USING btree (attachable_id);
-
-
---
--- Name: index_attachments_on_attachable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_attachable_type ON attachments USING btree (attachable_type);
-
-
---
--- Name: index_attachments_on_attachable_type_and_attachable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_attachable_type_and_attachable_id ON attachments USING btree (attachable_type, attachable_id);
-
-
---
--- Name: index_attachments_on_gallery_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attachments_on_gallery_id ON attachments USING btree (gallery_id);
-
-
---
 -- Name: index_categories_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -658,27 +527,6 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON friendly_id_slugs USING 
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USING btree (sluggable_type);
-
-
---
--- Name: index_galleries_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_galleries_on_name ON galleries USING btree (name);
-
-
---
--- Name: index_galleries_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_galleries_on_slug ON galleries USING btree (slug);
-
-
---
--- Name: index_galleries_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_galleries_on_user_id ON galleries USING btree (user_id);
 
 
 --
@@ -756,14 +604,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 
 CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv', 'pg_catalog.english', 'title', 'body');
-
-
---
--- Name: attachments_gallery_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY attachments
-    ADD CONSTRAINT attachments_gallery_id_fk FOREIGN KEY (gallery_id) REFERENCES galleries(id) ON DELETE CASCADE;
 
 
 --
@@ -853,4 +693,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140919021640');
 INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007211818');
+
+INSERT INTO schema_migrations (version) VALUES ('20150724164324');
+
+INSERT INTO schema_migrations (version) VALUES ('20150724164333');
 
