@@ -10,6 +10,7 @@ services: postgresql
 bundler_args: --retry 3 --without development --deployment
 cache: bundler
 addons:
+  postgresql: 9.3
   apt:
     packages:
      - postgresql-contrib-9.1
