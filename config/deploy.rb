@@ -10,8 +10,8 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, '104.131.76.145'
-set :deploy_to, '/var/www/kodiak'
+set :domain, ENV['KODIAK_IP']
+set :deploy_to, ENV['KODIAK_APP_DIR'] 
 set :repository, 'git@bitbucket.org:djaustin/stonecolddev.in.git'
 set :branch, 'master'
 
@@ -21,7 +21,7 @@ set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
 set :user, 'kodiak'    # Username in the server to SSH to.
-set :port, '1023'     # SSH port number.
+set :port, ENV['KODIAK_SSH_PORT']     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -40,7 +40,6 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/puma"]
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
-  queue! %[mkdir -p "#{deploy_to}/shared/public/uploads/attachments"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
   queue! %[sudo cp "#{deploy_to}/current/script/init.d/kodiak" /etc/init.d/kodiak]
 
