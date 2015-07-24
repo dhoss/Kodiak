@@ -25,7 +25,7 @@ gem 'mini_magick'
 gem 'friendly_id', '~> 5.0.3'
 gem 'coveralls', require: false
 gem 'faker', '~> 1.3.0'
-gem 'gemnasium', '3.0.1'
+gem 'gemnasium'
 gem 'unf', '~> 0.1.4'
 gem 'protected_attributes', '~> 1.0.7'
 gem 'hashifiable'
