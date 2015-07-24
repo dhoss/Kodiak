@@ -5,7 +5,9 @@ class Post < ActiveRecord::Base
 
   include PgSearch
   include Search
-  multisearchable :against => [:title, :author, :body, :category_id]
+  multisearchable :against => [:title, :author, :body, :category_id, :published_on],
+                  :if => lambda{ |record| record.published_on != nil }
+
   validates :title, presence: true
   validates :body, presence: true
  
@@ -68,23 +70,23 @@ class Post < ActiveRecord::Base
    end
 
    def self.search(params)
-     order_options =  params.has_key?('order_by')     ? 
-       { params['order_by'] => params['order_type'] } : 
-       { :published_on => 'desc'}
-     results = with_author.published.fast_search(params['q'])
-                          .page(params['page'])
-                          .order(order_options)
-     Search::Result.new(
-       :results   => results, 
-       :terms     => params['q'], 
-       :columns   => [:title,:body], 
-       :to_filter => [:body]
-     )
-     
+#     order_options =  params.has_key?('order_by')     ? 
+#       { params['order_by'] => params['order_type'] } : 
+#       { :published_on => 'desc'}
+     PgSearch.multisearch(params['q']).page(params['page']||1)
    end
 
    def reply_tree
      # give build_tree an array of hashes with the AR objects serialized into a hash
      build_tree(descendents.to_a.map(&:serializable_hash))
+   end
+
+   def self.delete_search_documents
+     PgSearch::Document.delete_all(:searchable_type =>"Post")
+   end
+
+   def self.rebuild_pg_search_documents
+     #PgSearch::Multisearch.rebuild(Post)
+     find_each { |record| record.update_pg_search_document }
    end
 end

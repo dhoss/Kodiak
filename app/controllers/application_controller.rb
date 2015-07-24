@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
 
   def recent_activity
     @recent_posts  = Post.published.order(published_on: :desc).limit(5)
-    @recent_photos = Attachment.where(is_public: 1).order(created_at: :desc).limit(5) 
   end
 
   def categories_section

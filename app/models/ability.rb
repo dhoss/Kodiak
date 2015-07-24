@@ -8,18 +8,6 @@ class Ability
       can :manage, :all
     end
 
-    can :manage, Attachment do |u|
-      user.try(:user) == u
-    end
-
-    can :update, Attachment do |u|
-      user.try(:user) == u
-    end
-
-    can :delete, Attachment do |u|
-      user.try(:user) == u
-    end
-
     can :manage, User do |u|
       user.try(:user) == user
     end
@@ -29,10 +17,6 @@ class Ability
     end
 
     can :delete, User do |u|
-      user.try(:user) == u
-    end
-
-    can :manage, Gallery do |u|
       user.try(:user) == u
     end
 
@@ -48,7 +32,6 @@ class Ability
       can :delete, Post do |post|
         post.try(:user) == user
       end
-      can :create, Attachment
     end
   end
 end

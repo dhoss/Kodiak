@@ -1,28 +1,28 @@
 <%= render partial: 'search/form' %>
 
 <% if params[:q] %>
- <% if @results.formatter.formatted_results.any? %>
+ <% if @results %>
   <div class="search-results">
-    <% @results.formatter.formatted_results.each do |r| %>
+    <% @results.each do |r| %>
       <div class="blog-post">
-        <div><%= link_to r[:title].html_safe, post_path(r[:id]) %></div>
+        <div><%= link_to r.searchable.title.html_safe, post_path(r.searchable.id) %></div>
         <div class="blog-post-meta">
-          by <%= link_to User.find(r[:user_id]).name, user_path(r[:user_id]) %> 
-          on <%= r[:published_on] %>
+          by <%= link_to r.searchable.user.name, user_path(r.searchable.user.id) %> 
+          on <%= r.searchable.published_on %>
         </div>
         <div class="blog-post-body">
-          <%= r[:body].html_safe %>
+          <%= r.searchable.body.html_safe %>
         </div>
       </div>
       <hr />
     <% end %>
   </div>
-  <% elsif !@results.formatter.formatted_results.any?%>
+  <% elsif !@results%>
   <div class="search-result">
     (No results)
   </div>
   <% end %>
 <% end %>
-<% if params[:q] && @results.formatter.formatted_results.any? %>
+<% if params[:q] && @results %>
   <%= render partial: 'search/page', local: {object: @results} %> 
 <% end %>
