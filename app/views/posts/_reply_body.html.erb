@@ -1,6 +1,6 @@
 <div class="blog-post">
     <p class="blog-post-meta">
-    <%= reply.published_on %> by <%= reply.author.name %>
+    <%= reply.published_on %> by <%= reply.author.name != "" ? reply.author.name : reply.author.email %>
     </p>
       <div class="blog-post-body">
       <%= raw reply.body %>
