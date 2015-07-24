@@ -1,6 +1,5 @@
 sudo: false
 language: ruby
-cache: bundler
 addons:
   code_climate:
     repo_token: 3d255b2cfd37d4db29b81c8ec30c17bac274d5b062024b8254cba978134309ee 
@@ -10,10 +9,10 @@ rvm:
 services: postgresql
 bundler_args: --retry 3 --without development --deployment
 cache: bundler
-install: 
- - sudo apt-get update -qq
- - sudo apt-get install -qq postgresql-contrib-9.1
- - travis_retry bundle install
+addons:
+  apt:
+    packages:
+     - postgresql-contrib-9.1
 before_script:
  - psql -c 'create database kodiak_test;' -U postgres
  - psql -U postgres kodiak_test < db/search_extensions.sql
