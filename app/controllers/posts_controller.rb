@@ -100,8 +100,8 @@ class PostsController < ApplicationController
       user: user_signed_in? ? current_user : User.find_or_initialize(name: params[:commentor_name]),
       title: "RE: #{@post.title}", 
       body: params[:post][:body],
-      category: @post.category
-
+      category: @post.category,
+      published_on: DateTime.now
     )
 
     respond_to do |format|
