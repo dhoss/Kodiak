@@ -98,14 +98,14 @@ describe Post do
       Post.delete_all
       post = Post.create(FactoryGirl.attributes_for(:post))
       Post.rebuild_pg_search_documents
-      results = Post.search({'q'=> post.title}).formatter.formatted_results
+      results = Post.search({'q'=> post.title})
       expect(results.size).to eq(1)
     end
 
     it "updates properly without ruining the index" do
       post = Post.first
       post.update_attributes(title: "this is a fucking different title")
-      results = Post.search({'q'=> post.title}).formatter.formatted_results
+      results = Post.search({'q'=> post.title})
       expect(results.size).to eq(1)
     end
   end
