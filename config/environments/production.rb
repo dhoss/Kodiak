@@ -60,11 +60,11 @@ Kodiak::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: config.app_domain }
   config.action_mailer.smtp_settings = {
-    address: 'mail.gandi.net', 
+    address: '', 
     port: '587',
     enable_starttls_auto: true,
-    user_name: 'devin@stonecolddev.in',
-    password: 'qu44ck@@',
+    user_name: '',
+    password: '',
     authentication: :plain,
     domain: config.app_domain
   }
