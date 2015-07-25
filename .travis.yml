@@ -10,7 +10,9 @@ addons:
      - postgresql-contrib-9.3
 rvm: 
  - 2.0.0
-services: postgresql
+services: 
+ - postgresql
+ - redis
 bundler_args: --retry 3 --without development --deployment
 cache: bundler
 before_script:
