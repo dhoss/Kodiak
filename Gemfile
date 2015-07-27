@@ -5,7 +5,8 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.3'
+gem 'activesupport', '~> 4.2.3'
 gem 'kaminari', '0.16.2'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
@@ -25,9 +26,6 @@ gem 'pg', '0.18.1'
 gem 'devise', '~> 3.4.1'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'carrierwave', '~> 0.10.0'
-gem 'fog', '1.27.0'
-gem 'mini_magick', '~> 4.0.3'
 gem 'friendly_id', '~> 5.1.0'
 gem 'coveralls', '~> 0.7.8', require: false
 gem 'faker', '~> 1.4.3'
@@ -63,7 +61,7 @@ gem 'fluorescent', '0.0.7'
 group :development, :test do
   gem 'capybara'
   gem 'factory_girl', '~> 4.4.0'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.3.3'
   gem 'rspec-activemodel-mocks'
   gem 'syntax', '~> 1.2.0'
   gem 'rake', '~> 10.4.2'
