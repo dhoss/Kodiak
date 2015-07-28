@@ -5,6 +5,4 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
-//= require dropzone
-//= require attachments
 //= require app_util
