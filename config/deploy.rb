@@ -12,7 +12,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 set :domain, ENV['KODIAK_IP']
 set :deploy_to, ENV['KODIAK_APP_DIR'] 
-set :repository, 'git@bitbucket.org:djaustin/stonecolddev.in.git'
+set :repository,'git@github.com:dhoss/Kodiak.git' #'git@bitbucket.org:djaustin/stonecolddev.in.git'
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
