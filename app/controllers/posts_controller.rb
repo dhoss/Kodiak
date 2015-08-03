@@ -119,7 +119,7 @@ class PostsController < ApplicationController
   end
 
   def feed
-    @posts = Post.roots.all
+    @posts = Post.roots.all.order(created_at: :desc)
 
     respond_to do |format|
       format.rss { render :layout => false }
