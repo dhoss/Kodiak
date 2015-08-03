@@ -1,5 +1,7 @@
 Kodiak::Application.routes.draw do
 
+  get 'feed' => 'posts#feed'
+
   mount API::Root => '/'
 
   get 'posts/drafts' => 'posts#drafts', as: :drafts

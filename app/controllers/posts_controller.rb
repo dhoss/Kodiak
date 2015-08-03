@@ -118,4 +118,13 @@ class PostsController < ApplicationController
     @posts = current_user.posts.drafts.page(params[:page]||1)
   end
 
+  def feed
+    @posts = Post.roots.all
+
+    respond_to do |format|
+      format.rss { render :layout => false }
+    end
+  end
+
+
 end

@@ -51,6 +51,7 @@ class Post < ActiveRecord::Base
      posts_by_year(year).where("extract(month from published_on) = ?", month).order(published_on: :desc) 
    }
 
+
    scope :with_author, -> { eager_load(:user) }
 
    scope :front_page, ->(page) { with_author.where(parent: nil).where.not(published_on: nil).order(published_on: :desc).page(page) }
@@ -58,6 +59,8 @@ class Post < ActiveRecord::Base
    scope :drafts, -> { where(published_on: nil) }
 
    scope :published, -> { where.not(published_on: nil) }
+
+   scope :roots, -> { published.where(parent: nil) }
 
    def self.distinct_years
      order('cast(extract(year from published_on) as integer) DESC').pluck('distinct(cast(extract(year from published_on) as integer))') 
