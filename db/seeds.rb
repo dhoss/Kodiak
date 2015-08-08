@@ -1,28 +1,16 @@
-config = [{
-    type: "site_text",
-    settings:
-    {
-      headings: { 
-        banner_title: "Kodiak",
-        site_title: "Kodiak",
-        tag_line: "It's a bear of a blog",
-      },
-      page_sections: { 
-        about: "this is the about me section",
-        other_places: {"twitter" => "http://twitter.com/stonecolddevin","github" => "http://github.com/dhoss"}
-      }
-    }
-  },
-  {
-    type: "site_images",
-    settings: 
-    {
-      banner_img: "kodiak.jpg" 
-    }
-  }]
-config.each do |c|
-  Setting.create configuration: c
+# encoding: UTF-8
+# This file is auto-generated from the current content of the database. Instead
+# of editing this file, please use the migrations feature of Seed Migration to
+# incrementally modify your database, and then regenerate this seed file.
+#
+# If you need to create the database on another system, you should be using
+# db:seed, not running all the migrations from scratch. The latter is a flawed
+# and unsustainable approach (the more migrations you'll amass, the slower
+# it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended to check this file into your version control system.
+
+ActiveRecord::Base.transaction do
 end
-["admin", "poster"].each do |role|
-  Role.create(name: role)
-end
+
+SeedMigration::Migrator.bootstrap(20150808202614)

@@ -59,7 +59,9 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    queue "bundle exec rake seed_migration:install:migrations"
     invoke :'rails:db_migrate:force'
+    queue "bundle exec rake seed:migrate"
     invoke :'rails:assets_precompile'
 
     to :launch do

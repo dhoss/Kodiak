@@ -77,10 +77,10 @@ SET default_with_oids = false;
 
 CREATE TABLE categories (
     id integer NOT NULL,
-    name character varying,
+    name character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    slug character varying
+    slug character varying(255)
 );
 
 
@@ -109,10 +109,10 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 CREATE TABLE friendly_id_slugs (
     id integer NOT NULL,
-    slug character varying NOT NULL,
+    slug character varying(255) NOT NULL,
     sluggable_id integer NOT NULL,
     sluggable_type character varying(50),
-    scope character varying,
+    scope character varying(255),
     created_at timestamp without time zone
 );
 
@@ -143,8 +143,8 @@ ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
 CREATE TABLE identities (
     id integer NOT NULL,
     user_id integer,
-    provider character varying,
-    uid character varying,
+    provider character varying(255),
+    uid character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -177,7 +177,7 @@ CREATE TABLE pg_search_documents (
     id integer NOT NULL,
     content text,
     searchable_id integer,
-    searchable_type character varying,
+    searchable_type character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -208,7 +208,7 @@ ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
 
 CREATE TABLE posts (
     id integer NOT NULL,
-    title character varying,
+    title character varying(255),
     body text,
     parent_id integer,
     user_id integer,
@@ -216,7 +216,7 @@ CREATE TABLE posts (
     updated_at timestamp without time zone,
     category_id integer,
     tsv tsvector,
-    slug character varying,
+    slug character varying(255),
     published_on timestamp without time zone
 );
 
@@ -256,7 +256,7 @@ CREATE TABLE posts_tags (
 
 CREATE TABLE roles (
     id integer NOT NULL,
-    name character varying
+    name character varying(255)
 );
 
 
@@ -284,7 +284,7 @@ ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
 --
 
 CREATE TABLE schema_migrations (
-    version character varying NOT NULL
+    version character varying(255) NOT NULL
 );
 
 
@@ -354,7 +354,7 @@ ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
 
 CREATE TABLE tags (
     id integer NOT NULL,
-    name character varying,
+    name character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -385,22 +385,22 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    name character varying,
-    password character varying,
-    email character varying,
+    name character varying(255),
+    password character varying(255),
+    email character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
     sign_in_count integer DEFAULT 0 NOT NULL,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying,
-    last_sign_in_ip character varying,
-    provider character varying,
-    uid character varying
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    provider character varying(255),
+    uid character varying(255)
 );
 
 
@@ -710,11 +710,11 @@ CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON posts FOR EACH ROW EXEC
 
 
 --
--- Name: fk_rails_5b5ddfd518; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: posts_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_5b5ddfd518 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+    ADD CONSTRAINT posts_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --
@@ -796,6 +796,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140919021640');
 INSERT INTO schema_migrations (version) VALUES ('20141007004000');
 
 INSERT INTO schema_migrations (version) VALUES ('20141007211818');
+
+INSERT INTO schema_migrations (version) VALUES ('20141010212941');
 
 INSERT INTO schema_migrations (version) VALUES ('20141024215012');
 
