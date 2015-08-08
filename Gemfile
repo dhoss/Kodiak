@@ -57,6 +57,8 @@ gem 'cancancan', '~> 1.12.0'
 
 gem 'fluorescent', '0.0.7'
 
+gem 'seed_migration'
+
 group :development, :test do
   gem 'capybara'
   gem 'factory_girl', '~> 4.4.0'

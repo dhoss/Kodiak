@@ -273,6 +273,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    seed_migration (1.0.5)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -363,6 +364,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails (~> 3.3.3)
   sass-rails (~> 5.0.3)
+  seed_migration
   syntax (~> 1.2.0)
   therubyracer (~> 0.12.2)
   treeify (= 0.05.02)

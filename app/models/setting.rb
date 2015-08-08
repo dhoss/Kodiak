@@ -8,6 +8,7 @@ class Setting < ActiveRecord::Base
     end
   end
 
+  # does this even work?
   # now we have versioned configuration
   def self.set(hash)
     create(configuration: hash)

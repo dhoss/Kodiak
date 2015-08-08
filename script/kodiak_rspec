@@ -2,5 +2,7 @@ bundle install &&
 bundle exec rake db:drop RAILS_ENV=test_local && 
 bundle exec rake db:create RAILS_ENV=test_local && 
 psql -Upostgres kodiak_test < db/search_extensions.sql && 
+bundle exec rake seed_migration:install:migrations RAILS_ENV=test_local&&
 bundle exec rake db:migrate RAILS_ENV=test_local && 
+bundle exec rake seed:migrate RAILS_ENV=test_local &&
 RAILS_ENV=test_local bundle exec rspec $1

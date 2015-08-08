@@ -3,10 +3,10 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "Office of Secret Intelligence"
-    xml.author "Devin Austin"
-    xml.description "Who taught you to be a spy, fucking Gallagher?!"
-    xml.link "https://www.stonecolddev.in"
+    xml.title Setting.get("site_text")['settings']["headings"]["site_title"]
+    xml.author  Setting.get("site_text")['settings']['owner_name']
+    xml.description Setting.get("site_text")["settings"]["headings"]["banner_title"]
+    xml.link  Setting.get("site_text")["settings"]["website_url"]
     xml.language "en"
 
     for article in @posts
@@ -16,9 +16,9 @@ xml.rss :version => "2.0" do
         else
           xml.title ""
         end
-        xml.author "Devin Austin"
+        xml.author Setting.get("site_text")['settings']['owner_name']
         xml.pubDate article.created_at.to_s(:rfc822)
-        xml.link "https://www.stonecolddev.in/posts/" + article.friendly_id
+        xml.link Setting.get("site_text")["settings"]["website_url"] + "/posts/" + article.friendly_id
         xml.guid article.friendly_id
 
         text = article.body
