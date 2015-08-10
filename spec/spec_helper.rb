@@ -45,6 +45,7 @@ RSpec.configure do |config|
   config.before(:each) do
     FactoryGirl.factories.clear
     FactoryGirl.find_definitions
+    FactoryGirl.create(:setting)
     DatabaseCleaner.start
     Rails.application.load_seed
   end

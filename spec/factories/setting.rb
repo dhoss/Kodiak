@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :setting do
     configuration { 
-{
+      {
         type: "site_text",
         settings: {
           headings: {
